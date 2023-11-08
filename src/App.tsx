@@ -1,10 +1,14 @@
 // import { useState } from 'react'
+import { useRoutes } from "react-router-dom";
+import AuthRouter from "./components/AutoRoute";
+import rootRouter from "./pages/routes";
 
 function App() {
+  const element = useRoutes(rootRouter as any);
+  console.log(rootRouter);
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <button className="btn">Hello daisyUI</button>
+      <AuthRouter>{element}</AuthRouter>
     </>
   );
 }
