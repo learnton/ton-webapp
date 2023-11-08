@@ -1,7 +1,8 @@
-import Layout from "./Layout";
-import NoMatch from "./NoMatch";
-
-import login from "./login";
+import Layout from "./layouts/Layout";
+import NoFound from "./no-found/page";
+import Dashboard from "./home/page";
+import Login from "./login/page";
+import Contact from "./contact";
 
 const rootRouter = [
   {
@@ -10,14 +11,28 @@ const rootRouter = [
     key: "/",
     auth: true,
     element: <Layout />,
-    children: [],
+    children: [
+      {
+        path: "/",
+        name: "Dashboard",
+        key: "dashboard",
+        element: <Dashboard />,
+        index: true,
+      },
+      ...Contact,
+    ],
   },
-  ...login,
+  {
+    path: "login",
+    name: "login",
+    key: "login",
+    element: <Login />,
+  },
   {
     path: "*",
     name: "No Match",
     key: "*",
-    element: <NoMatch />,
+    element: <NoFound />,
   },
 ];
 

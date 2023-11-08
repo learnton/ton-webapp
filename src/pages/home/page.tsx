@@ -1,5 +1,11 @@
-import React, { memo } from "react";
+// import Reactfrom "react";
+import { Link } from "react-router-dom";
 
-const Page: React.FC = (): React.ReactElement => <div>home</div>;
-
-export default memo(Page);
+export default function Dashboard() {
+  return (
+    <>
+      <div>dashboard</div>
+      <Link to={"contacts"}>Contact</Link>
+    </>
+  );
+}
