@@ -1,8 +1,8 @@
 import instance from "./axiosInstance";
 
 export const login = (params: { username: string; password: string }) => {
-  return instance.post(`/api/login`, params).then((res) => {
-    instance.defaults.headers.common["Authorization"] = res.data.token;
+  return instance.post(`/api/login`, params).then(() => {
+    instance.defaults.headers.common["Authorization"] = "test-token";
   });
 };
 
