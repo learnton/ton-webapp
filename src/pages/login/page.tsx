@@ -21,7 +21,7 @@ export default function Login() {
       {/* 基于tailwind 的登录表单 */}
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-        onSubmit={(event: unknown) => handleSubmit(event)}
+        onSubmit={(event: any) => handleSubmit(event)}
       >
         <div className="mb-4">
           <label

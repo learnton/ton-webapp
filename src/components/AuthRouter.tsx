@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const AuthRouter = (props) => {
+const AuthRouter = (props: { children: any }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const token = localStorage.getItem("token") || null;
