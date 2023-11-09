@@ -5,7 +5,6 @@ import rootRouter from "./pages/routes";
 
 function App() {
   const element = useRoutes(rootRouter as any);
-  console.log(rootRouter);
   return (
     <>
       <AuthRouter>{element}</AuthRouter>
