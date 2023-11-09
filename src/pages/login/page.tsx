@@ -1,7 +1,10 @@
 // import Reactfrom "react";
 import { login } from "@/api/sample";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const handleSubmit = (e: Event) => {
     e.preventDefault();
 
@@ -11,7 +14,7 @@ export default function Login() {
     }).then(() => {
       console.log("submit");
       localStorage.setItem("token", "123456");
-      window.location.href = "/";
+      navigate("/");
     });
   };
 
