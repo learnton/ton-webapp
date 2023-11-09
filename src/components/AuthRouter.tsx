@@ -12,11 +12,13 @@ const AuthRouter = (props: { children: any }) => {
   useEffect(() => {
     if (!token) {
       console.warn("token is null");
-      navigate("/login");
+      navigate("/login", {
+        replace: true,
+      });
     } else if (location.pathname == "/login") {
-      navigate("/");
-    } else {
-      navigate(location.pathname);
+      navigate("/", {
+        replace: true,
+      });
     }
 
     // back button
