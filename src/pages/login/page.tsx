@@ -4,11 +4,12 @@ import { login } from "@/api/sample";
 export default function Login() {
   const handleSubmit = (e: Event) => {
     e.preventDefault();
-    console.log("submit");
+
     login({
       username: "test",
       password: "123456",
     }).then(() => {
+      console.log("submit");
       localStorage.setItem("token", "123456");
       window.location.href = "/";
     });

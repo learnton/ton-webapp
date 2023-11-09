@@ -26,11 +26,12 @@ const instance = axios.create({
 // 响应后处理
 instance.interceptors.response.use(
   function (response) {
-    if (response?.data?.code !== 200) {
-      throw new Error(response?.data?.msg);
-    } else {
-      return response.data;
-    }
+    // if (response?.data?.code !== 200) {
+    //   throw new Error(response?.data?.msg);
+    // } else {
+    //   return response.data;
+    // }
+    return response.data;
   },
   function (error) {
     return catchError(error);
