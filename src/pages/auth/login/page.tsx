@@ -1,23 +1,23 @@
 // import Reactfrom "react";
-import { login } from "@/api/sample";
+// import { login } from "@/api/sample";
 import { useNavigate } from "react-router-dom";
 import IdentityIcon from "@/components/IdentityIcon";
 
 export default function Login() {
   const navigate = useNavigate();
 
-  const handleSubmit = (e: Event) => {
-    e.preventDefault();
+  // const handleSubmit = (e: Event) => {
+  //   e.preventDefault();
 
-    login({
-      username: "test",
-      password: "123456",
-    }).then(() => {
-      console.log("submit");
-      localStorage.setItem("token", "123456");
-      navigate("/");
-    });
-  };
+  //   login({
+  //     username: "test",
+  //     password: "123456",
+  //   }).then(() => {
+  //     console.log("submit");
+  //     localStorage.setItem("token", "123456");
+  //     navigate("/");
+  //   });
+  // };
 
   return (
     <div className="flex flex-col justify-center p-10 h-[100vh] gap-8">
