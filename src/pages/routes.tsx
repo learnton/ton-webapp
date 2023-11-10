@@ -1,7 +1,7 @@
 import Layout from "./layouts/Layout";
 import NoFound from "./no-found/page";
 import Dashboard from "./home/page";
-import Login from "./login/page";
+import authRoutes from "./auth";
 import Contact from "./contact";
 
 const rootRouter = [
@@ -22,12 +22,7 @@ const rootRouter = [
       ...Contact,
     ],
   },
-  {
-    path: "login",
-    name: "login",
-    key: "login",
-    element: <Login />,
-  },
+  ...authRoutes,
   {
     path: "*",
     name: "No Match",
