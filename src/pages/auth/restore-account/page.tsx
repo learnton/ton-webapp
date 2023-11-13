@@ -1,9 +1,9 @@
 import { MainButton } from "@/hooks/useTwaSdk";
 
 export default function RestoreAccount() {
-  MainButton(
+  MainButton.init(
     {
-      text: "confirm",
+      text: "Next",
     },
     () => {
       console.log("Restore account");

@@ -1,16 +1,63 @@
-// import Reactfrom "react";
+import { useState } from "react";
+import EnterPassword from "./_EnterPassword";
+import { MainButton } from "@/hooks/useTwaSdk";
+import { checkPasswordSecurityLevel } from "@/utils";
+import useToast from "@/hooks/useToast";
 
 export default function RegisterPage() {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [step, setStep] = useState(0);
+
+  const toast = useToast();
+
+  const MainButtonHandle = () => {
+    switch (step) {
+      case 0:
+        if (checkPasswordSecurityLevel(password) < 3) {
+          toast &&
+            toast({
+              value:
+                "Password length must be greater than 8 characters, and must contains letters and symbols",
+            });
+        } else if (password !== confirmPassword) {
+          toast &&
+            toast({
+              value: "The two passwords entered do not match",
+            });
+        } else {
+          setStep(1);
+          MainButton.setParams({
+            text: "Complete",
+          });
+        }
+
+        break;
+      case 1:
+        console.log("register");
+        break;
+      default:
+        break;
+    }
+  };
+
+  MainButton.init(
+    {
+      text: "Next",
+    },
+    MainButtonHandle
+  );
+
   return (
-    <div className="flex flex-col justify-center p-10 h-[100vh] gap-8">
-      <div className="text-[#9CA3AF]">
-        <h1 className="font-bold text-[#111827] text-xl mb-4">
-          Welcome to Product Name
-        </h1>
-        We've prepared your digital identity. Check out its features, use our
-        trusted digital cards, and enjoy smooth validations and enhanced
-        privacy, all with your data under your control.
-      </div>
+    <div className=" p-10 ">
+      <ul className="steps mx-auto mb-8">
+        <li className="step step-primary text-primary">Enter password</li>
+        <li className="step">Back up seed phrase</li>
+      </ul>
+      <EnterPassword
+        setPassword={setPassword}
+        setConfirmPassword={setConfirmPassword}
+      />
     </div>
   );
 }

@@ -2,7 +2,6 @@
 // import { login } from "@/api/sample";
 import { useNavigate } from "react-router-dom";
 import IdentityIcon from "@/components/IdentityIcon";
-import { MainButton } from "@/hooks/useTwaSdk";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -19,17 +18,6 @@ export default function Login() {
   //     navigate("/");
   //   });
   // };
-
-  const MainButtonHandle = () => {
-    console.log("login page");
-  };
-
-  MainButton(
-    {
-      text: "Login",
-    },
-    MainButtonHandle
-  );
 
   return (
     <div className="flex flex-col justify-center p-10 h-[100vh] gap-8">
