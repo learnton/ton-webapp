@@ -1,13 +1,14 @@
-import { useEffect } from "react";
-import WebApp from "@twa-dev/sdk";
+import { MainButton } from "@/hooks/useTwaSdk";
 
 export default function RestoreAccount() {
-  useEffect(() => {
-    WebApp.MainButton.show();
-    WebApp.MainButton.onClick(() => {
+  MainButton(
+    {
+      text: "confirm",
+    },
+    () => {
       console.log("Restore account");
-    });
-  }, []);
+    }
+  );
 
   return (
     <div className="text-[#9CA3AF] p-10">
