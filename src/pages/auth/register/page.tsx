@@ -20,11 +20,13 @@ export default function RegisterPage() {
             toast({
               value:
                 "Password length must be greater than 8 characters, and must contains letters and symbols",
+              type: "warning",
             });
         } else if (password !== confirmPassword) {
           toast &&
             toast({
               value: "The two passwords entered do not match",
+              type: "warning",
             });
         } else {
           setStep(1);
@@ -52,7 +54,12 @@ export default function RegisterPage() {
   return (
     <div className=" p-10 ">
       <ul className="steps mx-auto mb-8">
-        <li className="step step-primary text-primary">Enter password</li>
+        <li
+          className="step step-primary text-primary"
+          onClick={() => MainButtonHandle()}
+        >
+          Enter password
+        </li>
         <li className="step">Back up seed phrase</li>
       </ul>
       {step === 0 && (

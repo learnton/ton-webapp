@@ -1,5 +1,4 @@
 // import Reactfrom "react";
-import { Password } from "@/components";
 
 export default function EnterPassword(props: {
   setPassword: (password: string) => void;
@@ -26,14 +25,16 @@ export default function EnterPassword(props: {
       <form>
         <div className="form-control">
           <div className="label">Enter Password</div>
-          <Password
+          <input
+            className="input input-secondary w-full"
             placeholder="Enter Password"
             onInput={(e: any) => props.setPassword(e.target.value)}
           />
         </div>
         <div className="form-control">
           <div className="label">Confirm Password</div>
-          <Password
+          <input
+            className="input input-secondary w-full"
             placeholder="Confirm Password"
             onInput={(e: any) => props.setConfirmPassword(e.target.value)}
           />

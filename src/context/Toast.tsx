@@ -30,7 +30,7 @@ const Toast: React.FC<Props> = (props) => {
     setShow(true);
     setTimeout(() => {
       setShow(false);
-    }, 2000);
+    }, 2500);
   };
 
   return (
@@ -46,13 +46,11 @@ const Toast: React.FC<Props> = (props) => {
         {props.children}
       </Context.Provider>
       <div
-        className={`toast ${position?.join(" ")} transition ${
-          show ? "scale-100" : "hidden scale-0"
-        }`}
+        className={`toast w-[80vw] whitespace-normal z-50 ${position
+          ?.map((position) => "toast-" + position)
+          .join(" ")} transition ${show ? "scale-100" : "hidden scale-0"}`}
       >
-        <div className={`max-w-[80vw] alert${type ? " alert-" + type : ""}`}>
-          {value}
-        </div>
+        <div className={`alert${type ? " alert-" + type : ""}`}>{value}</div>
       </div>
     </>
   );

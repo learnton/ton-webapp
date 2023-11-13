@@ -19,16 +19,16 @@ export default function BackupSeed(props: any) {
           assets
         </p>
       </div>
-      <div className="relative">
+      <div className="relative my-4 border rounded overflow-hidden">
         <textarea
-          className="textarea textarea-bordered flex-1"
+          className={"block textarea w-full" + (!show ? " blur" : "")}
           placeholder="present police twin quality river sail coach link give distance palm paddle"
           rows={4}
           value={`sfs sdf sdfds dsfds fsdfsd sdsd sd`}
         ></textarea>
         <span
           onClick={() => setShow(!show)}
-          className="text-[#363636] absolute right-2 bottom-2"
+          className="text-[#363636] absolute p-4 right-0 bottom-0 z-50"
         >
           {show ? <IconEye /> : <IconEyeOff />}
         </span>

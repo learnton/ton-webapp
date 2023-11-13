@@ -3,5 +3,6 @@ export const themeColor = {
   secondary: "#C8C7FA",
   accent: "#37cdbe",
   neutral: "#3d4451",
+  warning: "#ffbe00",
   "base-100": "#ffffff",
 };
