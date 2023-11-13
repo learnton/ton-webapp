@@ -1,13 +1,16 @@
+import { useEffect } from "react";
 import WebApp from "@twa-dev/sdk";
 
 export default function RestoreAccount() {
-  WebApp.MainButton.show();
-  WebApp.MainButton.onClick(() => {
-    console.log("Restore account");
-  });
+  useEffect(() => {
+    WebApp.MainButton.show();
+    WebApp.MainButton.onClick(() => {
+      console.log("Restore account");
+    });
+  }, []);
 
   return (
-    <div className="text-[#9CA3AF]">
+    <div className="text-[#9CA3AF] p-10">
       <h1 className="font-bold text-[#111827] text-xl mb-4">
         Enter your seed phrase
       </h1>
