@@ -1,14 +1,10 @@
-// import Reactfrom "react";
+import { useEffect } from "react";
 // import { login } from "@/api/sample";
 import { useNavigate } from "react-router-dom";
 import IdentityIcon from "@/components/IdentityIcon";
 import WebApp from "@twa-dev/sdk";
 
 export default function Login() {
-  WebApp.MainButton.show();
-  WebApp.MainButton.onClick(() => {
-    console.log("login page");
-  });
   const navigate = useNavigate();
 
   // const handleSubmit = (e: Event) => {
@@ -23,6 +19,16 @@ export default function Login() {
   //     navigate("/");
   //   });
   // };
+
+  useEffect(() => {
+    WebApp.MainButton.show();
+    WebApp.MainButton.onClick(() => {
+      console.log("login page");
+    });
+    return () => {
+      WebApp.MainButton.hide();
+    };
+  }, []);
 
   return (
     <div className="flex flex-col justify-center p-10 h-[100vh] gap-8">
