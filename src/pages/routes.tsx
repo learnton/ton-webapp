@@ -2,7 +2,6 @@ import Layout from "./layouts/Layout";
 import NoFound from "./no-found/page";
 import Dashboard from "./home/page";
 import authRoutes from "./auth";
-import Contact from "./contact";
 
 const rootRouter = [
   {
@@ -19,7 +18,6 @@ const rootRouter = [
         element: <Dashboard />,
         index: true,
       },
-      ...Contact,
     ],
   },
   ...authRoutes,

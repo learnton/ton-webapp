@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import { themeColor } from "./src/constant";
+
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -14,11 +16,7 @@ export default {
     themes: [
       {
         mytheme: {
-          primary: "#4B45FF",
-          secondary: "#f6d860",
-          accent: "#37cdbe",
-          neutral: "#3d4451",
-          "base-100": "#ffffff",
+          ...themeColor,
 
           "--rounded-box": "1rem", // border radius rounded-box utility class, used in card and other large boxes
           "--rounded-btn": "0.5rem", // border radius rounded-btn utility class, used in buttons and similar element

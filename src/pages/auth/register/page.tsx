@@ -1,5 +1,6 @@
 import { useState } from "react";
 import EnterPassword from "./_EnterPassword";
+import BackupSeed from "./_BackupSeed";
 import { MainButton } from "@/hooks/useTwaSdk";
 import { checkPasswordSecurityLevel } from "@/utils";
 import useToast from "@/hooks/useToast";
@@ -54,10 +55,13 @@ export default function RegisterPage() {
         <li className="step step-primary text-primary">Enter password</li>
         <li className="step">Back up seed phrase</li>
       </ul>
-      <EnterPassword
-        setPassword={setPassword}
-        setConfirmPassword={setConfirmPassword}
-      />
+      {step === 0 && (
+        <EnterPassword
+          setPassword={setPassword}
+          setConfirmPassword={setConfirmPassword}
+        />
+      )}
+      {step === 1 && <BackupSeed />}
     </div>
   );
 }

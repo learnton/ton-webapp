@@ -50,7 +50,9 @@ const Toast: React.FC<Props> = (props) => {
           show ? "scale-100" : "hidden scale-0"
         }`}
       >
-        <div className={`alert${type ? " alert-" + type : ""}`}>{value}</div>
+        <div className={`max-w-[80vw] alert${type ? " alert-" + type : ""}`}>
+          {value}
+        </div>
       </div>
     </>
   );
