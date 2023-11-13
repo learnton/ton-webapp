@@ -3,6 +3,7 @@ import IconEye from "@/assets/img/eye.svg?react";
 import IconEyeOff from "@/assets/img/eye-off.svg?react";
 
 export default function BackupSeed(props: any) {
+  console.log(props);
   const [show, setShow] = useState(false);
 
   return (
