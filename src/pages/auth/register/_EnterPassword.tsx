@@ -30,7 +30,7 @@ export default function EnterPassword(props: {
               type="password"
               placeholder="Type here"
               className="input flex-1"
-              onInput={(e) => props.setPassword(e.target.value)}
+              onInput={(e: any) => props.setPassword(e.target.value)}
             />
             <span>icon</span>
           </div>
@@ -42,7 +42,7 @@ export default function EnterPassword(props: {
               type="password"
               placeholder="Type here"
               className="input flex-1"
-              onInput={(e) => props.setConfirmPassword(e.target.value)}
+              onInput={(e: any) => props.setConfirmPassword(e.target.value)}
             />
             <span>icon</span>
           </div>
