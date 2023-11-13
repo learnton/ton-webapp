@@ -2,8 +2,13 @@
 // import { login } from "@/api/sample";
 import { useNavigate } from "react-router-dom";
 import IdentityIcon from "@/components/IdentityIcon";
+import WebApp from "@twa-dev/sdk";
 
 export default function Login() {
+  WebApp.MainButton.show();
+  WebApp.MainButton.onClick(() => {
+    console.log("login page");
+  });
   const navigate = useNavigate();
 
   // const handleSubmit = (e: Event) => {
