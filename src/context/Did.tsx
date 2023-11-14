@@ -21,7 +21,7 @@ const DidProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (userId) {
       setLoading(true);
-      const _didAccounts = new DidAccounts(userId);
+      const _didAccounts = new DidAccounts(String(userId));
 
       _didAccounts.isReady.then((_d) => {
         setDidAccounts(_d);
