@@ -32,6 +32,7 @@ export default function RegistByPassword() {
               type: "warning",
             });
         } else {
+          // TODO generate did
           setStep(1);
         }
 

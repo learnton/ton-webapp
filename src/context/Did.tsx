@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { DidAccount, DidAccounts } from "@zcloak/wallet-lib";
+import useTwaUser from "@/hooks/useTwaUser";
 
 interface DidState {
   did: DidAccount | null | undefined;
@@ -10,7 +11,7 @@ interface DidState {
 export const DidContext = createContext({} as DidState);
 
 const DidProvider = ({ children }: { children: React.ReactNode }) => {
-  const userId = "test";
+  const { id: userId } = useTwaUser();
   const [didAccounts, setDidAccounts] = useState<DidAccounts | null>(null);
   const [loading, setLoading] = useState(true);
   const [did, setDid] = useState<DidAccount | null | undefined>(

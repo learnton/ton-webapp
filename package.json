@@ -23,6 +23,7 @@
     "tonweb": "^0.0.62"
   },
   "devDependencies": {
+    "@twa-dev/types": "^6.9.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",

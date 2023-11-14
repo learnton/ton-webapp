@@ -4,7 +4,6 @@ export default function EnterPassword(props: {
   setPassword: (password: string) => void;
   setConfirmPassword: (password: string) => void;
 }) {
-  console.log(props);
   return (
     <>
       <h1 className="leading-loose font-bold text-xl">Enter Password</h1>

@@ -7,9 +7,10 @@ import { DidContext } from "@/context/Did";
 import { PHASE_KEY } from "@/constant";
 import TonWeb from "tonweb";
 import { Address } from "@/components";
+import useTwaUser from "@/hooks/useTwaUser";
 
 export default function Complete() {
-  const userId = "test";
+  const { id: userId } = useTwaUser();
   const { didAccounts, did } = useContext(DidContext);
 
   const generate = async () => {
