@@ -2,20 +2,20 @@ import { useState } from "react";
 import EnterPassword from "./_EnterPassword";
 import BackupSeed from "./_BackupSeed";
 import Complete from "./_Complete";
-import { MainButton } from "@/hooks/useTwaSdk";
 import { checkPasswordSecurityLevel } from "@/utils";
 import useToast from "@/hooks/useToast";
 import { useNavigate } from "react-router-dom";
 
 export default function RegistByPassword() {
   const navigate = useNavigate();
+  const [buttonText, setButtonText] = useState("Next");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [step, setStep] = useState(0);
 
   const toast = useToast();
 
-  const MainButtonHandle = ((password, confirmPassword, step) => () => {
+  const MainButtonHandle = () => {
     switch (step) {
       case 0:
         if (checkPasswordSecurityLevel(password) < 3) {
@@ -39,9 +39,8 @@ export default function RegistByPassword() {
         break;
       case 1:
         setStep(2);
-        MainButton.setParams({
-          text: "Complete",
-        });
+        setButtonText("Complete");
+
         break;
       case 2:
         navigate("/", {
@@ -51,34 +50,18 @@ export default function RegistByPassword() {
       default:
         break;
     }
-  })(password, confirmPassword, step);
-
-  MainButton.init(
-    {
-      text: "Next",
-    },
-    MainButtonHandle
-  );
+  };
 
   return (
     <div className=" p-10 ">
       <ul className="steps mx-auto mb-8 leading-tight text-xs">
-        <li
-          className={`step${step === 0 ? " step-primary text-primary" : ""}`}
-          onClick={() => MainButtonHandle()}
-        >
+        <li className={`step${step === 0 ? " step-primary text-primary" : ""}`}>
           Enter password
         </li>
-        <li
-          className={`step${step === 1 ? " step-primary text-primary" : ""}`}
-          onClick={() => MainButtonHandle()}
-        >
+        <li className={`step${step === 1 ? " step-primary text-primary" : ""}`}>
           Back up seed phrase
         </li>
-        <li
-          className={`step${step === 2 ? " step-primary text-primary" : ""}`}
-          onClick={() => MainButtonHandle()}
-        >
+        <li className={`step${step === 2 ? " step-primary text-primary" : ""}`}>
           Complete
         </li>
       </ul>
@@ -92,6 +75,13 @@ export default function RegistByPassword() {
         <BackupSeed mnemonic="sfs sdf sdfds dsfds fsdfsd sdsd sd" />
       )}
       {step === 2 && <Complete />}
+
+      <button
+        className="btn w-full btn-primary mt-8"
+        onClick={() => MainButtonHandle()}
+      >
+        {buttonText}
+      </button>
     </div>
   );
 }
