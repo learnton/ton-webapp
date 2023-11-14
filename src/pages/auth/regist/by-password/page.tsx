@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import EnterPassword from "./_EnterPassword";
 import BackupSeed from "./_BackupSeed";
 import Complete from "./_Complete";
@@ -15,7 +15,7 @@ export default function RegistByPassword() {
 
   const toast = useToast();
 
-  const MainButtonHandle = useCallback(() => {
+  const MainButtonHandle = ((password, confirmPassword, step) => () => {
     switch (step) {
       case 0:
         if (checkPasswordSecurityLevel(password) < 3) {
@@ -51,13 +51,13 @@ export default function RegistByPassword() {
       default:
         break;
     }
-  }, [password, confirmPassword, step]);
+  })(password, confirmPassword, step);
 
   MainButton.init(
     {
       text: "Next",
     },
-    () => MainButtonHandle()
+    MainButtonHandle
   );
 
   return (

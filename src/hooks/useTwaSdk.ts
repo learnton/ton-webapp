@@ -7,7 +7,7 @@ const defaultConfig = {
 };
 
 export const MainButton = {
-  init: (params: object, MainButtonHandle: () => any) => {
+  init: (params: object, MainButtonHandle: () => void) => {
     useEffect(() => {
       WebApp.MainButton.setParams(Object.assign(defaultConfig, params));
       WebApp.MainButton.onClick(MainButtonHandle);

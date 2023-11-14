@@ -1,16 +1,18 @@
 import { MainButton } from "@/hooks/useTwaSdk";
-import { useState, useCallback } from "react";
+import { useState } from "react";
 
 export default function RestoreAccount() {
   const [mnemonic, setMnemonic] = useState<string>("");
+
+  const MainButtonHandle = ((mnemonic) => () => {
+    console.log("Restore account", mnemonic);
+  })(mnemonic);
 
   MainButton.init(
     {
       text: "Complete",
     },
-    useCallback(() => {
-      console.log("Restore account", mnemonic);
-    }, [mnemonic])
+    MainButtonHandle
   );
 
   return (

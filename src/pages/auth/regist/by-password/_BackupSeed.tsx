@@ -31,6 +31,7 @@ export default function BackupSeed(props: { mnemonic: string }) {
           placeholder="present police twin quality river sail coach link give distance palm paddle"
           rows={4}
           value={mnemonic}
+          readOnly
         ></textarea>
         <span
           onClick={() => setShow(!show)}
