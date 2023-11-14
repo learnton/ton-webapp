@@ -57,7 +57,7 @@ export default function RegistByPassword() {
     {
       text: "Next",
     },
-    MainButtonHandle
+    () => MainButtonHandle()
   );
 
   return (
