@@ -28,7 +28,7 @@ export default function EnterPassword(props: {
             className="input input-secondary w-full"
             type="password"
             placeholder="Enter Password"
-            onChange={(e: any) => props.setPassword(e.target.value)}
+            onChange={(e: any) => props.setPassword(e.target.value.trim())}
           />
         </div>
         <div className="form-control">
@@ -37,7 +37,9 @@ export default function EnterPassword(props: {
             className="input input-secondary w-full"
             type="password"
             placeholder="Confirm Password"
-            onChange={(e: any) => props.setConfirmPassword(e.target.value)}
+            onChange={(e: any) =>
+              props.setConfirmPassword(e.target.value.trim())
+            }
           />
         </div>
       </form>
