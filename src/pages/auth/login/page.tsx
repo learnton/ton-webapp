@@ -41,8 +41,14 @@ export default function Login() {
 
       <div className="flex flex-col gap-4">
         <button
-          className="btn btn-primary font-normal"
-          onClick={() => navigate("/register")}
+          className="btn btn-primary font-normal text-xs"
+          onClick={() => navigate("/regist/wallet")}
+        >
+          Fast Registration with TON Wallet
+        </button>
+        <button
+          className="link link-hover link-primary font-normal text-sm"
+          onClick={() => navigate("/regist/password")}
         >
           Register with password
         </button>

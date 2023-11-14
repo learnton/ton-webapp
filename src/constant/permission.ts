@@ -1,1 +1,6 @@
-export const AuthWhitelist = ["/register", "/login", "/restore"];
+export const AuthWhitelist = [
+  "/regist/wallet",
+  "/regist/password",
+  "/login",
+  "/restore",
+];

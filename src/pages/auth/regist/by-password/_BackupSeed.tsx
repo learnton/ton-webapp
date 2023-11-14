@@ -1,10 +1,16 @@
 import { useState } from "react";
 import IconEye from "@/assets/img/eye.svg?react";
 import IconEyeOff from "@/assets/img/eye-off.svg?react";
+import { useCopyToClipboard } from "react-use";
 
-export default function BackupSeed(props: any) {
+export default function BackupSeed(props: { mnemonic: string }) {
   console.log(props);
   const [show, setShow] = useState(false);
+  const [mnemonic] = useState(props.mnemonic);
+  const [state, copyToClipboard] = useCopyToClipboard();
+  const handleCopy = () => {
+    copyToClipboard(mnemonic);
+  };
 
   return (
     <>
@@ -19,12 +25,12 @@ export default function BackupSeed(props: any) {
           assets
         </p>
       </div>
-      <div className="relative my-4 border rounded overflow-hidden">
+      <div className="relative mt-4 border rounded overflow-hidden">
         <textarea
           className={"block textarea w-full" + (!show ? " blur" : "")}
           placeholder="present police twin quality river sail coach link give distance palm paddle"
           rows={4}
-          value={`sfs sdf sdfds dsfds fsdfsd sdsd sd`}
+          value={mnemonic}
         ></textarea>
         <span
           onClick={() => setShow(!show)}
@@ -32,6 +38,14 @@ export default function BackupSeed(props: any) {
         >
           {show ? <IconEye /> : <IconEyeOff />}
         </span>
+      </div>
+      <div
+        className={`float-right tooltip`}
+        data-tip={state.value ? "Copied" : ""}
+      >
+        <button className="btn btn-ghost " onClick={() => handleCopy()}>
+          Copy
+        </button>
       </div>
     </>
   );

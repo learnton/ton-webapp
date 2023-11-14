@@ -5,7 +5,7 @@ import { MainButton } from "@/hooks/useTwaSdk";
 import { checkPasswordSecurityLevel } from "@/utils";
 import useToast from "@/hooks/useToast";
 
-export default function RegisterPage() {
+export default function RegistByPassword() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [step, setStep] = useState(0);
@@ -68,7 +68,9 @@ export default function RegisterPage() {
           setConfirmPassword={setConfirmPassword}
         />
       )}
-      {step === 1 && <BackupSeed />}
+      {step === 1 && (
+        <BackupSeed mnemonic="sfs sdf sdfds dsfds fsdfsd sdsd sd" />
+      )}
     </div>
   );
 }
