@@ -1,12 +1,15 @@
 import { MainButton } from "@/hooks/useTwaSdk";
+import { useState } from "react";
 
 export default function RestoreAccount() {
+  const [mnemonic, setMnemonic] = useState<string>("");
+
   MainButton.init(
     {
-      text: "Next",
+      text: "Complete",
     },
     () => {
-      console.log("Restore account");
+      console.log("Restore account", mnemonic);
     }
   );
 
@@ -23,6 +26,7 @@ export default function RestoreAccount() {
           className="textarea textarea-bordered flex-1"
           placeholder="present police twin quality river sail coach link give distance palm paddle"
           rows={4}
+          onChange={(e) => setMnemonic(e.target.value)}
         ></textarea>
       </div>
     </div>

@@ -1,3 +1,3 @@
 import Password from "./Password";
-
-export { Password };
+import Address from "./Address";
+export { Password, Address };
