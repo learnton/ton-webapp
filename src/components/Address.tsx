@@ -14,7 +14,7 @@ function Address({
     return null;
   }
 
-  return <>{showFull ? value : `${value.slice(0, 11)}...${value.slice(-4)}`}</>;
+  return <>{showFull ? value : `${value.slice(0, 15)}...${value.slice(-8)}`}</>;
 }
 
 export default React.memo(Address);
