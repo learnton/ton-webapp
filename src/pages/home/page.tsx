@@ -8,6 +8,9 @@ export default function Dashboard() {
   return (
     <>
       <div className="break-all">did: {did?.instance.id}</div>
+      <button className="btn" onClick={() => localStorage.clear()}>
+        clear storage
+      </button>
     </>
   );
 }

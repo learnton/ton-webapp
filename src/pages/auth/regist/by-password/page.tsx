@@ -2,13 +2,12 @@ import { useState } from "react";
 import EnterPassword from "./_EnterPassword";
 import BackupSeed from "./_BackupSeed";
 import Complete from "./_Complete";
-import { useNavigate } from "react-router-dom";
 import { utils } from "@zcloak/wallet-lib";
 import useDidHelper from "@/hooks/useDidHelper";
+import { reloadToIndex } from "@/utils";
 
 export default function RegistByPassword() {
   const { checkConfirmPassword } = useDidHelper();
-  const navigate = useNavigate();
   const [buttonText, setButtonText] = useState("Next");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -31,8 +30,7 @@ export default function RegistByPassword() {
 
         break;
       case 2:
-        console.log('navigate("/")');
-        navigate("/");
+        reloadToIndex();
         break;
       default:
         break;

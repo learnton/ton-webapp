@@ -1,9 +1,8 @@
 import { useState } from "react";
 import useDidHelper from "@/hooks/useDidHelper";
-import { useNavigate } from "react-router-dom";
+import { reloadToIndex } from "@/utils";
 
 export default function RestoreAccount() {
-  const navigate = useNavigate();
   const { checkConfirmPassword, generate } = useDidHelper();
   const [mnemonic, setMnemonic] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -16,7 +15,9 @@ export default function RestoreAccount() {
           password,
           mnemonic,
         }).then((did) => {
-          did && navigate("/");
+          if (did) {
+            reloadToIndex();
+          }
         });
       }
     });
