@@ -28,7 +28,11 @@ const AuthRouter = (props: { children: any }) => {
 
     // back button
     if (location.pathname !== "/") {
-      WebApp.BackButton.show();
+      if (!isAuth && location.pathname === "/login") {
+        WebApp.BackButton.hide();
+      } else {
+        WebApp.BackButton.show();
+      }
     } else {
       WebApp.BackButton.hide();
     }
