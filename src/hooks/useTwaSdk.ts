@@ -25,7 +25,7 @@ export default () => {
       WebApp.MainButton.setParams(Object.assign(defaultConfig, params));
     },
     destroy() {
-      this.MainButtonHandle &&
+      this?.MainButtonHandle &&
         WebApp.MainButton.offClick(this.MainButtonHandle);
       WebApp.MainButton.hide();
     },

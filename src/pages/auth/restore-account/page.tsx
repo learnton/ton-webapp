@@ -17,7 +17,7 @@ export default function RestoreAccount() {
     );
 
     return TwaSdk.MainButton.destroy;
-  });
+  }, []);
 
   return (
     <div className="text-[#9CA3AF] p-10">
