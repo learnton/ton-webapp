@@ -3,6 +3,7 @@
 export default function EnterPassword(props: {
   setPassword: (password: string) => void;
   setConfirmPassword: (password: string) => void;
+  onSubmit?: () => void;
 }) {
   return (
     <>
@@ -21,7 +22,10 @@ export default function EnterPassword(props: {
         </ul>
         <p>Example: A1b2@c3d</p>
       </div>
-      <form className="py-4">
+      <form
+        className="py-4"
+        onSubmit={() => props.onSubmit && props.onSubmit()}
+      >
         <div className="form-control">
           <div className="label">Enter Password</div>
           <input

@@ -14,6 +14,7 @@ export default function RegistByPassword() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [mnemonic] = useState(utils.mnemonic.mnemonicGenerate(24));
   const [step, setStep] = useState(0);
+  const [runing, setRuning] = useState(false);
 
   const toast = useToast();
 
@@ -40,6 +41,7 @@ export default function RegistByPassword() {
 
         break;
       case 1:
+        setRuning(true);
         setStep(2);
         setButtonText("Complete");
 
@@ -71,15 +73,24 @@ export default function RegistByPassword() {
         <EnterPassword
           setPassword={setPassword}
           setConfirmPassword={setConfirmPassword}
+          onSubmit={() => MainButtonHandle()}
         />
       )}
       {step === 1 && <BackupSeed mnemonic={mnemonic} />}
-      {step === 2 && <Complete mnemonic={mnemonic} password={password} />}
+      {step === 2 && (
+        <Complete
+          mnemonic={mnemonic}
+          password={password}
+          ready={() => setRuning(false)}
+        />
+      )}
 
       <button
         className="btn w-full btn-primary mt-4"
+        disabled={runing}
         onClick={() => MainButtonHandle()}
       >
+        {runing && <span className="loading loading-spinner"></span>}
         {buttonText}
       </button>
     </div>

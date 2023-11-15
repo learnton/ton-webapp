@@ -7,6 +7,7 @@ import useTwaSdk from "@/hooks/useTwaSdk";
 export default function Complete(props: {
   mnemonic: string;
   password: string;
+  ready?: () => void;
 }) {
   const { UserInfo } = useTwaSdk();
   const { didAccounts, did } = useContext(DidContext);
@@ -25,7 +26,7 @@ export default function Complete(props: {
 
   useEffect(() => {
     if (UserInfo?.id && didAccounts && !didAccounts.current) {
-      generate();
+      generate().then(() => typeof props.ready === "function" && props.ready());
     } else {
       console.warn("params lost", UserInfo?.id, props);
     }
