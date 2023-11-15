@@ -74,6 +74,9 @@ export default function RestoreAccount() {
       >
         Complete
       </button>
+      <div className="alert alert-warning">
+        <span>Warning: Invalid email address!</span>
+      </div>
     </div>
   );
 }
