@@ -2,12 +2,12 @@ import { useState } from "react";
 import EnterPassword from "./_EnterPassword";
 import BackupSeed from "./_BackupSeed";
 import Complete from "./_Complete";
-import { checkPasswordSecurityLevel } from "@/utils";
-import useToast from "@/hooks/useToast";
 import { useNavigate } from "react-router-dom";
 import { utils } from "@zcloak/wallet-lib";
+import useDidHelper from "@/hooks/useDidHelper";
 
 export default function RegistByPassword() {
+  const { checkConfirmPassword } = useDidHelper();
   const navigate = useNavigate();
   const [buttonText, setButtonText] = useState("Next");
   const [password, setPassword] = useState("");
@@ -16,28 +16,12 @@ export default function RegistByPassword() {
   const [step, setStep] = useState(0);
   const [runing, setRuning] = useState(false);
 
-  const toast = useToast();
-
   const MainButtonHandle = () => {
     switch (step) {
       case 0:
-        if (checkPasswordSecurityLevel(password) < 3) {
-          toast &&
-            toast({
-              value:
-                "Password length must be greater than 8 characters, and must contains letters and symbols",
-              type: "warning",
-            });
-        } else if (password !== confirmPassword) {
-          toast &&
-            toast({
-              value: "The two passwords entered do not match",
-              type: "warning",
-            });
-        } else {
-          // TODO generate did
-          setStep(1);
-        }
+        checkConfirmPassword(password, confirmPassword, (valid) => {
+          valid && setStep(1);
+        });
 
         break;
       case 1:
@@ -57,7 +41,7 @@ export default function RegistByPassword() {
   };
 
   return (
-    <div className=" p-10 ">
+    <div className=" p-8 ">
       <ul className="steps mx-auto mb-8 leading-tight text-xs">
         <li className={`step${step >= 0 ? " step-primary text-primary" : ""}`}>
           Enter password

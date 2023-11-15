@@ -3,6 +3,7 @@ import IdentityIcon from "@/components/IdentityIcon";
 import { DidContext } from "@/context/Did";
 import { Address } from "@/components";
 import useTwaSdk from "@/hooks/useTwaSdk";
+import useDidHelper from "@/hooks/useDidHelper";
 
 export default function Complete(props: {
   mnemonic: string;
@@ -12,21 +13,13 @@ export default function Complete(props: {
   const { UserInfo } = useTwaSdk();
   const { didAccounts, did } = useContext(DidContext);
 
-  const generate = async () => {
-    if (!didAccounts || !UserInfo?.id || !props.mnemonic || !props.password) {
-      return console.warn("generate by password fail");
-    }
-
-    if (!didAccounts?.current) {
-      const did = await didAccounts.generate(props.mnemonic, props.password);
-
-      didAccounts.setCurrent(did.instance.id);
-    }
-  };
+  const { generate } = useDidHelper();
 
   useEffect(() => {
     if (UserInfo?.id && didAccounts && !didAccounts.current) {
-      generate().then(() => typeof props.ready === "function" && props.ready());
+      generate(props).then(
+        () => typeof props.ready === "function" && props.ready()
+      );
     } else {
       console.warn("params lost", UserInfo?.id, props);
     }

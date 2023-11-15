@@ -5,7 +5,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col justify-center p-10 h-[100vh] gap-8">
+    <div className="flex flex-col justify-center p-8 h-[100vh] gap-8">
       <div className="text-[#9CA3AF]">
         <h1 className="font-bold text-[#111827] text-xl mb-4">
           Welcome to Product Name
