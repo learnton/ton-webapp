@@ -21,7 +21,7 @@ export default function EnterPassword(props: {
         </ul>
         <p>Example: A1b2@c3d</p>
       </div>
-      <form>
+      <form className="py-4">
         <div className="form-control">
           <div className="label">Enter Password</div>
           <input

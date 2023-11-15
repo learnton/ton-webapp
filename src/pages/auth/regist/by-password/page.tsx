@@ -57,13 +57,13 @@ export default function RegistByPassword() {
   return (
     <div className=" p-10 ">
       <ul className="steps mx-auto mb-8 leading-tight text-xs">
-        <li className={`step${step === 0 ? " step-primary text-primary" : ""}`}>
+        <li className={`step${step >= 0 ? " step-primary text-primary" : ""}`}>
           Enter password
         </li>
-        <li className={`step${step === 1 ? " step-primary text-primary" : ""}`}>
+        <li className={`step${step >= 1 ? " step-primary text-primary" : ""}`}>
           Back up seed phrase
         </li>
-        <li className={`step${step === 2 ? " step-primary text-primary" : ""}`}>
+        <li className={`step${step >= 2 ? " step-primary text-primary" : ""}`}>
           Complete
         </li>
       </ul>
@@ -77,7 +77,7 @@ export default function RegistByPassword() {
       {step === 2 && <Complete mnemonic={mnemonic} password={password} />}
 
       <button
-        className="btn w-full btn-primary mt-8"
+        className="btn w-full btn-primary mt-4"
         onClick={() => MainButtonHandle()}
       >
         {buttonText}

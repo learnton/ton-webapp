@@ -39,7 +39,7 @@ export default function BackupSeed(props: { mnemonic: string }) {
         </span>
       </div>
       <div
-        className={`float-right tooltip`}
+        className={`float-right${state.value ? " tooltip" : ""}`}
         data-tip={state.value ? "Copied" : ""}
       >
         <button className="btn btn-ghost " onClick={() => handleCopy()}>

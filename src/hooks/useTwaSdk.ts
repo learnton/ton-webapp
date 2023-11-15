@@ -2,23 +2,35 @@ import WebApp from "@twa-dev/sdk";
 import { useEffect } from "react";
 import { themeColor } from "@/constant";
 
+WebApp.ready();
+
 const defaultConfig = {
   color: themeColor.primary,
 };
 
-export const MainButton = {
-  init: (params: object, MainButtonHandle: () => void) => {
-    useEffect(() => {
+export default () => {
+  const MainButton = {
+    init: (params: object, MainButtonHandle: () => void) => {
+      useEffect(() => {
+        WebApp.MainButton.setParams(Object.assign(defaultConfig, params));
+        WebApp.MainButton.onClick(MainButtonHandle);
+        WebApp.MainButton.show();
+        return () => {
+          WebApp.MainButton.offClick(MainButtonHandle);
+          WebApp.MainButton.hide();
+        };
+      }, []);
+    },
+    setParams: (params: object) => {
       WebApp.MainButton.setParams(Object.assign(defaultConfig, params));
-      WebApp.MainButton.onClick(MainButtonHandle);
-      WebApp.MainButton.show();
-      return () => {
-        WebApp.MainButton.offClick(MainButtonHandle);
-        WebApp.MainButton.hide();
-      };
-    }, []);
-  },
-  setParams: (params: object) => {
-    WebApp.MainButton.setParams(Object.assign(defaultConfig, params));
-  },
+    },
+  };
+
+  const UserInfo = WebApp.initDataUnsafe.user;
+
+  return {
+    MainButton,
+    WebApp,
+    UserInfo,
+  };
 };

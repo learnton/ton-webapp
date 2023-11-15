@@ -2,17 +2,17 @@ import { useEffect, useContext } from "react";
 import IdentityIcon from "@/components/IdentityIcon";
 import { DidContext } from "@/context/Did";
 import { Address } from "@/components";
-import useTwaUser from "@/hooks/useTwaUser";
+import useTwaSdk from "@/hooks/useTwaSdk";
 
 export default function Complete(props: {
   mnemonic: string;
   password: string;
 }) {
-  const { id: userId } = useTwaUser();
+  const { UserInfo } = useTwaSdk();
   const { didAccounts, did } = useContext(DidContext);
 
   const generate = async () => {
-    if (!didAccounts || !userId || !props.mnemonic || !props.password) {
+    if (!didAccounts || !UserInfo?.id || !props.mnemonic || !props.password) {
       return console.warn("generate by password fail");
     }
 
@@ -24,12 +24,12 @@ export default function Complete(props: {
   };
 
   useEffect(() => {
-    if (userId && didAccounts && !didAccounts.current) {
+    if (UserInfo?.id && didAccounts && !didAccounts.current) {
       generate();
     } else {
-      console.warn("params lost", userId, props);
+      console.warn("params lost", UserInfo?.id, props);
     }
-  }, [userId, didAccounts, props]);
+  }, [UserInfo?.id, didAccounts, props]);
 
   return (
     <>
@@ -43,7 +43,7 @@ export default function Complete(props: {
           privacy, all with your data under your control.
         </p>
       </div>
-      <div className="text-center">
+      <div className="text-center py-4">
         <IdentityIcon
           value={did?.instance.id}
           className="w-20 h-20 m-auto mask mask-circle bg-[#eee] mb-4"
