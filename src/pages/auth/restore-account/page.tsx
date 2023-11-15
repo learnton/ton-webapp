@@ -16,7 +16,7 @@ export default function RestoreAccount() {
       MainButtonHandle
     );
 
-    return TwaSdk.MainButton.destroy(MainButtonHandle);
+    return TwaSdk.MainButton.destroy;
   });
 
   return (

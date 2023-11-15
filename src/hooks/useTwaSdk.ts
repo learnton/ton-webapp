@@ -8,17 +8,25 @@ const defaultConfig = {
 };
 
 export default () => {
-  const MainButton = {
-    init: (params: object, MainButtonHandle: () => void) => {
+  const MainButton: {
+    MainButtonHandle?: () => void;
+    init: (params: object, MainButtonHandle: () => void) => void;
+    setParams: (params: object) => void;
+    destroy: () => void;
+  } = {
+    MainButtonHandle: undefined,
+    init(params: object, MainButtonHandle: () => void) {
       WebApp.MainButton.setParams(Object.assign(defaultConfig, params));
       WebApp.MainButton.onClick(MainButtonHandle);
       WebApp.MainButton.show();
+      this.MainButtonHandle = MainButtonHandle;
     },
-    setParams: (params: object) => {
+    setParams(params: object) {
       WebApp.MainButton.setParams(Object.assign(defaultConfig, params));
     },
-    destroy: (MainButtonHandle: () => void) => {
-      WebApp.MainButton.offClick(MainButtonHandle);
+    destroy() {
+      this.MainButtonHandle &&
+        WebApp.MainButton.offClick(this.MainButtonHandle);
       WebApp.MainButton.hide();
     },
   };
