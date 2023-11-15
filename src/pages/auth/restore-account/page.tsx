@@ -1,23 +1,30 @@
 import useTwaSdk from "@/hooks/useTwaSdk";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function RestoreAccount() {
   const [mnemonic, setMnemonic] = useState<string>("");
   const TwaSdk = useTwaSdk();
-  const MainButtonHandle = ((mnemonic) => () => {
+  const MainButtonHandle = () => {
     console.log("Restore account", mnemonic);
-  })(mnemonic);
+  };
 
-  TwaSdk.MainButton.init(
-    {
-      text: "Complete",
-    },
-    MainButtonHandle
-  );
+  useEffect(() => {
+    TwaSdk.MainButton.init(
+      {
+        text: "Complete",
+      },
+      MainButtonHandle
+    );
+
+    return TwaSdk.MainButton.destroy(MainButtonHandle);
+  });
 
   return (
     <div className="text-[#9CA3AF] p-10">
-      <h1 className="font-bold text-[#111827] text-xl mb-4">
+      <h1
+        className="font-bold text-[#111827] text-xl mb-4"
+        onClick={() => MainButtonHandle()}
+      >
         Enter your seed phrase
       </h1>
       <p className="my-4">

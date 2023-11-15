@@ -11,18 +11,16 @@ const defaultConfig = {
 export default () => {
   const MainButton = {
     init: (params: object, MainButtonHandle: () => void) => {
-      useEffect(() => {
-        WebApp.MainButton.setParams(Object.assign(defaultConfig, params));
-        WebApp.MainButton.onClick(MainButtonHandle);
-        WebApp.MainButton.show();
-        return () => {
-          WebApp.MainButton.offClick(MainButtonHandle);
-          WebApp.MainButton.hide();
-        };
-      }, []);
+      WebApp.MainButton.setParams(Object.assign(defaultConfig, params));
+      WebApp.MainButton.onClick(MainButtonHandle);
+      WebApp.MainButton.show();
     },
     setParams: (params: object) => {
       WebApp.MainButton.setParams(Object.assign(defaultConfig, params));
+    },
+    destroy: (MainButtonHandle: () => void) => {
+      WebApp.MainButton.offClick(MainButtonHandle);
+      WebApp.MainButton.hide();
     },
   };
 
