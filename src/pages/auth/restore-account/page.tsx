@@ -1,26 +1,37 @@
 import { useState } from "react";
 import useDidHelper from "@/hooks/useDidHelper";
 import { reloadToIndex } from "@/utils";
+import { Password } from "@/components";
+import useToast from "@/hooks/useToast";
 
 export default function RestoreAccount() {
+  const toast = useToast();
   const { checkConfirmPassword, generate } = useDidHelper();
   const [mnemonic, setMnemonic] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   const onSubmit = () => {
-    checkConfirmPassword(password, confirmPassword, (valid) => {
-      if (valid) {
-        generate({
-          password,
-          mnemonic,
-        }).then((did) => {
-          if (did) {
-            reloadToIndex();
-          }
+    if (!mnemonic.trim().length) {
+      toast &&
+        toast({
+          type: "warning",
+          value: "Please enter your mnemonic",
         });
-      }
-    });
+    } else {
+      checkConfirmPassword(password, confirmPassword, (valid) => {
+        if (valid) {
+          generate({
+            password,
+            mnemonic,
+          }).then((did) => {
+            if (did) {
+              reloadToIndex();
+            }
+          });
+        }
+      });
+    }
   };
 
   return (
@@ -41,18 +52,14 @@ export default function RestoreAccount() {
         <form className="py-4" onSubmit={() => onSubmit()}>
           <div className="form-control">
             <div className="label">Enter Password</div>
-            <input
-              className="input input-secondary w-full"
-              type="password"
+            <Password
               placeholder="Enter Password"
               onChange={(e: any) => setPassword(e.target.value.trim())}
             />
           </div>
           <div className="form-control">
             <div className="label">Confirm Password</div>
-            <input
-              className="input input-secondary w-full"
-              type="password"
+            <Password
               placeholder="Confirm Password"
               onChange={(e: any) => setConfirmPassword(e.target.value.trim())}
             />
