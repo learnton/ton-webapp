@@ -15,6 +15,7 @@ const AuthRouter = (props: { children: any }) => {
   useEffect(() => {
     if (!isAuth) {
       if (!AuthWhitelist.includes(location.pathname)) {
+        console.log("not auth", location.pathname);
         navigate("/login", {
           replace: true,
         });
