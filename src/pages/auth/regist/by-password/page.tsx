@@ -5,12 +5,14 @@ import Complete from "./_Complete";
 import { checkPasswordSecurityLevel } from "@/utils";
 import useToast from "@/hooks/useToast";
 import { useNavigate } from "react-router-dom";
+import { utils } from "@zcloak/wallet-lib";
 
 export default function RegistByPassword() {
   const navigate = useNavigate();
   const [buttonText, setButtonText] = useState("Next");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [mnemonic] = useState(utils.mnemonic.mnemonicGenerate(24));
   const [step, setStep] = useState(0);
 
   const toast = useToast();
@@ -71,10 +73,8 @@ export default function RegistByPassword() {
           setConfirmPassword={setConfirmPassword}
         />
       )}
-      {step === 1 && (
-        <BackupSeed mnemonic="sfs sdf sdfds dsfds fsdfsd sdsd sd" />
-      )}
-      {step === 2 && <Complete />}
+      {step === 1 && <BackupSeed mnemonic={mnemonic} />}
+      {step === 2 && <Complete mnemonic={mnemonic} password={password} />}
 
       <button
         className="btn w-full btn-primary mt-8"

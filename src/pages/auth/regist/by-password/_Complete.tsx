@@ -1,43 +1,35 @@
 import { useEffect, useContext } from "react";
-
 import IdentityIcon from "@/components/IdentityIcon";
-import { requestPhaseText } from "@/utils";
-import { utils } from "@zcloak/wallet-lib";
 import { DidContext } from "@/context/Did";
-import { PHASE_KEY } from "@/constant";
-import TonWeb from "tonweb";
 import { Address } from "@/components";
 import useTwaUser from "@/hooks/useTwaUser";
 
-export default function Complete() {
+export default function Complete(props: {
+  mnemonic: string;
+  password: string;
+}) {
   const { id: userId } = useTwaUser();
   const { didAccounts, did } = useContext(DidContext);
 
   const generate = async () => {
-    if (!didAccounts || !userId) return;
+    if (!didAccounts || !userId || !props.mnemonic || !props.password) {
+      return console.warn("generate by password fail");
+    }
 
     if (!didAccounts?.current) {
-      const wPreKey = crypto.getRandomValues(new Uint8Array(32));
-      const message = requestPhaseText(wPreKey);
-      // const sig = await signMessageAsync({ message });
-
-      const mnemonic = utils.mnemonic.mnemonicGenerate(24);
-
-      const did = await didAccounts.generate(mnemonic, message);
+      const did = await didAccounts.generate(props.mnemonic, props.password);
 
       didAccounts.setCurrent(did.instance.id);
-      localStorage.setItem(
-        `${userId}_${PHASE_KEY}`,
-        TonWeb.utils.bytesToHex(wPreKey)
-      );
     }
   };
 
   useEffect(() => {
     if (userId && didAccounts && !didAccounts.current) {
       generate();
+    } else {
+      console.warn("params lost", userId, props);
     }
-  }, [userId, didAccounts]);
+  }, [userId, didAccounts, props]);
 
   return (
     <>

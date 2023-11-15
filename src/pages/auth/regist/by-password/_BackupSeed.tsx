@@ -4,12 +4,10 @@ import IconEyeOff from "@/assets/img/eye-off.svg?react";
 import { useCopyToClipboard } from "react-use";
 
 export default function BackupSeed(props: { mnemonic: string }) {
-  console.log(props);
   const [show, setShow] = useState(false);
-  const [mnemonic] = useState(props.mnemonic);
   const [state, copyToClipboard] = useCopyToClipboard();
   const handleCopy = () => {
-    copyToClipboard(mnemonic);
+    copyToClipboard(props.mnemonic);
   };
 
   return (
@@ -30,7 +28,7 @@ export default function BackupSeed(props: { mnemonic: string }) {
           className={"block textarea w-full" + (!show ? " blur" : "")}
           placeholder="present police twin quality river sail coach link give distance palm paddle"
           rows={4}
-          value={mnemonic}
+          value={props.mnemonic}
           readOnly
         ></textarea>
         <span
