@@ -1,5 +1,4 @@
 import WebApp from "@twa-dev/sdk";
-import { useEffect } from "react";
 import { themeColor } from "@/constant";
 
 WebApp.ready();
