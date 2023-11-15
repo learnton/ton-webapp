@@ -16,10 +16,7 @@ export default function RestoreAccount() {
           password,
           mnemonic,
         }).then((did) => {
-          did &&
-            navigate("/", {
-              replace: true,
-            });
+          did && navigate("/");
         });
       }
     });

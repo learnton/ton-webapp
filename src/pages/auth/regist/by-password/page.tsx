@@ -31,9 +31,7 @@ export default function RegistByPassword() {
 
         break;
       case 2:
-        navigate("/", {
-          replace: true,
-        });
+        navigate("/");
         break;
       default:
         break;
