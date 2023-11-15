@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 export default function Layout() {
   return (
-    <div className="max-w-[1200px] m-auto p-10">
+    <div className="p-4">
       <Outlet />
     </div>
   );

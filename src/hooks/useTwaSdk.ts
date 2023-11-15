@@ -26,11 +26,17 @@ export default () => {
     },
   };
 
-  const UserInfo = WebApp.initDataUnsafe.user;
+  const DevMode =
+    WebApp.platform === "unknown" && parseFloat(WebApp.version) < 6.1;
+
+  const UserInfo = DevMode
+    ? { id: "testIdByDevMode" }
+    : WebApp.initDataUnsafe.user;
 
   return {
     MainButton,
     WebApp,
     UserInfo,
+    DevMode,
   };
 };

@@ -11,10 +11,7 @@ export default () => {
   useEffect(() => {
     if (user?.id && didAccounts?.current) {
       setIsAuth(true);
-    } else if (
-      parseFloat(TwaSdk.WebApp.version) < 6.1 &&
-      didAccounts?.current
-    ) {
+    } else if (TwaSdk.DevMode && didAccounts?.current) {
       console.log("runing in dev mode by version=", TwaSdk.WebApp.version);
       setIsAuth(true);
     } else {
