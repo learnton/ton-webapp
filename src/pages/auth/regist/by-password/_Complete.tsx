@@ -37,7 +37,7 @@ export default function Complete(props: {
           privacy, all with your data under your control.
         </p>
       </div>
-      <div className="text-center py-4">
+      <div className="text-center py-10">
         <IdentityIcon
           value={did?.instance.id}
           className="w-20 h-20 m-auto mask mask-circle bg-[#eee] mb-4"
