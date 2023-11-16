@@ -1,14 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
 import "./global.css";
-import { BrowserRouter as Router } from "react-router-dom";
+import ToastProvider from "./context/Toast";
+import DidProvider from "./context/Did";
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { baseURL } from "@/constant";
+import rootRoute from "./pages/routes";
+const router = createBrowserRouter(rootRoute, {
+  basename: baseURL,
+});
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Router basename={baseURL}>
-      <App />
-    </Router>
+    <ToastProvider>
+      <DidProvider>
+        <RouterProvider router={router} />
+      </DidProvider>
+    </ToastProvider>
   </React.StrictMode>
 );

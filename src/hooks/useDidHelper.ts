@@ -3,6 +3,7 @@ import { DidContext } from "@/context/Did";
 import { useContext } from "react";
 import { checkPasswordSecurityLevel } from "@/utils";
 import useToast from "@/hooks/useToast";
+import { DidAccount } from "@zcloak/wallet-lib";
 
 export default () => {
   const toast = useToast();
@@ -11,12 +12,15 @@ export default () => {
 
   const generate = async (params: { mnemonic: string; password: string }) => {
     if (!didAccounts || !UserInfo?.id || !params.mnemonic || !params.password) {
-      console.warn("generate did fail");
+      console.warn("generate did fail", didAccounts, UserInfo, params);
       return null;
     }
 
     if (!didAccounts?.current) {
-      const did = await didAccounts.generate(params.mnemonic, params.password);
+      const did: DidAccount = await didAccounts.generate(
+        params.mnemonic,
+        params.password
+      );
 
       didAccounts.setCurrent(did.instance.id);
       return did;

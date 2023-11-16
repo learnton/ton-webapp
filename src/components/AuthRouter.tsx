@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useMatches } from "react-router-dom";
 import { AuthWhitelist } from "@/constant";
 import useAuth from "@/hooks/useAuth";
 import WebApp from "@twa-dev/sdk";
@@ -9,9 +9,11 @@ WebApp.BackButton.onClick(() => {
 });
 
 const AuthRouter = (props: { children: any }) => {
+  const matches = useMatches();
   const isAuth = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+
   useEffect(() => {
     if (!isAuth) {
       if (!AuthWhitelist.includes(location.pathname)) {
@@ -27,7 +29,10 @@ const AuthRouter = (props: { children: any }) => {
     }
 
     // back button
-    if (location.pathname !== "/") {
+    console.log("matches=", matches);
+    if (matches.length > 1) {
+      WebApp.BackButton.show();
+    } else if (location.pathname !== "/") {
       if (!isAuth && location.pathname === "/login") {
         WebApp.BackButton.hide();
       } else {

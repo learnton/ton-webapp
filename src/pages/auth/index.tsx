@@ -1,14 +1,12 @@
-import { RouteObject } from "@/types/router";
 import Login from "./login/page";
 import RegistByPassword from "./regist/by-password/page";
 import RegistByWallet from "./regist/by-wallet/page";
 import RestoreAccount from "./restore-account/page";
 
-const routers: RouteObject[] = [
+const routers = [
   {
     path: "login",
     element: <Login />,
-    index: true,
   },
   {
     path: "regist/password",

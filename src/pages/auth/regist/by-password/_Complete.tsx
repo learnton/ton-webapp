@@ -1,30 +1,7 @@
-import { useEffect, useContext } from "react";
 import IdentityIcon from "@/components/IdentityIcon";
-import { DidContext } from "@/context/Did";
 import { Address } from "@/components";
-import useTwaSdk from "@/hooks/useTwaSdk";
-import useDidHelper from "@/hooks/useDidHelper";
 
-export default function Complete(props: {
-  mnemonic: string;
-  password: string;
-  ready?: () => void;
-}) {
-  const { UserInfo } = useTwaSdk();
-  const { didAccounts, did } = useContext(DidContext);
-
-  const { generate } = useDidHelper();
-
-  useEffect(() => {
-    if (UserInfo?.id && didAccounts && !didAccounts.current) {
-      generate(props).then(
-        () => typeof props.ready === "function" && props.ready()
-      );
-    } else {
-      console.warn("params lost", UserInfo?.id, props);
-    }
-  }, [UserInfo?.id, didAccounts, props]);
-
+export default function Complete(props: { didUrl: string }) {
   return (
     <>
       <h1 className="leading-loose font-bold text-xl">
@@ -39,12 +16,12 @@ export default function Complete(props: {
       </div>
       <div className="text-center py-10">
         <IdentityIcon
-          value={did?.instance.id}
+          value={props.didUrl}
           className="w-20 h-20 m-auto mask mask-circle bg-[#eee] mb-4"
         />
 
         <div className="text-base">
-          <Address value={did?.instance.id} />
+          <Address value={props.didUrl} />
         </div>
       </div>
     </>

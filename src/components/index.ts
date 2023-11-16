@@ -1,3 +1,4 @@
 import Password from "./Password";
 import Address from "./Address";
-export { Password, Address };
+import AuthRouter from "./AuthRouter";
+export { Password, Address, AuthRouter };

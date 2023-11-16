@@ -4,16 +4,19 @@ import BackupSeed from "./_BackupSeed";
 import Complete from "./_Complete";
 import { utils } from "@zcloak/wallet-lib";
 import useDidHelper from "@/hooks/useDidHelper";
-import { reloadToIndex } from "@/utils";
+import { useNavigate } from "react-router-dom";
+import { DidAccount } from "@zcloak/wallet-lib";
 
 export default function RegistByPassword() {
-  const { checkConfirmPassword } = useDidHelper();
+  const navigate = useNavigate();
+  const { checkConfirmPassword, generate } = useDidHelper();
   const [buttonText, setButtonText] = useState("Next");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [mnemonic] = useState(utils.mnemonic.mnemonicGenerate(24));
   const [step, setStep] = useState(0);
   const [runing, setRuning] = useState(false);
+  const [did, setDid] = useState<DidAccount | undefined>();
 
   const MainButtonHandle = () => {
     switch (step) {
@@ -25,12 +28,24 @@ export default function RegistByPassword() {
         break;
       case 1:
         setRuning(true);
-        setStep(2);
-        setButtonText("Complete");
+
+        generate({
+          mnemonic,
+          password,
+        }).then((did) => {
+          if (did) {
+            setDid(did);
+            setRuning(false);
+            setStep(2);
+            setButtonText("Complete");
+          }
+        });
 
         break;
       case 2:
-        reloadToIndex();
+        navigate("/", {
+          replace: true,
+        });
         break;
       default:
         break;
@@ -58,13 +73,7 @@ export default function RegistByPassword() {
         />
       )}
       {step === 1 && <BackupSeed mnemonic={mnemonic} />}
-      {step === 2 && (
-        <Complete
-          mnemonic={mnemonic}
-          password={password}
-          ready={() => setRuning(false)}
-        />
-      )}
+      {step === 2 && did && <Complete didUrl={did?.instance.id} />}
 
       <button
         className="btn w-full btn-primary mt-4"
