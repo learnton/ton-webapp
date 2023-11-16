@@ -1,7 +1,12 @@
 import IdentityIcon from "@/components/IdentityIcon";
 import { Address } from "@/components";
+import Lottie from "lottie-react";
+import LottieData from "@/assets/Animation - 1700111502636.json";
+import { useState } from "react";
 
 export default function Complete(props: { didUrl: string }) {
+  const [show, setShow] = useState(true);
+
   return (
     <>
       <h1 className="leading-loose font-bold text-xl">
@@ -24,6 +29,16 @@ export default function Complete(props: { didUrl: string }) {
           <Address value={props.didUrl} />
         </div>
       </div>
+      {show && (
+        <Lottie
+          animationData={LottieData}
+          className="fixed left-0 bottom-0 w-full h-full"
+          loop={false}
+          onComplete={() => {
+            setShow(false);
+          }}
+        />
+      )}
     </>
   );
 }
