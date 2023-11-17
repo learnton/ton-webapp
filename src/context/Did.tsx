@@ -47,11 +47,11 @@ const DidProvider = ({ children }: { children: React.ReactNode }) => {
     };
   }, [didAccounts]);
 
-  // useEffect(() => {
-  //   if (!did) return;
-
-  //   did.instance.getPublish().then((document) => console.log(document));
-  // }, [did]);
+  useEffect(() => {
+    if (!did) return;
+    console.log(did);
+    // did.instance.getPublish().then((document) => console.log(document));
+  }, [did]);
 
   return (
     <>
