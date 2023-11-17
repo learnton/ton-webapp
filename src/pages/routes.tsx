@@ -1,6 +1,6 @@
 import Layout from "./layouts/Layout";
 import NoFound from "./no-found/page";
-import HomePage from "./account/page";
+import accountRoutes from "./account";
 import authRoutes from "./auth";
 import { AuthRouter } from "@/components";
 import { RouteObject } from "@/types";
@@ -8,20 +8,12 @@ import { RouteObject } from "@/types";
 const rootRouter = [
   {
     path: "/",
-    name: "首页",
     element: <Layout />,
-    children: [
-      {
-        path: "/",
-        name: "HomePage",
-        element: <HomePage />,
-      },
-    ],
+    children: [...accountRoutes],
   },
   ...authRoutes,
   {
     path: "*",
-    name: "No Match",
     element: <NoFound />,
   },
 ];

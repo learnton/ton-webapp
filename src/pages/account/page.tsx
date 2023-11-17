@@ -8,8 +8,9 @@ import IconScan from "./assets/icon_scan.svg?react";
 import IconNoti from "./assets/icon_notification.svg?react";
 import useTwaSdk from "@/hooks/useTwaSdk";
 import CardBgURL from "./assets/img_bg_card@2x.webp";
+import { Link } from "react-router-dom";
 
-export default function Dashboard() {
+export default function Account() {
   const { did } = useContext(DidContext);
   const { UserInfo } = useTwaSdk();
   const [noti, setNoti] = useState(0);
@@ -29,22 +30,22 @@ export default function Dashboard() {
         }}
       >
         <div className="absolute left-0 top-0 w-full box-border p-4 flex flex-row items-center">
-          <button className="btn btn-ghost btn-xs">
+          <Link to="/account/profile" className="btn btn-ghost btn-xs">
             <IconAccount />
-          </button>
-          <button className="btn btn-ghost btn-xs">
+          </Link>
+          <Link to="/account/scan" className="btn btn-ghost btn-xs">
             <IconScan />
-          </button>
+          </Link>
 
           <div className="flex-1 text-right">
             {noti > 0 && <span>{noti} new message</span>}
           </div>
-          <button className="btn btn-ghost btn-xs relative">
+          <Link to="/account/message" className="btn btn-ghost btn-xs relative">
             {noti && (
               <div className="absolute left-[50%] translate-x-[6px] top-0 w-2 h-2 overflow-hidden rounded-3xl bg-error"></div>
             )}
             <IconNoti />
-          </button>
+          </Link>
         </div>
         <div className="flex flex-row items-center gap-2">
           {did && (
@@ -54,7 +55,7 @@ export default function Dashboard() {
             />
           )}
           <div className="flex-1">
-            <p className="text-sm">Valid Name/{UserInfo.username || "--"}</p>
+            <p className="text-sm">{UserInfo.username || "--"}</p>
             <div className="font-medium text-[#191B1E]">
               {did && <Address value={did.instance.id} withCopy />}
             </div>
