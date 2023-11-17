@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation, useNavigate, useMatches } from "react-router-dom";
+import { useLocation, useNavigate, useMatches, Outlet } from "react-router-dom";
 import { AuthWhitelist, HOMEPAGE_URL } from "@/constant";
 import useAuth from "@/hooks/useAuth";
 import WebApp from "@twa-dev/sdk";
@@ -8,7 +8,7 @@ WebApp.BackButton.onClick(() => {
   window.history.back();
 });
 
-const AuthRouter = (props: { children: any }) => {
+export default function AuthRouter() {
   const matches = useMatches();
   const isAuth = useAuth();
   const { pathname } = useLocation();
@@ -48,7 +48,9 @@ const AuthRouter = (props: { children: any }) => {
     }
   }, [isAuth, pathname, navigate]);
 
-  return isAuth === null ? <>loading...</> : props.children;
-};
-
-export default AuthRouter;
+  return (
+    <div className="p-4 bg-[#F9FAFB] min-h-[100vh]">
+      <Outlet />
+    </div>
+  );
+}

@@ -8,10 +8,8 @@ export default function Complete(props: { didUrl: string }) {
   const [show, setShow] = useState(true);
 
   return (
-    <>
-      <h1 className="leading-loose font-bold text-xl">
-        Your account is now ready!
-      </h1>
+    <div className="relative">
+      <h1 className="font-bold text-xl mb-4">Your account is now ready!</h1>
       <div className="text-[#9CA3AF] flex flex-col gap-4">
         <p>
           We've prepared your digital identity. Check out its features, use our
@@ -32,13 +30,12 @@ export default function Complete(props: { didUrl: string }) {
       {show && (
         <Lottie
           animationData={LottieData}
-          className="fixed left-0 bottom-0 w-full h-full"
-          loop={false}
+          className="absolute left-0 bottom-0 w-full h-full"
           onComplete={() => {
             setShow(false);
           }}
         />
       )}
-    </>
+    </div>
   );
 }
