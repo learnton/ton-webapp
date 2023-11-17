@@ -1,6 +1,6 @@
 import Layout from "./layouts/Layout";
 import NoFound from "./no-found/page";
-import Dashboard from "./home/page";
+import HomePage from "./account/page";
 import authRoutes from "./auth";
 import { AuthRouter } from "@/components";
 import { RouteObject } from "@/types";
@@ -13,8 +13,8 @@ const rootRouter = [
     children: [
       {
         path: "/",
-        name: "Dashboard",
-        element: <Dashboard />,
+        name: "HomePage",
+        element: <HomePage />,
       },
     ],
   },

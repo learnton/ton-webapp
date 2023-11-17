@@ -4,6 +4,13 @@ import { themeColor } from "./src/constant";
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   plugins: [require("daisyui")],
+  theme: {
+    extend: {
+      aspectRatio: {
+        card: "12 / 7",
+      },
+    },
+  },
   // daisyUI config (optional - here are the default values)
   daisyui: {
     themes: [

@@ -1,5 +1,6 @@
 import WebApp from "@twa-dev/sdk";
 import { themeColor } from "@/constant";
+import { WebAppUser } from "@twa-dev/types";
 
 WebApp.ready();
 
@@ -34,9 +35,9 @@ export default () => {
   const DevMode =
     WebApp.platform === "unknown" && parseFloat(WebApp.version) < 6.1;
 
-  const UserInfo = DevMode
-    ? { id: "testIdByDevMode" }
-    : WebApp.initDataUnsafe.user;
+  const UserInfo = (
+    DevMode ? { id: "testIdByDevMode" } : WebApp.initDataUnsafe.user
+  ) as WebAppUser;
 
   return {
     MainButton,
