@@ -13,7 +13,12 @@ const router = createBrowserRouter(rootRoute, {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <TonConnectUIProvider manifestUrl="https://learnton.github.io/ton-webapp/tonconnect-manifest.json">
+    <TonConnectUIProvider
+      manifestUrl="https://learnton.github.io/ton-webapp/tonconnect-manifest.json"
+      actionsConfiguration={{
+        twaReturnUrl: "https://t.me/TMASampleBot",
+      }}
+    >
       <ToastProvider>
         <DidProvider>
           <RouterProvider router={router} />

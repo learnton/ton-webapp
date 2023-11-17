@@ -7,7 +7,7 @@ export default function RegistByWallet() {
   useTonWalletSign();
 
   const handler = () => {
-    TonConnectUI.openModal().then(() => {});
+    TonConnectUI.openModal();
   };
 
   const disconnect = () => {

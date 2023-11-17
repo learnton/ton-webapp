@@ -14,10 +14,11 @@ export default function () {
     });
   };
 
-  refreshPayload();
-
   useEffect(() => {
+    refreshPayload();
+
     tonConnectUI.onStatusChange((wallet) => {
+      console.log("onStatusChange", wallet);
       if (
         wallet?.connectItems?.tonProof &&
         "proof" in wallet?.connectItems?.tonProof
