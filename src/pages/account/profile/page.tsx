@@ -12,14 +12,16 @@ export default function Profile() {
   const { UserInfo } = useTwaSdk();
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-10">
       <div className="flex flex-col items-center gap-2">
-        {did && (
-          <IdentityIcon
-            value={did.instance.id}
-            className="w-20 h-20 m-auto mask mask-circle bg-[#eee]"
-          />
-        )}
+        <div className="py-4">
+          {did && (
+            <IdentityIcon
+              value={did.instance.id}
+              className="w-20 h-20 m-auto mask mask-circle bg-[#eee]"
+            />
+          )}
+        </div>
         <p className="font-bold text-xl">{UserInfo.username || "--"}</p>
         <div className="font-medium text-[#191B1E]">
           {did && <Address value={did.instance.id} withCopy />}

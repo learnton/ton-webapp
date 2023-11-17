@@ -7,7 +7,7 @@ import Keys from "./keys/page";
 
 const routers = [
   {
-    path: "/",
+    path: "account",
     element: <HomePage />,
   },
   {

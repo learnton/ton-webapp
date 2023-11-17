@@ -1,5 +1,5 @@
-import { baseURL } from "@/constant";
+import { BaseURL } from "@/constant";
 
 export const reloadToIndex = () => {
-  window.location.href = baseURL;
+  window.location.href = BaseURL;
 };

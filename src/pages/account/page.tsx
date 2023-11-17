@@ -62,7 +62,7 @@ export default function Account() {
           </div>
         </div>
         {/* bottom card */}
-        <div className="bg-[#3D3E45] rounded-3xl p-4 -bottom-12 flex items-center text-[#C7D8FA] absolute left-4 right-4">
+        <div className="bg-[#3D3E45] rounded-xl p-4 -bottom-12 flex items-center text-[#C7D8FA] absolute left-4 right-4">
           <div className="flex-1 text-center">
             <p>zkID Cards</p>
             <div className="text-2xl text-white">{342}</div>

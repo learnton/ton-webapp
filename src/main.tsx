@@ -5,10 +5,10 @@ import ToastProvider from "./context/Toast";
 import DidProvider from "./context/Did";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { baseURL } from "@/constant";
+import { BaseURL } from "@/constant";
 import rootRoute from "./pages/routes";
 const router = createBrowserRouter(rootRoute, {
-  basename: baseURL,
+  basename: BaseURL,
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
