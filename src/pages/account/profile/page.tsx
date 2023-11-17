@@ -28,7 +28,7 @@ export default function Profile() {
         </div>
       </div>
 
-      <div>
+      <div className="flex flex-col items-center">
         <div className="aspect-square rounded-2xl shadow-xl m-4 p-4 bg-white overflow-hidden">
           {did ? <QRCode accountId={did?.instance.id} /> : <>loading</>}
         </div>

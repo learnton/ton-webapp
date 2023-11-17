@@ -20,9 +20,9 @@ const Code = ({
       qr.current = qrcode(0, "L");
 
       if (didAccounts) {
-        const json = didAccounts.exportDidFile(accountId);
+        // const json = didAccounts.exportDidFile(accountId);
 
-        qr.current.addData(JSON.stringify(json));
+        qr.current.addData(accountId);
         qr.current.make();
       }
 
