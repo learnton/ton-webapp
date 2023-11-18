@@ -6,7 +6,7 @@ import React, { useEffect, useRef } from "react";
 
 interface Props {
   value?: string | null;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 const IdentityIcon: React.FC<Props> = (props) => {

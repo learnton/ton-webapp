@@ -1,6 +1,6 @@
 // Copyright 2021-2023 zcloak authors & contributors
 // SPDX-License-Identifier: Apache-2.0
-import { memo, useState } from "react";
+import { useState } from "react";
 import IconCopy from "@/assets/img/icon_copy.svg?react";
 import IconDone from "@/assets/img/icon_true.svg?react";
 import { useCopyToClipboard } from "react-use";
@@ -47,4 +47,4 @@ function Address({
   );
 }
 
-export default memo(Address);
+export default Address;

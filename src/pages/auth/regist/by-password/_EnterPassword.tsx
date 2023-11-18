@@ -31,14 +31,16 @@ export default function EnterPassword(props: {
           <div className="label">Enter Password</div>
           <Password
             placeholder="Enter Password"
-            onChange={(e: any) => props.setPassword(e.target.value.trim())}
+            onChange={(e: { target: HTMLInputElement }) =>
+              props.setPassword(e.target.value.trim())
+            }
           />
         </div>
         <div className="form-control">
           <div className="label">Confirm Password</div>
           <Password
             placeholder="Confirm Password"
-            onChange={(e: any) =>
+            onChange={(e: { target: HTMLInputElement }) =>
               props.setConfirmPassword(e.target.value.trim())
             }
           />

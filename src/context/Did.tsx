@@ -23,7 +23,7 @@ const DidProvider = ({ children }: { children: React.ReactNode }) => {
       setLoading(true);
       const _didAccounts = new DidAccounts(String(UserInfo?.id));
 
-      _didAccounts.isReady.then((_d) => {
+      void _didAccounts.isReady.then((_d) => {
         setDidAccounts(_d);
         setDid(_d.current);
         setLoading(false);

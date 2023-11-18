@@ -23,25 +23,13 @@ const instance = axios.create({
   },
 });
 
-// 响应后处理
-instance.interceptors.response.use(
-  function (response) {
-    // if (response?.data?.code !== 200) {
-    //   throw new Error(response?.data?.msg);
-    // } else {
-    //   return response.data;
-    // }
-    return response.data;
-  },
-  function (error) {
-    return catchError(error);
-  }
-);
-
 /**
  * 请求错误处理
  */
-const catchError = function (error: any) {
+const catchError = function (error: {
+  response: { status: unknown };
+  message: unknown;
+}) {
   //原生错误对象
   if (error.response) {
     // that falls out of the range of 2xx
@@ -54,7 +42,7 @@ const catchError = function (error: any) {
         break;
       default:
     }
-  } else if (error.message) {
+  } else if (typeof error.message === "string") {
     // Something happened in setting up the request that triggered an Error
     let message = error.message;
     if (message.indexOf("timeout") > -1) {
@@ -64,11 +52,22 @@ const catchError = function (error: any) {
     } else if (message.indexOf("canceled") > -1) {
       // 请求取消
     } else {
+      console.warn(message);
     }
-    console.warn(message);
   }
 
   return Promise.reject(error);
 };
+
+// 响应后处理
+instance.interceptors.response.use(function (response) {
+  // if (response?.data?.code !== 200) {
+  //   throw new Error(response?.data?.msg);
+  // } else {
+  //   return response.data;
+  // }
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return response.data;
+}, catchError);
 
 export default instance;

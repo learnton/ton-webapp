@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation, useNavigate, useMatches, Outlet } from "react-router-dom";
+import { useLocation, useNavigate, Outlet } from "react-router-dom";
 import { AuthWhitelist, HOMEPAGE_URL } from "@/constant";
 import useAuth from "@/hooks/useAuth";
 import WebApp from "@twa-dev/sdk";
@@ -9,7 +9,6 @@ WebApp.BackButton.onClick(() => {
 });
 
 export default function AuthRouter() {
-  const matches = useMatches();
   const isAuth = useAuth();
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -36,7 +35,6 @@ export default function AuthRouter() {
     }
 
     // back button
-    console.log("matches=", matches, pathname);
     if (pathname === HOMEPAGE_URL) {
       WebApp.BackButton.hide();
     } else {

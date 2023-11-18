@@ -10,8 +10,8 @@ export default function Login() {
         <h1 className="font-bold text-[#111827] text-xl mb-4">
           Welcome to Product Name
         </h1>
-        We've prepared your digital identity. Check out its features, use our
-        trusted digital cards, and enjoy smooth validations and enhanced
+        We&apos;ve prepared your digital identity. Check out its features, use
+        our trusted digital cards, and enjoy smooth validations and enhanced
         privacy, all with your data under your control.
       </div>
 

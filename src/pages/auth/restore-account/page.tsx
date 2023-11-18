@@ -21,7 +21,7 @@ export default function RestoreAccount() {
     } else {
       checkConfirmPassword(password, confirmPassword, (valid) => {
         if (valid) {
-          generate({
+          void generate({
             password,
             mnemonic,
           }).then((did) => {
@@ -54,14 +54,18 @@ export default function RestoreAccount() {
             <div className="label">Enter Password</div>
             <Password
               placeholder="Enter Password"
-              onChange={(e: any) => setPassword(e.target.value.trim())}
+              onChange={(e: { target: EventTarget & HTMLInputElement }) =>
+                setPassword(e.target.value.trim())
+              }
             />
           </div>
           <div className="form-control">
             <div className="label">Confirm Password</div>
             <Password
               placeholder="Confirm Password"
-              onChange={(e: any) => setConfirmPassword(e.target.value.trim())}
+              onChange={(e: { target: EventTarget & HTMLInputElement }) =>
+                setConfirmPassword(e.target.value.trim())
+              }
             />
           </div>
         </form>

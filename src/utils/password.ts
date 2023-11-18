@@ -1,5 +1,3 @@
-/* eslint-disable prefer-regex-literals */
-
 const digits = new RegExp("(\\d.*)");
 const letters = new RegExp("([a-zA-Z].*)");
 const symbols = new RegExp(

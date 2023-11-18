@@ -2,7 +2,7 @@ import { useState } from "react";
 import IconEye from "@/assets/img/eye.svg?react";
 import IconEyeOff from "@/assets/img/eye-off.svg?react";
 
-export default function Password(props: { [key: string]: any }) {
+export default function Password(props: { [key: string]: unknown }) {
   const [show, setShow] = useState(false);
 
   return (

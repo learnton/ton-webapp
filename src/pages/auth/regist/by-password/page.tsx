@@ -29,7 +29,7 @@ export default function RegistByPassword() {
       case 1:
         setRuning(true);
 
-        generate({
+        void generate({
           mnemonic,
           password,
         }).then((did) => {

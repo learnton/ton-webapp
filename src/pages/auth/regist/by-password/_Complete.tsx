@@ -12,8 +12,8 @@ export default function Complete(props: { didUrl: string }) {
       <h1 className="font-bold text-xl mb-4">Your account is now ready!</h1>
       <div className="text-[#9CA3AF] flex flex-col gap-4">
         <p>
-          We've prepared your digital identity. Check out its features, use our
-          trusted digital cards, and enjoy smooth validations and enhanced
+          We&apos;ve prepared your digital identity. Check out its features, use
+          our trusted digital cards, and enjoy smooth validations and enhanced
           privacy, all with your data under your control.
         </p>
       </div>

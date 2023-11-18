@@ -6,6 +6,6 @@ export const setToken = (token: string) =>
   localStorage.setItem(TOKEN_KEY, "Bearer " + token);
 
 export const hasToken = (): boolean => {
-  let token = getToken();
+  const token = getToken();
   return undefined !== token && null !== token && "" !== token;
 };

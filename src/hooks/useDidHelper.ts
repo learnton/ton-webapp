@@ -27,7 +27,7 @@ export default () => {
     }
   };
 
-  const checkConfirmPassword = async (
+  const checkConfirmPassword = (
     password: string,
     confirmPassword: string,
     callback?: (confirm: boolean) => void

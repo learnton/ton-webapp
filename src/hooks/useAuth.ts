@@ -1,6 +1,6 @@
 import useTwaSdk from "@/hooks/useTwaSdk";
 import { DidContext } from "@/context/Did";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 
 export default () => {
@@ -8,7 +8,7 @@ export default () => {
   const location = useLocation();
   const TwaSdk = useTwaSdk();
   const user = TwaSdk.UserInfo;
-  const checkAuth = () => {
+  const checkAuth = useCallback(() => {
     if (didAccounts === null) {
       return null;
     } else if (user?.id && did) {
@@ -19,15 +19,13 @@ export default () => {
     } else {
       return false;
     }
-  };
+  }, [TwaSdk.DevMode, TwaSdk.WebApp.version, did, didAccounts, user?.id]);
 
   const [isAuth, setIsAuth] = useState(checkAuth());
 
   useEffect(() => {
     setIsAuth(checkAuth());
-
-    console.log("isAuth:", isAuth);
-  }, [did, location]);
+  }, [did, location, checkAuth]);
 
   return isAuth;
 };
