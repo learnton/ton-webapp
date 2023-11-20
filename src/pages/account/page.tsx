@@ -20,7 +20,8 @@ export default function Account() {
   }, []);
 
   const handleScan = (text: string) => {
-    console.log(text);
+    alert(text);
+    return true;
   };
 
   return (
