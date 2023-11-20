@@ -1,37 +1,28 @@
 import { useCallback, useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import useToast from "@/hooks/useToast";
-import { base64Decode } from "@zcloak/crypto";
 import { DidContext } from "@/context/Did";
-
-import { scrypt } from "@/utils";
 
 export default function RecoverySeedPhrase() {
   const { didAccounts: accounts } = useContext(DidContext);
   const [password, setPassword] = useState<string>();
   const [mnemonic, setMnemonic] = useState<string>();
   const location = useLocation();
-  const toast = useToast();
   const navigate = useNavigate();
 
   const handleShow = useCallback(() => {
-    if (!password || !accounts?.encryptedMnemonic) return;
+    if (!password || !accounts?.getMnemonic) return;
 
     try {
-      setMnemonic(
-        scrypt.mnemonicDecrypt(
-          base64Decode(accounts.encryptedMnemonic),
-          password
-        )
-      );
+      const mnemonic = accounts.getMnemonic();
+      if (mnemonic) {
+        setMnemonic(mnemonic);
+      } else {
+        return new Error("getMnemonic error");
+      }
     } catch (error) {
-      toast &&
-        toast({
-          type: "error",
-          value: "Incorrect password",
-        });
+      console.warn(error);
     }
-  }, [password, accounts.encryptedMnemonic]);
+  }, [password, accounts?.getMnemonic]);
 
   return (
     <PageContainer>

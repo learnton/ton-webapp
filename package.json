@@ -16,7 +16,7 @@
     "@zcloak/crypto": "^2.0.0",
     "@zcloak/did-resolver": "^2.0.0",
     "@zcloak/vc": "^2.0.3",
-    "@zcloak/wallet-lib": "^0.1.1",
+    "@zcloak/wallet-lib": "^0.1.2",
     "axios": "^1.6.0",
     "daisyui": "^4.4.2",
     "jdenticon": "^3.2.0",

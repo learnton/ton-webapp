@@ -1224,10 +1224,10 @@
     merkletreejs "^0.3.9"
     web3 "^4.1.1"
 
-"@zcloak/wallet-lib@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@zcloak/wallet-lib/-/wallet-lib-0.1.1.tgz#8aed7f8f519f5448d01a5ed31f66a11acdcee4e1"
-  integrity sha512-rnsxkpK2RgLhXfMmofdqzyt0GdqMAtjuTPEIdhYt+KV5+vZSUnsEDKCvPPjNuI+u5/MoGtS9y+MvlqVfYEsnUA==
+"@zcloak/wallet-lib@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@zcloak/wallet-lib/-/wallet-lib-0.1.2.tgz#7cd1ee5b697f17a38d1efab84f6470ad2c62db55"
+  integrity sha512-a1PWsI98SfWbtJF5fVP1f4AGbyp8aDJYFD6/PYnAUOd0UKcudbvIl6Vc3y52WlXeXH1XBmUE7H+sXWi8+iR0XA==
   dependencies:
     "@polkadot/util" "^12.5.1"
     "@zcloak/crypto" "^2.0.0"
