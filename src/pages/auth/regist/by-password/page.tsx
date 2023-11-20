@@ -53,7 +53,7 @@ export default function RegistByPassword() {
   };
 
   return (
-    <div className=" p-8 ">
+    <div className="p-4">
       <ul className="steps mx-auto mb-8 leading-tight text-xs">
         <li className={`step${step >= 0 ? " step-primary text-primary" : ""}`}>
           Enter password

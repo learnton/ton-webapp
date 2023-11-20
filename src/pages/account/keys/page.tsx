@@ -9,9 +9,7 @@ import { Link } from "react-router-dom";
 export default function AccountKeys() {
   const { did } = useContext(DidContext);
 
-  const toHex = (
-    publicKey: Uint8Array | HexString | undefined | DidUrl | string
-  ) =>
+  const toHex = (publicKey: Uint8Array | HexString | undefined | DidUrl) =>
     publicKey
       ? isU8a(publicKey)
         ? u8aToHex(publicKey)
@@ -85,8 +83,8 @@ export default function AccountKeys() {
       <h1 className="leading-loose font-bold text-xl">My Keys</h1>
       <div className="text-[#9CA3AF] flex flex-col gap-4">
         <p>
-          Here are your account's private keys. Download your keysfile now for
-          future account recovery.
+          Here are your account&apos;s private keys. Download your keysfile now
+          for future account recovery.
         </p>
       </div>
       <ul className="bg-white px-4 py-2 rounded-xl my-10">

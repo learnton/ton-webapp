@@ -35,7 +35,7 @@ export default function RestoreAccount() {
   };
 
   return (
-    <div className="text-[#9CA3AF] p-8">
+    <div className="text-[#9CA3AF] p-4">
       <h1 className="font-bold text-[#111827] text-xl mb-4">
         Enter your seed phrase
       </h1>

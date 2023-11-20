@@ -1,89 +1,86 @@
 import { useCallback, useContext, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { DidContext } from "@/context/Did";
+import { Password, DisplayMnemonic } from "@/components";
+import useToast from "@/hooks/useToast";
 
 export default function RecoverySeedPhrase() {
   const { didAccounts: accounts } = useContext(DidContext);
   const [password, setPassword] = useState<string>();
   const [mnemonic, setMnemonic] = useState<string>();
-  const location = useLocation();
   const navigate = useNavigate();
+  const toast = useToast();
 
-  const handleShow = useCallback(() => {
+  const handleShow = useCallback(async () => {
     if (!password || !accounts?.getMnemonic) return;
-
+    console.log("password", password);
     try {
+      await accounts.unlock(password);
       const mnemonic = accounts.getMnemonic();
+      console.log("mnemonic", mnemonic);
       if (mnemonic) {
         setMnemonic(mnemonic);
       } else {
-        return new Error("getMnemonic error");
+        return new Error("Get mnemonic error");
       }
-    } catch (error) {
-      console.warn(error);
+    } catch (e) {
+      toast &&
+        toast({
+          type: "error",
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          value: e?.message,
+        });
     }
-  }, [password, accounts?.getMnemonic]);
+  }, [password, accounts, toast]);
 
   return (
-    <PageContainer>
-      <PageContainerHeader title="Security" />
-      <PageContainerContent>
+    <>
+      <h1 className="font-bold text-xl mb-4">Back up your seed phrase</h1>
+      <div className="text-[#9CA3AF] flex flex-col gap-4">
+        <p>
+          Kindly ensure the secure storage of your 24 words seed phrase, as it
+          will be necessary for account recovery. Additionally, refrain from
+          sharing it with others, as it could grant unauthorized access to your
+          digital assets
+        </p>
+      </div>
+      <div className="py-4">
         {mnemonic ? (
-          <Stack alignItems="flex-start" spacing={1.5}>
-            <InputMnemonic label="Recovery Seed Phrase" value={mnemonic} />
-            <CopyButton value={mnemonic} />
-          </Stack>
+          <DisplayMnemonic mnemonic={mnemonic} />
         ) : (
-          <>
-            {accounts.encryptedMnemonic ? (
-              <InputPassword
-                autoComplete="current-password"
-                autoFocus
-                label="Recovery Seed Phrase"
-                onChange={setPassword}
-                placeholder="Password"
-                withBorder
-              />
-            ) : (
-              <Typography color="error">
-                {"You don't have recovery seed phrase."}
-              </Typography>
-            )}
-          </>
+          <div className="form-control">
+            <div className="label">Enter Password</div>
+            <Password
+              label="Recovery Seed Phrase"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setPassword(e.target.value)
+              }
+              placeholder="Password"
+            />
+          </div>
         )}
-      </PageContainerContent>
-      <PageContainerAction>
+      </div>
+      <div className="py-4">
         {mnemonic ? (
-          <Button fullWidth onClick={() => navigate(-1)} variant="contained">
+          <button
+            className="btn btn-primary btn-block"
+            onClick={() => navigate(-1)}
+          >
             Confirm
-          </Button>
+          </button>
         ) : (
           <>
-            {accounts.encryptedMnemonic ? (
-              <Button
-                disabled={!password}
-                fullWidth
-                onClick={handleShow}
-                variant="contained"
-              >
-                Show Seed
-              </Button>
-            ) : (
-              <Button
-                component={Link}
-                fullWidth
-                to={{
-                  pathname: "/create-account",
-                  search: `?redirect=${location.pathname}${location.search}`,
-                }}
-                variant="contained"
-              >
-                Create Account
-              </Button>
-            )}
+            <button
+              disabled={!password}
+              className="btn btn-primary btn-block"
+              // eslint-disable-next-line @typescript-eslint/no-misused-promises
+              onClick={handleShow}
+            >
+              Show Seed
+            </button>
           </>
         )}
-      </PageContainerAction>
-    </PageContainer>
+      </div>
+    </>
   );
 }
