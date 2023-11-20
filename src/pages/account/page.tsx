@@ -12,12 +12,16 @@ import { Link } from "react-router-dom";
 
 export default function Account() {
   const { did } = useContext(DidContext);
-  const { UserInfo } = useTwaSdk();
+  const { UserInfo, WebApp } = useTwaSdk();
   const [noti, setNoti] = useState(0);
 
   useEffect(() => {
     setNoti(9);
   }, []);
+
+  const handleScan = (text: string) => {
+    console.log(text);
+  };
 
   return (
     <>
@@ -33,9 +37,12 @@ export default function Account() {
           <Link to="/account/profile" className="btn btn-ghost btn-xs">
             <IconAccount />
           </Link>
-          <Link to="/account/scan" className="btn btn-ghost btn-xs">
+          <button
+            onClick={() => WebApp.showScanQrPopup({}, handleScan)}
+            className="btn btn-ghost btn-xs"
+          >
             <IconScan />
-          </Link>
+          </button>
 
           <div className="flex-1 text-right">
             {noti > 0 && <span>{noti} new message</span>}
