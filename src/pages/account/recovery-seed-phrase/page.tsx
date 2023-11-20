@@ -1,36 +1,21 @@
-// Copyright 2021-2023 zcloak authors & contributors
-// SPDX-License-Identifier: Apache-2.0
-
 import { useCallback, useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
+import useToast from "@/hooks/useToast";
 import { base64Decode } from "@zcloak/crypto";
 import { DidContext } from "@/context/Did";
 
-import { BagSecurity } from "@zkid-wallet/app-config/images";
-import { scrypt } from "@zkid-wallet/library/scrypt";
-import {
-  AppContext,
-  CopyButton,
-  InputMnemonic,
-  InputPassword,
-  PageContainer,
-  PageContainerAction,
-  PageContainerContent,
-  PageContainerHeader,
-  useNotification,
-} from "@zkid-wallet/react";
+import { scrypt } from "@/utils";
 
 export default function RecoverySeedPhrase() {
-  const { DidAccounts: accounts } = useContext(DidContext);
+  const { didAccounts: accounts } = useContext(DidContext);
   const [password, setPassword] = useState<string>();
   const [mnemonic, setMnemonic] = useState<string>();
   const location = useLocation();
-  const { notifyError } = useNotification();
+  const toast = useToast();
   const navigate = useNavigate();
 
   const handleShow = useCallback(() => {
-    if (!password || !accounts.encryptedMnemonic) return;
+    if (!password || !accounts?.encryptedMnemonic) return;
 
     try {
       setMnemonic(
@@ -40,9 +25,13 @@ export default function RecoverySeedPhrase() {
         )
       );
     } catch (error) {
-      notifyError(error);
+      toast &&
+        toast({
+          type: "error",
+          value: "Incorrect password",
+        });
     }
-  }, [password, accounts.encryptedMnemonic, notifyError]);
+  }, [password, accounts.encryptedMnemonic]);
 
   return (
     <PageContainer>
@@ -55,11 +44,6 @@ export default function RecoverySeedPhrase() {
           </Stack>
         ) : (
           <>
-            <img
-              src={BagSecurity}
-              style={{ userSelect: "none", marginBottom: 40 }}
-              width="100%"
-            />
             {accounts.encryptedMnemonic ? (
               <InputPassword
                 autoComplete="current-password"

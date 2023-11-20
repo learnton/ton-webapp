@@ -4,6 +4,7 @@ import { isU8a, u8aToHex } from "@polkadot/util";
 import { DidUrl } from "@zcloak/did-resolver/types";
 import type { HexString } from "@zcloak/crypto/types";
 import { shortString } from "@/utils";
+import { Link } from "react-router-dom";
 
 export default function AccountKeys() {
   const { did } = useContext(DidContext);
@@ -100,7 +101,12 @@ export default function AccountKeys() {
         ))}
       </ul>
 
-      <button className="btn btn-primary btn-block">View my seed phrase</button>
+      <Link
+        to="/account/recovery-seed-phrase"
+        className="btn btn-primary btn-block"
+      >
+        View my seed phrase
+      </Link>
     </>
   );
 }

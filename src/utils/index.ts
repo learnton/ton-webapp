@@ -3,3 +3,4 @@ export * from "./password";
 export * from "./xmtp";
 export * from "./helper";
 export * from "./scan";
+export * from "./scrypt";
