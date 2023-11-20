@@ -36,7 +36,7 @@ export default function Profile() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <Link
+        {/* <Link
           to="/account/manage"
           className="flex items-center p-4 bg-white rounded"
         >
@@ -49,7 +49,7 @@ export default function Profile() {
             </p>
           </div>
           <IconRight />
-        </Link>
+        </Link> */}
         <Link
           to="/account/keys"
           className="flex items-center p-4 bg-white rounded"

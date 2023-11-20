@@ -57,9 +57,9 @@ export default function Account() {
           <div className="flex-1 text-right">
             {noti > 0 && <span>{noti} new message</span>}
           </div>
-          <Link to="/account/message" className="btn btn-ghost btn-xs relative">
+          <Link to="/message/list" className="btn btn-ghost btn-xs relative">
             {noti && (
-              <div className="absolute left-[50%] translate-x-[6px] top-0 w-2 h-2 overflow-hidden rounded-3xl bg-error"></div>
+              <div className="absolute left-[50%] translate-x-[4px] top-0 w-2 h-2 overflow-hidden rounded-3xl bg-error"></div>
             )}
             <IconNoti />
           </Link>

@@ -76,7 +76,7 @@ export default function RegistByPassword() {
       {step === 2 && did && <Complete didUrl={did?.instance.id} />}
 
       <button
-        className="btn w-full btn-primary mt-4"
+        className="btn btn-block btn-primary mt-4"
         disabled={runing}
         onClick={() => MainButtonHandle()}
       >

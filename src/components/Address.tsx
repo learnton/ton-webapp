@@ -2,6 +2,7 @@ import { useState } from "react";
 import IconCopy from "@/assets/img/icon_copy.svg?react";
 import IconDone from "@/assets/img/icon_true.svg?react";
 import { useCopyToClipboard } from "react-use";
+import { shortString } from "@/utils";
 
 function Address({
   showFull,
@@ -30,7 +31,7 @@ function Address({
   return (
     <div className="inline-flex items-center">
       <div className="flex-1">
-        {showFull ? value : `${value.slice(0, 15)}...${value.slice(-8)}`}
+        {showFull ? value : shortString(value, 15, 8)}
       </div>
       {withCopy &&
         (state.value && showTip ? (

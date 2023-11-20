@@ -1,13 +1,15 @@
+import { AuthRouter } from "@/components";
+
 import NoFound from "./no-found/page";
 import accountRoutes from "./account";
 import authRoutes from "./auth";
-import { AuthRouter } from "@/components";
+import messageRoutes from "./message";
 
 const rootRouter = [
   {
     path: "/",
     element: <AuthRouter />,
-    children: [...accountRoutes, ...authRoutes],
+    children: [...accountRoutes, ...authRoutes, ...messageRoutes],
   },
   {
     path: "*",

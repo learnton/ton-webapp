@@ -13,10 +13,12 @@
   "dependencies": {
     "@tonconnect/ui-react": "^2.0.0-beta.6",
     "@twa-dev/sdk": "^6.9.1",
+    "@zcloak/crypto": "^2.0.0",
+    "@zcloak/did-resolver": "^2.0.0",
     "@zcloak/vc": "^2.0.3",
     "@zcloak/wallet-lib": "^0.1.1",
     "axios": "^1.6.0",
-    "daisyui": "^4.0.7",
+    "daisyui": "^4.4.2",
     "jdenticon": "^3.2.0",
     "lottie-react": "^2.4.0",
     "qrcode-generator": "^1.4.4",
