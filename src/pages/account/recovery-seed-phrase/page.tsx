@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useCallback, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DidContext } from "@/context/Did";
@@ -23,12 +24,15 @@ export default function RecoverySeedPhrase() {
       } else {
         return new Error("Get mnemonic error");
       }
-    } catch (e) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (e: any) {
       toast &&
+        e &&
+        Object.prototype.hasOwnProperty.call(e, "message") &&
         toast({
           type: "error",
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          value: e?.message,
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+          value: e.message,
         });
     }
   }, [password, accounts, toast]);
