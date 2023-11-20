@@ -19,7 +19,7 @@ export default function Account() {
     setNoti(9);
   }, []);
 
-  const handleScan = (text: string) => {
+  const handleScan: (text: string) => true | void = (text: string) => {
     alert(text);
     return true;
   };
