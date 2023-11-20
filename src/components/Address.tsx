@@ -1,5 +1,3 @@
-// Copyright 2021-2023 zcloak authors & contributors
-// SPDX-License-Identifier: Apache-2.0
 import { useState } from "react";
 import IconCopy from "@/assets/img/icon_copy.svg?react";
 import IconDone from "@/assets/img/icon_true.svg?react";

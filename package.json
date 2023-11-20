@@ -13,6 +13,7 @@
   "dependencies": {
     "@tonconnect/ui-react": "^2.0.0-beta.6",
     "@twa-dev/sdk": "^6.9.1",
+    "@zcloak/vc": "^2.0.3",
     "@zcloak/wallet-lib": "^0.1.1",
     "axios": "^1.6.0",
     "daisyui": "^4.0.7",
@@ -38,11 +39,11 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "husky": "^8.0.0",
     "postcss": "^8.4.31",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
     "vite-plugin-node-polyfills": "^0.16.0",
-    "vite-plugin-svgr": "^4.1.0",
-    "husky": "^8.0.0"
+    "vite-plugin-svgr": "^4.1.0"
   }
 }

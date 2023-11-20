@@ -9,6 +9,7 @@ import IconNoti from "./assets/icon_notification.svg?react";
 import useTwaSdk from "@/hooks/useTwaSdk";
 import CardBgURL from "./assets/img_bg_card@2x.webp";
 import { Link } from "react-router-dom";
+import { extraResult } from "@/utils";
 
 export default function Account() {
   const { did } = useContext(DidContext);
@@ -20,7 +21,15 @@ export default function Account() {
   }, []);
 
   const handleScan: (text: string) => true | void = (text: string) => {
-    alert(text);
+    extraResult(
+      text,
+      (result) => {
+        alert(result);
+      },
+      (percent) => {
+        console.log(percent);
+      }
+    );
     return true;
   };
 
