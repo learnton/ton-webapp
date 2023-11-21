@@ -1204,6 +1204,17 @@
     "@polkadot/util" "^12.1.2"
     "@zcloak/crypto" "2.0.0"
 
+"@zcloak/message@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@zcloak/message/-/message-2.0.3.tgz#65571fc7dbff16b7c82672a84afeb32a6b845a64"
+  integrity sha512-wmS5wu1SBcgWafLycb29qjETIaR9HQcYw2GS8cySNiOxjjoTwJkSCVRrWCAE3rAMYbWx+0nDYkIShrftF4e0HQ==
+  dependencies:
+    "@polkadot/util" "^12.1.2"
+    "@zcloak/crypto" "2.0.0"
+    "@zcloak/did" "2.0.2"
+    "@zcloak/did-resolver" "2.0.0"
+    "@zcloak/vc" "2.0.3"
+
 "@zcloak/ui-store@^0.9.7":
   version "0.9.7"
   resolved "https://registry.yarnpkg.com/@zcloak/ui-store/-/ui-store-0.9.7.tgz#4b56ce711a1104f2dd0365dc8acf56611aece1d6"
@@ -1211,7 +1222,7 @@
   dependencies:
     eventemitter3 "^5.0.0"
 
-"@zcloak/vc@^2.0.3":
+"@zcloak/vc@2.0.3", "@zcloak/vc@^2.0.3":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@zcloak/vc/-/vc-2.0.3.tgz#5717918fd0d47d19da6545525c0e93c85e86892b"
   integrity sha512-op4b8bGK5PsQ0Nks8GzOZsSrFD91nrGZ6hb70L3YtzVtzAnf/0vjYs+6NnPf5D3WqC4c2Il+YYiW1mWBpFOhCg==
@@ -1223,6 +1234,18 @@
     "@zcloak/did-resolver" "2.0.0"
     merkletreejs "^0.3.9"
     web3 "^4.1.1"
+
+"@zcloak/verify@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@zcloak/verify/-/verify-2.0.3.tgz#69d4a89c2f87b55ebd714404b5aad6c620cc08cf"
+  integrity sha512-yiJNa2Y8HFpVBHIhVnsyTJ02qOBsXx2Re5ek3W8jxX6FbkUJWZ9bE5u9PC7uDN1T2VW8pTDshLqkgHh2pVZVsQ==
+  dependencies:
+    "@polkadot/util" "^12.1.2"
+    "@zcloak/crypto" "2.0.0"
+    "@zcloak/ctype" "2.0.2"
+    "@zcloak/did" "2.0.2"
+    "@zcloak/did-resolver" "2.0.0"
+    "@zcloak/vc" "2.0.3"
 
 "@zcloak/wallet-lib@^0.1.2":
   version "0.1.2"
@@ -2048,6 +2071,11 @@ des.js@^1.0.0:
   dependencies:
     inherits "^2.0.1"
     minimalistic-assert "^1.0.0"
+
+dexie@^3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/dexie/-/dexie-3.2.4.tgz#b22a9729be1102acb2eee16102ea6e2bc76454cf"
+  integrity sha512-VKoTQRSv7+RnffpOJ3Dh6ozknBqzWw/F3iqMdsZg958R0AS8AnY9x9d1lbwENr0gzeGJHXKcGhAMRaqys6SxqA==
 
 didyoumean@^1.2.2:
   version "1.2.2"
@@ -3452,6 +3480,11 @@ minimatch@^3.0.4, minimatch@^3.0.5, minimatch@^3.1.1, minimatch@^3.1.2:
   integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
   dependencies:
     brace-expansion "^1.1.7"
+
+moment@^2.29.4:
+  version "2.29.4"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
+  integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
 
 ms@2.1.2:
   version "2.1.2"
