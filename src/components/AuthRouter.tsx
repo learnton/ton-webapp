@@ -4,12 +4,14 @@ import { AuthWhitelist, HOMEPAGE_URL } from "@/constant";
 import useAuth from "@/hooks/useAuth";
 import WebApp from "@twa-dev/sdk";
 import { login } from "@/api/auth";
+import useToast from "@/hooks/useToast";
 
 WebApp.BackButton.onClick(() => {
   window.history.back();
 });
 
 export default function AuthRouter() {
+  const toast = useToast();
   const [loading, setLoading] = useState(false);
   const isAuth = useAuth();
   const { pathname } = useLocation();
@@ -30,8 +32,14 @@ export default function AuthRouter() {
         setLoading(true);
         login().then((res) => {
           setLoading(false);
-          if (res.data.data?.authToken) {
+          if (res.data?.data?.authToken) {
             localStorage.setItem("token", res.data.data.authToken);
+          } else {
+            toast &&
+              toast({
+                type: "error",
+                value: "err: get token fail!",
+              });
           }
           // navigate(HOMEPAGE_URL, {
           //   replace: true,
