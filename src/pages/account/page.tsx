@@ -6,11 +6,13 @@ import IdentityIcon from "@/components/IdentityIcon";
 import IconAccount from "./assets/icon_profile.svg?react";
 import IconScan from "./assets/icon_scan.svg?react";
 import IconNoti from "./assets/icon_notification.svg?react";
+import IconRight from "@/assets/img/icon_go.svg?react";
 import useTwaSdk from "@/hooks/useTwaSdk";
 import CardBgURL from "./assets/img_bg_card@2x.webp";
 import { Link } from "react-router-dom";
 import { extraResult } from "@/utils";
 import { useToast } from "@/components/Toast";
+import { useRef } from "react";
 
 export default function Account() {
   const { did } = useContext(DidContext);
@@ -35,10 +37,25 @@ export default function Account() {
     return true;
   };
 
+  const links = useRef([
+    {
+      name: "Profile",
+      path: "/account/profile",
+    },
+    {
+      name: "Messages",
+      path: "/message/list",
+    },
+    {
+      name: "Settings",
+      path: "/account/settings",
+    },
+  ]);
+
   return (
     <>
       <div
-        className="bg-[#C7D8FA] aspect-card rounded-3xl p-4 flex flex-col justify-center relative mb-16"
+        className="bg-[#C7D8FA] aspect-card rounded-3xl p-4 flex flex-col justify-center relative mb-20"
         style={{
           backgroundImage: `url(${CardBgURL})`,
           backgroundSize: "cover",
@@ -92,6 +109,23 @@ export default function Account() {
           </div>
         </div>
       </div>
+
+      <h1 className="font-medium text-[#111827] text-xl mb-4">
+        What can you do?
+      </h1>
+      <ul className="flex flex-col gap-2 mb-4">
+        {links.current.map((link, index) => (
+          <li
+            key={index}
+            className="flex items-center p-4 rounded-xl bg-white"
+            onClick={() => WebApp.openLink(link.path)}
+          >
+            <div className="flex-1">{link.name}</div>
+            <IconRight />
+          </li>
+        ))}
+      </ul>
+
       <button className="btn" onClick={() => localStorage.clear()}>
         clear storage
       </button>
