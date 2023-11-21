@@ -28,11 +28,14 @@ export default function AuthRouter() {
       if (!Token) {
         console.log("no token", pathname, isAuth);
         setLoading(true);
-        login().then(() => {
+        login().then((res) => {
           setLoading(false);
-          navigate(HOMEPAGE_URL, {
-            replace: true,
-          });
+          if (res.data.data?.authToken) {
+            localStorage.setItem("token", res.data.data.authToken);
+          }
+          // navigate(HOMEPAGE_URL, {
+          //   replace: true,
+          // });
         });
       }
       if (pathname == "/login") {
