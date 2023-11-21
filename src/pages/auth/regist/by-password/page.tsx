@@ -44,28 +44,30 @@ export default function RegistByPassword() {
       case 1:
         setRuning(true);
 
-        void generate({
-          mnemonic,
-          password,
-        }).then((did) => {
-          if (did) {
-            bindDid(did)
-              .then(() => {
-                setDid(did);
-                setRuning(false);
-                setStep(2);
-                setButtonText("Complete");
-              })
-              .catch((err) => {
-                toast &&
-                  toast({
-                    type: "error",
-                    value: err.message,
-                  });
-                setRuning(false);
-              });
-          }
-        });
+        setTimeout(() => {
+          void generate({
+            mnemonic,
+            password,
+          }).then((did) => {
+            if (did) {
+              bindDid(did)
+                .then(() => {
+                  setDid(did);
+                  setRuning(false);
+                  setStep(2);
+                  setButtonText("Complete");
+                })
+                .catch((err) => {
+                  toast &&
+                    toast({
+                      type: "error",
+                      value: err.message,
+                    });
+                  setRuning(false);
+                });
+            }
+          });
+        }, 0);
 
         break;
       case 2:
