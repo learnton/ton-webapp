@@ -4,7 +4,7 @@ import { AuthWhitelist, HOMEPAGE_URL } from "@/constant";
 import useAuth from "@/hooks/useAuth";
 import WebApp from "@twa-dev/sdk";
 import { login } from "@/api/auth";
-import useToast from "@/hooks/useToast";
+import { useToast } from "@/components";
 
 WebApp.BackButton.onClick(() => {
   window.history.back();
@@ -39,7 +39,7 @@ export default function AuthRouter() {
             toast &&
               toast({
                 type: "error",
-                value: "err: get token fail!",
+                message: "err: get token fail!",
               });
           }
           // navigate(HOMEPAGE_URL, {

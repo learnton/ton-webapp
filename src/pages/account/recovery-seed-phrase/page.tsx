@@ -2,8 +2,7 @@
 import { useCallback, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DidContext } from "@/context/Did";
-import { Password, DisplayMnemonic } from "@/components";
-import useToast from "@/hooks/useToast";
+import { Password, DisplayMnemonic, useToast } from "@/components";
 
 export default function RecoverySeedPhrase() {
   const { didAccounts: accounts } = useContext(DidContext);
@@ -14,11 +13,9 @@ export default function RecoverySeedPhrase() {
 
   const handleShow = useCallback(async () => {
     if (!password || !accounts?.getMnemonic) return;
-    console.log("password", password);
     try {
       await accounts.unlock(password);
       const mnemonic = accounts.getMnemonic();
-      console.log("mnemonic", mnemonic);
       if (mnemonic) {
         setMnemonic(mnemonic);
       } else {
@@ -32,7 +29,7 @@ export default function RecoverySeedPhrase() {
         toast({
           type: "error",
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-          value: e.message,
+          message: e.message,
         });
     }
   }, [password, accounts, toast]);

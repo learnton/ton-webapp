@@ -1,8 +1,7 @@
 import { useState } from "react";
 import useDidHelper from "@/hooks/useDidHelper";
 import { reloadToIndex } from "@/utils";
-import { Password } from "@/components";
-import useToast from "@/hooks/useToast";
+import { Password, useToast } from "@/components";
 
 export default function RestoreAccount() {
   const toast = useToast();
@@ -16,7 +15,7 @@ export default function RestoreAccount() {
       toast &&
         toast({
           type: "warning",
-          value: "Please enter your mnemonic",
+          message: "Please enter your mnemonic",
         });
     } else {
       checkConfirmPassword(password, confirmPassword, (valid) => {

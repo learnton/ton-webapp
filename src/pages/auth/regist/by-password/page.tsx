@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { DidAccount } from "@zcloak/wallet-lib";
 import { bind } from "@/api/auth";
 import useTwaSdk from "@/hooks/useTwaSdk";
-import useToast from "@/hooks/useToast";
+import { useToast } from "@/components";
 
 export default function RegistByPassword() {
   const toast = useToast();
@@ -61,7 +61,7 @@ export default function RegistByPassword() {
                   toast &&
                     toast({
                       type: "error",
-                      value: err.message,
+                      message: err.message,
                     });
                   setRuning(false);
                 });

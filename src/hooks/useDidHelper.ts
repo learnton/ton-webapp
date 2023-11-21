@@ -2,7 +2,7 @@ import useTwaSdk from "@/hooks/useTwaSdk";
 import { DidContext } from "@/context/Did";
 import { useContext } from "react";
 import { checkPasswordSecurityLevel } from "@/utils";
-import useToast from "@/hooks/useToast";
+import { useToast } from "@/components";
 import { DidAccount } from "@zcloak/wallet-lib";
 
 export default () => {
@@ -35,7 +35,7 @@ export default () => {
     if (checkPasswordSecurityLevel(password) < 3) {
       toast &&
         toast({
-          value:
+          message:
             "Password length must be greater than 8 characters, and must contains letters and symbols",
           type: "warning",
         });
@@ -43,7 +43,7 @@ export default () => {
     } else if (password !== confirmPassword) {
       toast &&
         toast({
-          value: "The two passwords entered do not match",
+          message: "The two passwords entered do not match",
           type: "warning",
         });
 

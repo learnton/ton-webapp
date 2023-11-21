@@ -10,11 +10,13 @@ import useTwaSdk from "@/hooks/useTwaSdk";
 import CardBgURL from "./assets/img_bg_card@2x.webp";
 import { Link } from "react-router-dom";
 import { extraResult } from "@/utils";
+import { useToast } from "@/components/Toast";
 
 export default function Account() {
   const { did } = useContext(DidContext);
   const { UserInfo, WebApp } = useTwaSdk();
   const [noti, setNoti] = useState(0);
+  const toast = useToast();
 
   useEffect(() => {
     setNoti(9);
@@ -92,6 +94,18 @@ export default function Account() {
       </div>
       <button className="btn" onClick={() => localStorage.clear()}>
         clear storage
+      </button>
+      <button
+        className="btn"
+        onClick={() =>
+          toast &&
+          toast({
+            type: "success",
+            message: "success",
+          })
+        }
+      >
+        useToast
       </button>
     </>
   );

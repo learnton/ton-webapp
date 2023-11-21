@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./global.css";
-import ToastProvider from "./context/Toast";
+import "./assets/global.css";
+import { ToastProvider } from "@/components";
 import DidProvider from "./context/Did";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
