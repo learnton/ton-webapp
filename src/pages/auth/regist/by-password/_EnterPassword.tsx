@@ -15,8 +15,7 @@ export default function EnterPassword(props: {
         </p>
         <p>Password Requirements: </p>
         <ul>
-          <li>◉ At least one uppercase letter (A-Z)</li>
-          <li>◉ At least one lowercase letter (a-z)</li>
+          <li>◉ At least one letter (A-Z or a-z)</li>
           <li>◉ At least one number (0-9)</li>
           <li>◉ At least one symbol (!@#$%^&*)</li>
           <li>◉ Minimum 8 characters</li>

@@ -6,8 +6,12 @@ import { utils } from "@zcloak/wallet-lib";
 import useDidHelper from "@/hooks/useDidHelper";
 import { useNavigate } from "react-router-dom";
 import { DidAccount } from "@zcloak/wallet-lib";
+import { bind } from "@/api/auth";
+import useTwaSdk from "@/hooks/useTwaSdk";
+import useToast from "@/hooks/useToast";
 
 export default function RegistByPassword() {
+  const toast = useToast();
   const navigate = useNavigate();
   const { checkConfirmPassword, generate } = useDidHelper();
   const [buttonText, setButtonText] = useState("Next");
@@ -17,7 +21,18 @@ export default function RegistByPassword() {
   const [step, setStep] = useState(0);
   const [runing, setRuning] = useState(false);
   const [did, setDid] = useState<DidAccount | undefined>();
+  const { UserInfo } = useTwaSdk();
 
+  const bindDid = (did: DidAccount) => {
+    if (UserInfo.id && did) {
+      return bind({
+        onChainAddress: String(UserInfo.id),
+        didUrl: did.instance.id as string,
+      });
+    } else {
+      return Promise.reject("did bind: params error");
+    }
+  };
   const MainButtonHandle = () => {
     switch (step) {
       case 0:
@@ -34,10 +49,21 @@ export default function RegistByPassword() {
           password,
         }).then((did) => {
           if (did) {
-            setDid(did);
-            setRuning(false);
-            setStep(2);
-            setButtonText("Complete");
+            bindDid(did)
+              .then(() => {
+                setDid(did);
+                setRuning(false);
+                setStep(2);
+                setButtonText("Complete");
+              })
+              .catch((err) => {
+                toast &&
+                  toast({
+                    type: "error",
+                    value: err.message,
+                  });
+                setRuning(false);
+              });
           }
         });
 
