@@ -34,7 +34,7 @@ export default function AuthRouter() {
           setLoading(false);
           console.log("login", res);
           if (res?.data?.authToken) {
-            localStorage.setItem("token", res.data.data.authToken);
+            localStorage.setItem("token", res.data.authToken);
           } else {
             toast &&
               toast({
