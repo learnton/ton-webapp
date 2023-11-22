@@ -1,9 +1,9 @@
-import useTwaSdk from "@/hooks/useTwaSdk";
+import { useTwaSdk } from "@/hooks";
 import { DidContext } from "@/context/Did";
 import { useContext, useState, useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 
-export default () => {
+export const useAuth = () => {
   const { did, didAccounts } = useContext(DidContext);
   const location = useLocation();
   const TwaSdk = useTwaSdk();

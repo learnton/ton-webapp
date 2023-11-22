@@ -1,7 +1,5 @@
-import { BaseURL } from "@/constant";
-
 export const reloadToIndex = () => {
-  window.location.href = BaseURL;
+  window.location.href = import.meta.env.BASE_URL;
 };
 
 export function isUrl(input: string): boolean {

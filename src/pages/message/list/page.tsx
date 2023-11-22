@@ -3,7 +3,7 @@
 
 import type { DidDB, MessageMeta } from "@/utils";
 import { addCardRelation, getTemplateById } from "@/utils";
-
+import { DidContext } from "@/context/Did";
 import moment from "moment";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,21 +13,9 @@ import { decryptMessage } from "@zcloak/message";
 import { vcVerify } from "@zcloak/verify";
 
 import { fetchAndSaveMessages, insertTempIfNot, addVC } from "../_utils";
-
-import {
-  AccountName,
-  AccountsContext,
-  AppContext,
-  categoryMap,
-  CTypeName,
-  useCredentials,
-  useDidDB,
-  useLiveQuery,
-} from "@zkid-wallet/react";
-
-function getMessages(db: DidDB): Promise<MessageMeta[]> {
-  return db.cardMessages.orderBy("createTime").reverse().toArray();
-}
+import { AppContext } from "@/context/AppProvider";
+import { AccountName, categoryMap, CTypeName, CARD_TYPE } from "@/components";
+import { useCredentials, useDidDB, useLiveQuery } from "@/hooks";
 
 function Cell({
   checked,
@@ -47,15 +35,7 @@ function Cell({
   );
 
   return (
-    <div
-      alignItems="center"
-      bgcolor="background.paper"
-      direction="row"
-      px={1.5}
-      py={2}
-      spacing={0.5}
-      sx={{ borderRadius: "10px" }}
-    >
+    <div className="flex items-center px-2 py-4 gap-2 rounded">
       <input
         type="checkbox"
         className="checkbox"
@@ -69,28 +49,20 @@ function Cell({
             );
           }
         }}
-        sx={{ fontSize: "1.25rem" }}
       />
-      <div flex="1">
-        <div alignItems="center" direction="row" justifyContent="space-between">
+      <div className="flex-1">
+        <div className="flex items-center justify-between">
           <CTypeName cTypeHash={message.ctype} />
           <span color="text3.primary">
             {moment(message.createTime).format("YYYY-MM-DD HH:mm")}
           </span>
         </div>
         {typeof template?.category === "number" && (
-          <Chip
-            label={categoryMap[template?.category]}
-            size="small"
-            sx={({ palette }) => ({
-              borderRadius: "4px",
-              borderColor: palette.primary.main,
-              color: palette.primary.main,
-            })}
-            variant="outlined"
-          />
+          <span className="badge">
+            {categoryMap[template?.category as CARD_TYPE]}
+          </span>
         )}
-        <span color="text3.primary" mt={1}>
+        <span color="text3.primary" className="mt-2">
           Attester: <AccountName showVid value={message.sender} />
         </span>
       </div>
@@ -100,13 +72,19 @@ function Cell({
 
 function PageMessages() {
   const { cacheDB, keyring, resolver } = useContext(AppContext);
-  const { account } = useContext(AccountsContext);
+  const { did: account } = useContext(DidContext);
   const [checked, setChecked] = useState<string[]>([]);
   const didDB = useDidDB();
   const [busy, setBusy] = useState(false);
   const navigate = useNavigate();
 
-  const messages = useLiveQuery(getMessages, didDB, []);
+  const messages = useLiveQuery(
+    function getMessages(db: DidDB): Promise<MessageMeta[]> {
+      return db.cardMessages.orderBy("createTime").reverse().toArray();
+    },
+    didDB,
+    []
+  );
 
   const credentials = useCredentials();
 
@@ -183,34 +161,32 @@ function PageMessages() {
   }, [didDB, messages]);
 
   return (
-    <div bgcolor="background.default">
+    <>
       <div>
-        <div spacing={2}>
-          <div>
-            Select All
-            <input
-              type="checkbox"
-              className="checkbox"
-              onChange={(e) => {
-                if (e.target.checked) {
-                  setChecked(unImportedMessages.map((message) => message.id));
-                } else {
-                  setChecked([]);
-                }
-              }}
-            />
-          </div>
-          {unImportedMessages.map((message) => (
-            <Cell
-              checked={checked}
-              key={message.id}
-              message={message}
-              setChecked={setChecked}
-            />
-          ))}
+        <div>
+          <input
+            type="checkbox"
+            className="checkbox"
+            onChange={(e) => {
+              if (e.target.checked) {
+                setChecked(unImportedMessages.map((message) => message.id));
+              } else {
+                setChecked([]);
+              }
+            }}
+          />
+          Select All
         </div>
+        {unImportedMessages.map((message) => (
+          <Cell
+            checked={checked}
+            key={message.id}
+            message={message}
+            setChecked={setChecked}
+          />
+        ))}
       </div>
-      <div bgcolor="background.paper">
+      <div>
         <button
           className="btn"
           disabled={checked.length === 0}
@@ -220,7 +196,7 @@ function PageMessages() {
           Decrypt and recover
         </button>
       </div>
-    </div>
+    </>
   );
 }
 

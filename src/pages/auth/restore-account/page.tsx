@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useDidHelper from "@/hooks/useDidHelper";
+import { useDidHelper } from "@/hooks";
 import { reloadToIndex } from "@/utils";
 import { Password, useToast } from "@/components";
 

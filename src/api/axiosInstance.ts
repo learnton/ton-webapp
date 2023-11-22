@@ -7,23 +7,38 @@ declare global {
   }
 }
 
-// 各环境BaseURL配置
-const ENVIRONMENT = {
-  dev: "https://card-service.zkid.xyz",
-  test: "http://test.com/api",
-  master: "https://card-service.zkid.app",
-};
+declare module "axios" {
+  interface AxiosResponse {
+    code: number;
+    msg: string;
+  }
+}
 
-// 域名与环境映射关系
-const HASH: Record<string, string> = {
-  "dev.com": ENVIRONMENT.dev,
-  "test.com": ENVIRONMENT.test,
-  "legit3.id": ENVIRONMENT.master,
-};
+export const DID_SERVICE =
+  import.meta.env.MODE === "production"
+    ? "https://did-service.zkid.app"
+    : "https://did-service.zkid.xyz";
+
+export const CARD_SERVICE =
+  import.meta.env.MODE === "production"
+    ? "https://card-service.zkid.app"
+    : "https://card-service.zkid.xyz";
+
+export const VALID_SERVICE =
+  import.meta.env.MODE === "production"
+    ? "https://valid3-service.valid3.id"
+    : "https://valid3-service.zkid.xyz";
+
+export const TWEET_SERVICE = "https://tweet-service.zkid.app";
+
+export const WALLET_URL =
+  import.meta.env.MODE === "production"
+    ? "https://wallet.zkid.app"
+    : "https://wallet.zkid.xyz";
 
 // 创建请求实例
 const instance = axios.create({
-  baseURL: HASH[window.location.host] || ENVIRONMENT.dev,
+  baseURL: CARD_SERVICE,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",

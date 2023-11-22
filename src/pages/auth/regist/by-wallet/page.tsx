@@ -1,6 +1,6 @@
 // import { useState } from "react";
 import { useTonConnectUI } from "@tonconnect/ui-react";
-import useTonWalletSign from "@/hooks/useTonWalletSign";
+import { useTonWalletSign } from "@/hooks";
 
 export default function RegistByWallet() {
   const [TonConnectUI] = useTonConnectUI();

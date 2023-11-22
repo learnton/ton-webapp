@@ -28,6 +28,7 @@ async function insertCardIfNot(db: DidDB, message: MessageMeta) {
   }
 }
 export function fetchAndSaveMessages(account?: DidAccount, db?: DidDB | null) {
+  console.log("fetchAndSaveMessages", account, db);
   if (!db) return;
   const receiver = account?.instance.getKeyUrl("keyAgreement");
   if (!receiver) return;

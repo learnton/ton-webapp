@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { DidAccount, DidAccounts } from "@zcloak/wallet-lib";
-import useTwaSdk from "@/hooks/useTwaSdk";
+import { useTwaSdk } from "@/hooks";
 
 interface DidState {
   did: DidAccount | null | undefined;

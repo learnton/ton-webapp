@@ -4,8 +4,13 @@ import AuthRouter from "./AuthRouter";
 import QRCode from "./QRCode";
 import DisplayMnemonic from "./DisplayMnemonic";
 import { useToast, ToastProvider } from "./Toast";
+import AccountName from "./AccountName";
+import Avatar from "./Avatar";
+import CTypeName from "./CTypeName";
+import IdentityIcon from "./IdentityIcon";
 
 export {
+  Avatar,
   Password,
   Address,
   AuthRouter,
@@ -13,4 +18,9 @@ export {
   DisplayMnemonic,
   useToast,
   ToastProvider,
+  AccountName,
+  CTypeName,
+  IdentityIcon,
 };
+
+export * from "./Cards";

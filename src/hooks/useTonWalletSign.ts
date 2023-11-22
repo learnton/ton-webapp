@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useTonConnectUI } from "@tonconnect/ui-react";
 
-export default function () {
+export const useTonWalletSign = function () {
   const [tonConnectUI] = useTonConnectUI();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const refreshPayload = (payload = "123456") => {
@@ -29,4 +29,4 @@ export default function () {
       }
     });
   }, [refreshPayload, tonConnectUI]);
-}
+};

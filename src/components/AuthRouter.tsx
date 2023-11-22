@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, Outlet } from "react-router-dom";
 import { AuthWhitelist, HOMEPAGE_URL } from "@/constant";
-import useAuth from "@/hooks/useAuth";
+import { useAuth } from "@/hooks";
 import WebApp from "@twa-dev/sdk";
 import { login } from "@/api/auth";
 import { useToast } from "@/components";
@@ -16,7 +16,6 @@ export default function AuthRouter() {
   const isAuth = useAuth();
   const { pathname } = useLocation();
   const navigate = useNavigate();
-
   useEffect(() => {
     if (isAuth === false) {
       if (!AuthWhitelist.includes(pathname)) {

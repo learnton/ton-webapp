@@ -1,9 +1,7 @@
 import { useContext } from "react";
-import IdentityIcon from "@/components/IdentityIcon";
 import { DidContext } from "@/context/Did";
-import useTwaSdk from "@/hooks/useTwaSdk";
-import { Address } from "@/components";
-import { QRCode } from "@/components";
+import { useTwaSdk } from "@/hooks";
+import { Address, QRCode, IdentityIcon } from "@/components";
 import IconRight from "@/assets/img/icon_go.svg?react";
 import { Link } from "react-router-dom";
 

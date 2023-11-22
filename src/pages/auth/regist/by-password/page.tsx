@@ -3,11 +3,10 @@ import EnterPassword from "./_EnterPassword";
 import BackupSeed from "./_BackupSeed";
 import Complete from "./_Complete";
 import { utils } from "@zcloak/wallet-lib";
-import useDidHelper from "@/hooks/useDidHelper";
+import { useDidHelper, useTwaSdk } from "@/hooks";
 import { useNavigate } from "react-router-dom";
 import { DidAccount } from "@zcloak/wallet-lib";
 import { bind } from "@/api/auth";
-import useTwaSdk from "@/hooks/useTwaSdk";
 import { useToast } from "@/components";
 
 export default function RegistByPassword() {

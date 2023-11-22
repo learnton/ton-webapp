@@ -8,7 +8,7 @@ const defaultConfig = {
   color: themeColor.primary,
 };
 
-export default () => {
+export const useTwaSdk = () => {
   const MainButton: {
     MainButtonHandle?: () => void;
     init: (params: object, MainButtonHandle: () => void) => void;

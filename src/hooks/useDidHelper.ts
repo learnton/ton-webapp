@@ -1,11 +1,11 @@
-import useTwaSdk from "@/hooks/useTwaSdk";
+import { useTwaSdk } from "@/hooks";
 import { DidContext } from "@/context/Did";
 import { useContext } from "react";
 import { checkPasswordSecurityLevel } from "@/utils";
 import { useToast } from "@/components";
 import { DidAccount } from "@zcloak/wallet-lib";
 
-export default () => {
+export const useDidHelper = () => {
   const toast = useToast();
   const { UserInfo } = useTwaSdk();
   const { didAccounts } = useContext(DidContext);

@@ -1204,6 +1204,13 @@
     "@polkadot/util" "^12.1.2"
     "@zcloak/crypto" "2.0.0"
 
+"@zcloak/login-rpc@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@zcloak/login-rpc/-/login-rpc-2.0.0.tgz#7825f432716c8824c83a24d5df8470cbfb3c75cb"
+  integrity sha512-CwE6os9OPgyODl+p7PsBSkFc0k/DRuNRvx7ThoVkuid+xhHNYMdliIffHdY598VwPFuovIofk8afSh1E8sHhFg==
+  dependencies:
+    "@polkadot/util" "^12.1.2"
+
 "@zcloak/message@^2.0.3":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@zcloak/message/-/message-2.0.3.tgz#65571fc7dbff16b7c82672a84afeb32a6b845a64"
