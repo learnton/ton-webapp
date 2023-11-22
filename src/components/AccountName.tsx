@@ -1,7 +1,7 @@
 // Copyright 2021-2023 zcloak authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import { isDidUrl } from "@zcloak/did";
 import { parseDid } from "@zcloak/did-resolver/parseDid";
@@ -43,6 +43,8 @@ function AccountName({ showFull, showVid = false, value, withMeta }: Props) {
   );
 }
 
+export default AccountName;
+
 export function AccountVid({
   value,
 }: Omit<Props, "showFull" | "withMeta" | "showVid">) {
@@ -50,5 +52,3 @@ export function AccountVid({
 
   return <>{vid}</>;
 }
-
-export default React.memo(AccountName);

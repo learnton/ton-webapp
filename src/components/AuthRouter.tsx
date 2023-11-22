@@ -20,7 +20,7 @@ export default function AuthRouter() {
     if (isAuth === false) {
       if (!AuthWhitelist.includes(pathname)) {
         console.log("not auth", pathname);
-        navigate("/login", {
+        return navigate("/login", {
           replace: true,
         });
       }
@@ -29,10 +29,12 @@ export default function AuthRouter() {
       if (!Token) {
         console.log("no token", pathname, isAuth);
         setLoading(true);
-        login().then((res) => {
+        void login().then((res) => {
           setLoading(false);
           console.log("login", res);
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           if (res?.data?.authToken) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
             localStorage.setItem("token", res.data.authToken);
           } else {
             toast &&
@@ -70,7 +72,7 @@ export default function AuthRouter() {
         WebApp.BackButton.show();
       }
     }
-  }, [isAuth, pathname, navigate]);
+  }, [isAuth, pathname, navigate, toast]);
 
   return (
     <div className="p-4 bg-[#F9FAFB] min-h-[100vh]">

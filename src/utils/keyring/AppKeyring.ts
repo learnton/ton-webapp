@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 // Copyright 2021-2023 zcloak authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
@@ -26,7 +28,7 @@ export class AppKeyring extends BaseKeyring {
       this.once("ready", () => resolve(this));
     });
 
-    this.loadAll().then(() => this.emit("ready"));
+    void this.loadAll().then(() => this.emit("ready"));
 
     session.on("store_changed", (key: string, _, newVal) => {
       if (key === APP_KEYRING_STATE) {
@@ -101,24 +103,24 @@ export class AppKeyring extends BaseKeyring {
 
     const json = _pair.toJson(this.password);
 
-    this.#store.set(`${PAIR_PREFIX}${u8aToHex(_pair.publicKey)}`, json);
+    void this.#store.set(`${PAIR_PREFIX}${u8aToHex(_pair.publicKey)}`, json);
 
     return _pair;
   }
 
   public override removePair(publicKey: Uint8Array | HexString): void {
     super.removePair(publicKey);
-    this.#store.remove(`${PAIR_PREFIX}${u8aToHex(u8aToU8a(publicKey))}`);
+    void this.#store.remove(`${PAIR_PREFIX}${u8aToHex(u8aToU8a(publicKey))}`);
   }
 
   public override lock(): void {
     super.lock();
-    this.#session.remove(APP_KEYRING_STATE);
+    void this.#session.remove(APP_KEYRING_STATE);
   }
 
   public override unlock(password: string, expired: number): void {
     super.unlock(password, expired);
-    this.#session.set(APP_KEYRING_STATE, { password, expired });
+    void this.#session.set(APP_KEYRING_STATE, { password, expired });
   }
 
   public override updateExpired(expired: number): void {
@@ -127,6 +129,9 @@ export class AppKeyring extends BaseKeyring {
     }
 
     super.updateExpired(expired);
-    this.#session.set(APP_KEYRING_STATE, { password: this.password, expired });
+    void this.#session.set(APP_KEYRING_STATE, {
+      password: this.password,
+      expired,
+    });
   }
 }

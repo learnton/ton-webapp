@@ -1,3 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type { CacheDB, DidDB, MessageMeta } from "@/utils";
 import { get } from "@/api/template";
 import { DidAccount } from "@zcloak/wallet-lib";
@@ -24,32 +30,39 @@ async function insertCardIfNot(db: DidDB, message: MessageMeta) {
     .count();
 
   if (count === 0) {
-    db.cardMessages.add(message);
+    void db.cardMessages.add(message);
   }
 }
-export function fetchAndSaveMessages(account?: DidAccount, db?: DidDB | null) {
+export async function fetchAndSaveMessages(
+  account?: DidAccount,
+  db?: DidDB | null
+) {
   console.log("fetchAndSaveMessages", account, db);
   if (!db) return;
   const receiver = account?.instance.getKeyUrl("keyAgreement");
   if (!receiver) return;
-  Promise.all([
+  await Promise.all([
     all({
       receiver,
       msgType: "Response_Approve_Attestation",
     }),
     all({ receiver, msgType: "Send_issuedVC" }),
-  ]).then(([messages1, messages2]) => {
-    messages1.data.forEach((message: any) =>
-      insertCardIfNot(db, {
-        ...message.rawData,
-        templateId: message?.templateId,
-      })
-    );
-    messages2.data.forEach((message: any) =>
-      insertCardIfNot(db, {
-        ...message.rawData,
-        templateId: message?.templateId,
-      })
-    );
-  });
+  ])
+    .then(([messages1, messages2]) => {
+      messages1.data.forEach((message: any) =>
+        insertCardIfNot(db, {
+          ...message.rawData,
+          templateId: message?.templateId,
+        })
+      );
+      messages2.data.forEach((message: any) =>
+        insertCardIfNot(db, {
+          ...message.rawData,
+          templateId: message?.templateId,
+        })
+      );
+    })
+    .catch((err) => {
+      alert(err.message);
+    });
 }

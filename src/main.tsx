@@ -2,12 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./assets/global.css";
 import { ToastProvider } from "@/components";
-import DidProvider from "./context/Did";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { BrowserSession, BrowserStore } from "@zcloak/ui-store";
 import AppProvider from "./context/AppProvider";
-import AccountsProvider from "./context/AccountsProvider";
 import rootRoute from "./pages/routes";
 
 const router = createBrowserRouter(rootRoute, {
@@ -26,13 +24,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       }}
     >
       <AppProvider session={session} store={store}>
-        <AccountsProvider>
-          <ToastProvider>
-            <DidProvider>
-              <RouterProvider router={router} />
-            </DidProvider>
-          </ToastProvider>
-        </AccountsProvider>
+        <ToastProvider>
+          <RouterProvider router={router} />
+        </ToastProvider>
       </AppProvider>
     </TonConnectUIProvider>
   </React.StrictMode>

@@ -6,7 +6,7 @@ type StoreType = {
 
 type StoreDispatch = {
   type: string;
-  param?: any;
+  param?: Record<string, unknown>;
 };
 
 const initialState: StoreType = { count: 0 };
@@ -47,4 +47,5 @@ function StoreProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export { useStateStore, useDispatchStore, StoreProvider };

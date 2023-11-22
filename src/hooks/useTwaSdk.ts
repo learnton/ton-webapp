@@ -1,14 +1,26 @@
-import WebApp from "@twa-dev/sdk";
+import WebAppSDK from "@twa-dev/sdk";
+import type { WebApp, WebAppUser } from "@twa-dev/types";
 import { themeColor } from "@/constant";
-import { WebAppUser } from "@twa-dev/types";
 
-WebApp.ready();
+WebAppSDK.ready();
 
 const defaultConfig = {
   color: themeColor.primary,
 };
 
-export const useTwaSdk = () => {
+type useTwa = {
+  MainButton: {
+    MainButtonHandle?: (() => void) | undefined;
+    init: (params: object, MainButtonHandle: () => void) => void;
+    setParams: (params: object) => void;
+    destroy: () => void;
+  };
+  WebApp: WebApp;
+  UserInfo: WebAppUser;
+  DevMode: boolean;
+};
+
+export const useTwaSdk: () => useTwa = () => {
   const MainButton: {
     MainButtonHandle?: () => void;
     init: (params: object, MainButtonHandle: () => void) => void;
@@ -17,31 +29,31 @@ export const useTwaSdk = () => {
   } = {
     MainButtonHandle: undefined,
     init(params: object, MainButtonHandle: () => void) {
-      WebApp.MainButton.setParams(Object.assign(defaultConfig, params));
-      WebApp.MainButton.onClick(MainButtonHandle);
-      WebApp.MainButton.show();
+      WebAppSDK.MainButton.setParams(Object.assign(defaultConfig, params));
+      WebAppSDK.MainButton.onClick(MainButtonHandle);
+      WebAppSDK.MainButton.show();
       this.MainButtonHandle = MainButtonHandle;
     },
     setParams(params: object) {
-      WebApp.MainButton.setParams(Object.assign(defaultConfig, params));
+      WebAppSDK.MainButton.setParams(Object.assign(defaultConfig, params));
     },
     destroy() {
       this?.MainButtonHandle &&
-        WebApp.MainButton.offClick(this.MainButtonHandle);
-      WebApp.MainButton.hide();
+        WebAppSDK.MainButton.offClick(this.MainButtonHandle);
+      WebAppSDK.MainButton.hide();
     },
   };
 
   const DevMode =
-    WebApp.platform === "unknown" && parseFloat(WebApp.version) < 6.1;
+    WebAppSDK.platform === "unknown" && parseFloat(WebAppSDK.version) < 6.1;
 
   const UserInfo = (
-    DevMode ? { id: "testIdByDevMode" } : WebApp.initDataUnsafe.user
+    DevMode ? { id: "testIdByDevMode" } : WebAppSDK.initDataUnsafe.user
   ) as WebAppUser;
 
   return {
     MainButton,
-    WebApp,
+    WebApp: WebAppSDK,
     UserInfo,
     DevMode,
   };

@@ -1,6 +1,6 @@
 import qrcode from "qrcode-generator";
 import { useContext, useEffect, useRef } from "react";
-import { DidContext } from "@/context/Did";
+import { AppContext } from "@/context/AppProvider";
 
 const Code = ({
   accountId,
@@ -9,7 +9,7 @@ const Code = ({
   cellSize?: number;
   accountId: `did:zk:${string}`;
 }) => {
-  const { didAccounts } = useContext(DidContext);
+  const { didAccounts } = useContext(AppContext);
   const qr = useRef(qrcode(0, "L"));
   const container = useRef<HTMLDivElement>(null);
 

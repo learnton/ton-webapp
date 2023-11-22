@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 // Copyright 2021-2023 zcloak authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
@@ -8,25 +10,35 @@ import React, { createContext, useEffect, useState } from "react";
 import { DID_SERVICE } from "@/api/axiosInstance";
 import { ZkDidResolver, AuthDB, CacheDB, DidDB, CredentialCard } from "@/utils";
 
-import { AppState } from "@/types";
 import { getCTypes } from "@/api/did";
 // TODO refactor by wallet-bli
 import { WalletKeyring, DidAccounts, DidAccount } from "@zcloak/wallet-lib";
-import { useTwaSdk } from "@/hooks";
+
+export interface AppState {
+  store: BaseStore;
+  session: BaseStore;
+  authDB: AuthDB;
+  cacheDB: CacheDB;
+  allDidDB: Map<string, DidDB>;
+  resolver: ZkDidResolver;
+  keyring: WalletKeyring;
+  credentialCard: CredentialCard;
+  currentDid: () => DidAccount | null | undefined;
+  didAccounts: DidAccounts;
+}
 
 let authDB: AuthDB;
 let cacheDB: CacheDB;
-const allDidDB = new Map<any, any>();
+const allDidDB = new Map<string, DidDB>();
 let resolver: ZkDidResolver;
 let keyring: WalletKeyring;
-let accounts: DidAccounts;
 let credentialCard: CredentialCard;
+let didAccounts: DidAccounts;
 
 async function initInstance(
   store: BaseStore,
-  session: BaseStore,
-  UserInfo: any
-): Promise<DidAccounts> {
+  session: BaseStore
+): Promise<void> {
   authDB = new AuthDB();
   cacheDB = new CacheDB();
   resolver = new ZkDidResolver(cacheDB, DID_SERVICE);
@@ -37,10 +49,10 @@ async function initInstance(
   keyring = new WalletKeyring(store, session);
   await keyring.isReady;
 
-  return new DidAccounts(String(UserInfo?.id), keyring, store);
+  didAccounts = await new DidAccounts(`TonWebApp`, keyring, store).isReady;
 }
 
-export const AppContext = createContext({} as AppState);
+export const AppContext = createContext<AppState>({} as AppState);
 
 function AppProvider({
   children,
@@ -52,29 +64,26 @@ function AppProvider({
   session: BaseStore;
 }) {
   const [ready, setReady] = useState(false);
-  const { UserInfo } = useTwaSdk();
-  const [didAccounts, setDidAccounts] = useState<DidAccounts | null>(null);
 
   useEffect(() => {
-    if (UserInfo?.id) {
-      initInstance(store, session, UserInfo).then((_didAccounts) => {
-        void _didAccounts.isReady.then((_d) => {
-          _d.accounts.forEach((account) => {
-            allDidDB.set(account.instance.id, new DidDB(account.instance.id));
-          });
-          setReady(true);
-          setDidAccounts(_d);
+    if (session && store) {
+      void initInstance(store, session).then(() => {
+        console.log("initInstance", session, store);
+        didAccounts.accounts.forEach((account) => {
+          allDidDB.set(account.instance.id, new DidDB(account.instance.id));
         });
+        setReady(true);
       });
     }
-  }, [session, store, UserInfo?.id]);
+  }, [session, store]);
 
   useEffect(() => {
     if (ready) {
-      getCTypes().then((res) => {
-        if (res.code === 200) {
+      void getCTypes().then((res) => {
+        if (res.code === 200 && Array.isArray(res.data)) {
           res.data?.forEach((ctype: any) => {
-            cacheDB.cacheCType.put(ctype.rawData);
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+            void cacheDB?.cacheCType.put(ctype.rawData);
           });
         }
       });
@@ -91,9 +100,9 @@ function AppProvider({
         allDidDB,
         resolver,
         keyring,
-        accounts,
+        // accounts,
         didAccounts,
-        did: accounts.current,
+        currentDid: () => didAccounts?.current,
         credentialCard,
       }}
     >

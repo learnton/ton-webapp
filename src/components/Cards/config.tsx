@@ -10,7 +10,7 @@ import IconCard4 from "@/assets//wallet/icon_card4.svg";
 export interface CardBgConfig {
   bgId: string;
   bg: string;
-  component: any;
+  component: unknown;
   show: boolean;
   default: boolean;
 }

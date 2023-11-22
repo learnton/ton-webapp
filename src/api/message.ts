@@ -1,4 +1,4 @@
-import instance from "./axiosInstance";
+import instance, { DID_SERVICE } from "./axiosInstance";
 
 export const pageList = (params: {
   msgType?: string;
@@ -9,7 +9,7 @@ export const pageList = (params: {
 
   size?: string;
 }) => {
-  return instance.get(`/api/message/page`, { params });
+  return instance.get(`/message/page`, { params, baseURL: DID_SERVICE });
 };
 
 export const all = (params: {
@@ -17,5 +17,5 @@ export const all = (params: {
 
   receiver: `did:zk:${string}`;
 }) => {
-  return instance.get(`/api/message`, { params });
+  return instance.get(`/message`, { params, baseURL: DID_SERVICE });
 };

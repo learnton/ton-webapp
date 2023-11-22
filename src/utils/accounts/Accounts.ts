@@ -1,5 +1,5 @@
-// Copyright 2021-2023 zcloak authors & contributors
-// SPDX-License-Identifier: Apache-2.0
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 
 import type { DidKeys$Json } from "@zcloak/did/keys/types";
 import type { DidDocument } from "@zcloak/did-resolver/types";
@@ -37,10 +37,10 @@ export class Accounts extends BaseAccounts {
       this.once("ready", () => resolve(this));
     });
 
-    this.loadAll().then(() => this.emit("ready"));
+    void this.loadAll().then(() => this.emit("ready"));
 
     store.on("store_changed", (key: string, _, newVal) => {
-      if (key.startsWith(DID_PREFIX)) {
+      if (key.startsWith(DID_PREFIX as string)) {
         if (newVal) {
           const did = helpers.fromDidDocument(
             newVal as DidDocument,
@@ -54,7 +54,7 @@ export class Accounts extends BaseAccounts {
         } else {
           if (!this.getAccount(key)) return;
 
-          super.removeAccount(key);
+          void super.removeAccount(key);
         }
       } else if (key === CURRENT_ACCOUNT_KEY) {
         if (newVal) {
@@ -120,7 +120,7 @@ export class Accounts extends BaseAccounts {
 
   public override setCurrent(id: string | null): void {
     super.setCurrent(id);
-    this.#store.set(CURRENT_ACCOUNT_KEY, id);
+    void this.#store.set(CURRENT_ACCOUNT_KEY, id);
   }
 
   public override async addAccount(
@@ -157,7 +157,7 @@ export class Accounts extends BaseAccounts {
 
     await this.addAccount(account);
 
-    this.#store.set(APP_MNEMONIC_INDEX_KEY, deriveIndex + 1);
+    void this.#store.set(APP_MNEMONIC_INDEX_KEY, deriveIndex + 1);
 
     return account;
   }

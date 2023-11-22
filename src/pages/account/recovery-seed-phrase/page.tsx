@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useCallback, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { DidContext } from "@/context/Did";
+import { AppContext } from "@/context/AppProvider";
 import { Password, DisplayMnemonic, useToast } from "@/components";
 
 export default function RecoverySeedPhrase() {
-  const { didAccounts: accounts } = useContext(DidContext);
+  const { didAccounts: accounts } = useContext(AppContext);
   const [password, setPassword] = useState<string>();
   const [mnemonic, setMnemonic] = useState<string>();
   const navigate = useNavigate();

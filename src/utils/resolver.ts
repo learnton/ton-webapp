@@ -40,7 +40,8 @@ abstract class BaseResolver extends DidResolver {
       throw new DidNotFoundError();
     }
 
-    return res.data.rawData;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
+    return res.data?.rawData;
   }
 }
 
@@ -63,7 +64,7 @@ export class ZkDidResolver extends BaseResolver {
     const res = await createDid(did);
 
     if (res?.code !== 200) {
-      throw new Error(res?.msg);
+      throw new Error(res?.msg || "createDid error");
     }
   }
 }

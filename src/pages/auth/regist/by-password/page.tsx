@@ -60,6 +60,7 @@ export default function RegistByPassword() {
                   toast &&
                     toast({
                       type: "error",
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
                       message: err.message,
                     });
                   setRuning(false);

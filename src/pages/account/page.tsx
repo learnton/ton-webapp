@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
-import { DidContext } from "@/context/Did";
+import { AppContext } from "@/context/AppProvider";
 import { Address } from "@/components";
 import IdentityIcon from "@/components/IdentityIcon";
 import IconAccount from "./_assets/icon_profile.svg?react";
@@ -15,7 +15,8 @@ import { useToast } from "@/components/Toast";
 import { useRef } from "react";
 
 export default function Account() {
-  const { did } = useContext(DidContext);
+  const { currentDid } = useContext(AppContext);
+  const did = currentDid();
   const { UserInfo, WebApp } = useTwaSdk();
   const [noti, setNoti] = useState(0);
   const toast = useToast();

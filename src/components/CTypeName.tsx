@@ -12,4 +12,4 @@ const CTypeName: React.FC<{ cTypeHash?: string | null }> = ({ cTypeHash }) => {
   return <>{ctype?.title || (cTypeHash ? shortHash(cTypeHash) : "")}</>;
 };
 
-export default React.memo(CTypeName);
+export default CTypeName;

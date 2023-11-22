@@ -1,16 +1,24 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Copyright 2021-2023 zcloak authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import type { HexString } from '@zcloak/crypto/types';
-import type { KeyringPair } from '@zcloak/keyring/types';
+import type { HexString } from "@zcloak/crypto/types";
+import type { KeyringPair } from "@zcloak/keyring/types";
 
-import Events from 'eventemitter3';
+import Events from "eventemitter3";
 
-import { Keyring } from '@zcloak/keyring';
+import { Keyring } from "@zcloak/keyring";
 
-import { WalletKeyringPair } from './WalletKeyringPair';
+import { WalletKeyringPair } from "./WalletKeyringPair";
 
-type EventTypes = 'ready' | 'unlock' | 'update' | 'lock' | 'add_pair' | 'remove_pair';
+type EventTypes =
+  | "ready"
+  | "unlock"
+  | "update"
+  | "lock"
+  | "add_pair"
+  | "remove_pair";
 
 type KeyringState = {
   password: string;
@@ -32,41 +40,43 @@ export abstract class BaseKeyring extends Keyring {
   }
 
   public override addPair(pair: KeyringPair): KeyringPair {
-    const _pair = super.addPair(new WalletKeyringPair(pair, () => this.password));
+    const _pair = super.addPair(
+      new WalletKeyringPair(pair, () => this.password)
+    );
 
-    this.emit('add_pair');
+    this.emit("add_pair");
 
     return _pair;
   }
 
   public override removePair(publicKey: Uint8Array | HexString): void {
     super.removePair(publicKey);
-    this.emit('remove_pair');
+    this.emit("remove_pair");
   }
 
   public lock(): void {
     this.state = null;
     this.getPairs().forEach((pair) => pair.lock());
-    this.emit('lock');
+    this.emit("lock");
     clearTimeout(this.#timer);
   }
 
   public unlock(password: string, expired: number): void {
     this.state = {
       password,
-      expired
+      expired,
     };
     this.getPairs().forEach((pair) => pair.unlock(password));
-    this.emit('unlock');
+    this.emit("unlock");
   }
 
   public updateExpired(expired: number): void {
     if (!this.state?.password) {
-      throw new Error('Please unlock before update expired');
+      throw new Error("Please unlock before update expired");
     }
 
     this.state.expired = expired;
-    this.emit('update');
+    this.emit("update");
   }
 
   /** events */

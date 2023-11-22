@@ -1,6 +1,3 @@
-// Copyright 2021-2023 zcloak authors & contributors
-// SPDX-License-Identifier: Apache-2.0
-
 import type { BaseStore } from "@zcloak/ui-store";
 import type { CardBgInterface } from "@/types";
 
@@ -22,24 +19,30 @@ export class CredentialCard extends Events<"ready" | "store_changed"> {
       this.once("ready", () => resolve(this));
     });
 
-    this.load().then(() => this.emit("ready"));
+    void this.load().then(() => this.emit("ready"));
   }
 
   private async load() {
-    let value = (await this.#store.get(CARD_BG_KEY)) as CardBgInterface[];
+    let value = (await this.#store.get(
+      CARD_BG_KEY as string
+    )) as CardBgInterface[];
 
     if (value) {
       // replace png to webp background image
+       
       value = value.map((item) => ({
         ...item,
+         
         bg: /\.png$/.test(item.bg)
-          ? item.bg.replace(/\.png$/, ".webp")
-          : item.bg,
+          ?  
+            item.bg.replace(/\.png$/, ".webp")
+          :  
+            item.bg,
       }));
-      await this.#store.set(CARD_BG_KEY, value);
+      await this.#store.set(CARD_BG_KEY as string, value);
 
       value.forEach((v) => {
-        this.#value.set(v.rootHash, v);
+        v?.rootHash && this.#value.set(v.rootHash, v);
       });
     }
   }

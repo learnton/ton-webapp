@@ -2,12 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { useContext, useEffect, useMemo, useState } from "react";
-
-import { DidContext } from "@/context/Did";
+import { AppContext } from "@/context/AppProvider";
 import { AccountMeta } from "@/types";
 
 export function useAccountMeta(id?: string | null): AccountMeta | undefined {
-  const { didAccounts } = useContext(DidContext);
+  const { didAccounts } = useContext(AppContext);
   const allAccounts = didAccounts?.accounts;
   const account = useMemo(
     () => allAccounts?.find((account) => account.instance.id === id),

@@ -10,7 +10,8 @@ export function useVid(did?: DidUrl | null) {
   useEffect(() => {
     if (!did) return;
 
-    validName({ did }).then((res) => setVid(res.data));
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    void validName({ did }).then((res) => setVid(res.data));
   }, [did]);
 
   return { vid };

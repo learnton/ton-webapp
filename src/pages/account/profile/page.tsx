@@ -1,12 +1,13 @@
 import { useContext } from "react";
-import { DidContext } from "@/context/Did";
+import { AppContext } from "@/context/AppProvider";
 import { useTwaSdk } from "@/hooks";
 import { Address, QRCode, IdentityIcon } from "@/components";
 import IconRight from "@/assets/img/icon_go.svg?react";
 import { Link } from "react-router-dom";
 
 export default function Profile() {
-  const { did } = useContext(DidContext);
+  const { currentDid } = useContext(AppContext);
+  const did = currentDid();
   const { UserInfo } = useTwaSdk();
 
   return (

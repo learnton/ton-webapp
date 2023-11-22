@@ -52,12 +52,12 @@ const Toast = () => {
 
   useEffect(() => {
     setShow(!!message?.trim());
-    if (!!message?.trim()) {
+    if (message?.trim()) {
       setTimeout(() => {
         dispatch && dispatch({ type: "info", message: "" });
       }, 3000);
     }
-  }, [message]);
+  }, [dispatch, message]);
 
   return (
     <>
@@ -90,4 +90,5 @@ function ToastProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export { useToast, ToastProvider };

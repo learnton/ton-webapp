@@ -1,5 +1,5 @@
 import { useContext, useState, useMemo } from "react";
-import { DidContext } from "@/context/Did";
+import { AppContext } from "@/context/AppProvider";
 import { isU8a, u8aToHex } from "@polkadot/util";
 import { DidUrl } from "@zcloak/did-resolver/types";
 import type { HexString } from "@zcloak/crypto/types";
@@ -7,7 +7,8 @@ import { shortString } from "@/utils";
 import { Link } from "react-router-dom";
 
 export default function AccountKeys() {
-  const { did } = useContext(DidContext);
+  const { currentDid } = useContext(AppContext);
+  const did = currentDid();
 
   const toHex = (publicKey: Uint8Array | HexString | undefined | DidUrl) =>
     publicKey

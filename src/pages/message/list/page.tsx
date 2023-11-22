@@ -1,9 +1,8 @@
-// Copyright 2021-2023 zcloak authors & contributors
-// SPDX-License-Identifier: Apache-2.0
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 
 import type { DidDB, MessageMeta } from "@/utils";
 import { addCardRelation, getTemplateById } from "@/utils";
-import { DidContext } from "@/context/Did";
 import moment from "moment";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -71,8 +70,8 @@ function Cell({
 }
 
 function PageMessages() {
-  const { cacheDB, keyring, resolver } = useContext(AppContext);
-  const { did: account } = useContext(DidContext);
+  const { cacheDB, keyring, resolver, currentDid } = useContext(AppContext);
+  const account = currentDid();
   const [checked, setChecked] = useState<string[]>([]);
   const didDB = useDidDB();
   const [busy, setBusy] = useState(false);
@@ -95,8 +94,9 @@ function PageMessages() {
   }, [messages, cacheDB]);
 
   useEffect(() => {
-    if (account) {
-      fetchAndSaveMessages(account, didDB);
+    // console.log("fetchAndSaveMessages", account, didDB);
+    if (account && didDB) {
+      void fetchAndSaveMessages(account, didDB);
     }
   }, [account, didDB]);
 
@@ -156,7 +156,7 @@ function PageMessages() {
 
   useEffect(() => {
     messages?.forEach((message) => {
-      didDB?.cardMessages.update(message.id, { isRead: true });
+      void didDB?.cardMessages.update(message.id, { isRead: true });
     });
   }, [didDB, messages]);
 

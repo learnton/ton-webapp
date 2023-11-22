@@ -1,6 +1,3 @@
-// Copyright 2021-2023 zcloak authors & contributors
-// SPDX-License-Identifier: Apache-2.0
-
 import type { DidDocument } from "@zcloak/did-resolver/types";
 import type { BaseStore } from "@zcloak/ui-store";
 import type { AccountInstance, AccountMeta, AccountType } from "@/types";
@@ -30,7 +27,7 @@ export class Account<
     this.instance = instance;
 
     this.isReady = new Promise((resolve) => {
-      this.#store
+      void this.#store
         .get(this.metaKey)
         .then((value) => {
           if (value) {

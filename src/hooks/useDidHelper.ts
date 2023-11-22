@@ -1,5 +1,5 @@
 import { useTwaSdk } from "@/hooks";
-import { DidContext } from "@/context/Did";
+import { AppContext } from "@/context/AppProvider";
 import { useContext } from "react";
 import { checkPasswordSecurityLevel } from "@/utils";
 import { useToast } from "@/components";
@@ -8,7 +8,7 @@ import { DidAccount } from "@zcloak/wallet-lib";
 export const useDidHelper = () => {
   const toast = useToast();
   const { UserInfo } = useTwaSdk();
-  const { didAccounts } = useContext(DidContext);
+  const { didAccounts } = useContext(AppContext);
 
   const generate = async (params: { mnemonic: string; password: string }) => {
     if (!didAccounts || !UserInfo?.id || !params.mnemonic || !params.password) {

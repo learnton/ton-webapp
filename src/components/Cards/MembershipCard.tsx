@@ -90,4 +90,4 @@ const MembershipCard: React.FC<ZkIDCardProps> = ({
   );
 };
 
-export default React.memo(MembershipCard);
+export default MembershipCard;
