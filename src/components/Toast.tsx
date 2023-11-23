@@ -48,7 +48,24 @@ const Toast = () => {
   const { type, message } = state;
   const [show, setShow] = useState<boolean>(false);
 
-  const position = ["top", "center"];
+  const colorMap: Record<AlertType, { bg: string; color: string }> = {
+    info: {
+      bg: "#C7D8FA",
+      color: "#002847",
+    },
+    success: {
+      bg: "#DBF1E4",
+      color: "#05391B",
+    },
+    warning: {
+      bg: "#FFF6DE",
+      color: "#59290C",
+    },
+    error: {
+      bg: "#FBE8E8",
+      color: "#A81616",
+    },
+  };
 
   useEffect(() => {
     setShow(!!message?.trim());
@@ -61,17 +78,20 @@ const Toast = () => {
 
   return (
     <>
-      <div className="alert alert-info hidden"></div>
-      <div className="alert alert-success hidden"></div>
-      <div className="alert alert-warning hidden"></div>
-      <div className="alert alert-error hidden"></div>
-
       <div
-        className={`toast w-[80vw] whitespace-normal z-50 ${position
-          ?.map((position) => "toast-" + position)
-          .join(" ")} transition ${show ? "scale-100" : "scale-0"}`}
+        className={`fixed left-0 w-full top-0 z-50 transition ${
+          show ? "scale-100" : "scale-0"
+        }`}
       >
-        <div className={`alert ${"alert-" + type}`}>{message}</div>
+        <div
+          className="p-4"
+          style={{
+            backgroundColor: colorMap[type].bg,
+            color: colorMap[type].color,
+          }}
+        >
+          {message}
+        </div>
       </div>
     </>
   );
