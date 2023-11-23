@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import { AppContext } from "@/context/AppProvider";
 import { Address } from "@/components";
@@ -7,23 +7,36 @@ import IconAccount from "./_assets/icon_profile.svg?react";
 import IconScan from "./_assets/icon_scan.svg?react";
 import IconNoti from "./_assets/icon_notification.svg?react";
 import IconRight from "@/assets/img/icon_go.svg?react";
-import { useTwaSdk } from "@/hooks";
+import { useTwaSdk, useDidDB, useLiveQuery } from "@/hooks";
 import CardBgURL from "./_assets/img_bg_card@2x.webp";
 import { Link } from "react-router-dom";
-import { extraResult } from "@/utils";
+import { extraResult, DidDB } from "@/utils";
 import { useToast } from "@/components/Toast";
 import { useRef } from "react";
+import { fetchAndSaveMessages } from "@/pages/message/_utils";
 
 export default function Account() {
   const { didAccounts } = useContext(AppContext);
   const did = didAccounts.current;
   const { UserInfo, WebApp } = useTwaSdk();
-  const [noti, setNoti] = useState(0);
   const toast = useToast();
 
+  const didDB = useDidDB();
+
   useEffect(() => {
-    setNoti(9);
-  }, []);
+    if (did && didDB) {
+      void fetchAndSaveMessages(did, didDB);
+    }
+  }, [did, didDB]);
+
+  const count =
+    useLiveQuery(
+      function getMessages(db: DidDB): Promise<number> {
+        return db.cardMessages.filter((message) => !message.isRead).count();
+      },
+      didDB,
+      []
+    ) || 0;
 
   const handleScan: (text: string) => true | void = (text: string) => {
     extraResult(
@@ -75,10 +88,10 @@ export default function Account() {
           </button>
 
           <div className="flex-1 text-right">
-            {noti > 0 && <span>{noti} new message</span>}
+            {count > 0 && <span>{count} new message</span>}
           </div>
           <Link to="/message/list" className="btn btn-ghost btn-xs relative">
-            {noti && (
+            {count > 0 && (
               <div className="absolute left-[50%] translate-x-[4px] top-0 w-2 h-2 overflow-hidden rounded-3xl bg-error"></div>
             )}
             <IconNoti />
@@ -92,7 +105,7 @@ export default function Account() {
             />
           )}
           <div className="flex-1">
-            <p className="text-sm">{UserInfo.username || "--"}</p>
+            <p>{UserInfo.username || "--"}</p>
             <div className="font-medium text-[#191B1E]">
               {did && <Address value={did.instance.id} withCopy />}
             </div>

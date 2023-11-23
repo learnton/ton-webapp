@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --mode production",
-    "build": "tsc && vite build --mode development --base /ton-webapp && cp dist/index.html dist/404.html",
-    "build:prod": "tsc && vite build && cp dist/index.html dist/404.html",
+    "build:dev": "tsc && vite build --mode development --base /ton-webapp && cp dist/index.html dist/404.html",
+    "build": "tsc && vite build && cp dist/index.html dist/404.html",
     "lint": "eslint . --fix --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "postinstall": "husky install"

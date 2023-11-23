@@ -39,7 +39,6 @@ function PageMessages() {
   }, [messages, cacheDB]);
 
   useEffect(() => {
-    // console.log("fetchAndSaveMessages", account, didDB);
     if (account && didDB) {
       void fetchAndSaveMessages(account, didDB);
     }
