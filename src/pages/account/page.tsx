@@ -1,5 +1,4 @@
 import { useContext, useEffect } from "react";
-// import { Link } from "react-router-dom";
 import { AppContext } from "@/context/AppProvider";
 import { Address } from "@/components";
 import IdentityIcon from "@/components/IdentityIcon";
@@ -112,7 +111,10 @@ export default function Account() {
           </div>
         </div>
         {/* bottom card */}
-        <div className="bg-[#3D3E45] rounded-xl p-4 -bottom-12 flex items-center text-[#C7D8FA] absolute left-4 right-4">
+        <Link
+          to="/cards"
+          className="bg-[#3D3E45] rounded-xl p-4 -bottom-12 flex items-center text-[#C7D8FA] absolute left-4 right-4"
+        >
           <div className="flex-1 text-center">
             <p>zkID Cards</p>
             <div className="text-2xl text-white">{342}</div>
@@ -121,7 +123,7 @@ export default function Account() {
           <div className="flex-1 text-center">
             <p>view cards</p>
           </div>
-        </div>
+        </Link>
       </div>
 
       <h1 className="font-medium text-[#111827] text-xl mb-4">

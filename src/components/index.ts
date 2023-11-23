@@ -8,6 +8,7 @@ import AccountName from "./AccountName";
 import Avatar from "./Avatar";
 import CTypeName from "./CTypeName";
 import IdentityIcon from "./IdentityIcon";
+import ActionModal from "./ActionModal";
 
 export {
   Avatar,
@@ -21,6 +22,7 @@ export {
   AccountName,
   CTypeName,
   IdentityIcon,
+  ActionModal,
 };
 
 export * from "./Cards";

@@ -12,14 +12,8 @@ import AccountName from "../AccountName";
 import CardContainer from "./CardContainer";
 import { ZkIDCardProps } from "./types";
 
-function Item({ label, value }: { label: string; value: React.ReactNode }) {
-  return (
-    <div>
-      <span>{label}</span>
-      {value}
-    </div>
-  );
-}
+import cardBg from "./assets/card/img_card_1.png";
+import DataItem from "./DataItem";
 
 const MembershipCard: React.FC<ZkIDCardProps> = ({
   handleQr,
@@ -42,7 +36,7 @@ const MembershipCard: React.FC<ZkIDCardProps> = ({
   }, [vc?.credentialSubject]);
 
   const bg = useMemo(
-    () => template?.background ?? "/static/card/img_card_1.png",
+    () => template?.background ?? cardBg,
     [template?.background]
   );
 
@@ -54,31 +48,33 @@ const MembershipCard: React.FC<ZkIDCardProps> = ({
   return (
     <CardContainer bg={bg}>
       <div
+        className="h-full flex flex-col justify-between"
         onClick={onClick}
         style={{
-          height: "100%",
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
           color: template?.color ?? "#FFF",
         }}
       >
-        <div className="flex space-between">
+        <div className="flex justify-between">
           <span>MEMBERSHIP</span>
           {handleQr && (
-            <button className="btn" onClick={handleQr}>
+            <button
+              className="btn btn-ghost"
+              onClick={(e) => {
+                return e.stopPropagation();
+                // handleQr()
+              }}
+            >
               <IconQr />
             </button>
           )}
         </div>
         <div className="text-center">
-          <span className="text-xl">{name}</span>
-          <span>{role}</span>
+          <strong className="text-xl">{name}</strong>
+          <div>{role}</div>
         </div>
-        <div className="flex items-center mt-4 gap-1">
+        <div className="flex items-center mt-4 gap-2">
           {template?.logo && <Avatar src={template?.logo} />}
-          <Item
+          <DataItem
             label="ISSUER"
             value={<AccountName showVid value={attester} />}
           />

@@ -10,14 +10,7 @@ import AccountName from "../AccountName";
 import CardContainer from "./CardContainer";
 import { ZkIDCardProps } from "./types";
 
-function Item({ label, value }: { label: string; value: React.ReactNode }) {
-  return (
-    <div>
-      <span>{label}</span>
-      {value}
-    </div>
-  );
-}
+import DataItem from "./DataItem";
 
 const OldCard: React.FC<ZkIDCardProps> = ({ handleQr, id, onClick, vc }) => {
   const expirationTime = useMemo(() => {
@@ -51,21 +44,25 @@ const OldCard: React.FC<ZkIDCardProps> = ({ handleQr, id, onClick, vc }) => {
         <div className="flex items-center justify-between">
           <span>Legacy</span>
           {handleQr && (
-            <button className="btn" onClick={handleQr}>
+            <button
+              className="btn btn-ghost"
+              onClick={(e) => {
+                e.stopPropagation();
+                // handleQr()
+              }}
+            >
               <IconQr />
             </button>
           )}
         </div>
-        <div className="tooltip" data-tip={ctype?.title}>
-          <span className="mb-4 text-xl">{ctype?.title}</span>
-        </div>
+        <div className="mb-4 text-xl">{ctype?.title}</div>
 
-        <div className="flex items-center justify-between">
-          <Item
+        <div className="flex justify-between">
+          <DataItem
             label="ISSUER"
             value={<AccountName showVid value={attester} />}
           />
-          <Item label="EXPIRE DATE" value={expirationTime} />
+          <DataItem label="EXPIRE DATE" value={expirationTime} />
         </div>
       </div>
     </CardContainer>

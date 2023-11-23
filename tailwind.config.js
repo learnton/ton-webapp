@@ -11,6 +11,7 @@ export default {
     extend: {
       aspectRatio: {
         card: "12 / 7",
+        card2: "100 / 62.97",
       },
     },
   },

@@ -8,17 +8,15 @@ interface Props extends PropsWithChildren {
 
 const CardContainer: React.FC<Props> = ({ bg, children }) => {
   return (
-    <div>
-      <div
-        className="Card_Content"
-        style={{
-          background: `url(${bg}) no-repeat`,
-          backgroundSize: "cover",
-          backgroundPosition: "center center",
-        }}
-      >
-        {children}
-      </div>
+    <div
+      className="aspect-card2 rounded-3xl p-4"
+      style={{
+        background: `url(${bg}) no-repeat`,
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+      }}
+    >
+      {children}
     </div>
   );
 };

@@ -12,7 +12,6 @@ export async function addCardRelation(
   id?: HexString,
   template?: CacheTemplate
 ) {
-  console.log("addCardRelation", id, template);
   if (id && template) {
     const count = await didDB.cardTemplateRelation.where({ id }).count();
 

@@ -12,3 +12,5 @@ export * from "./useVid";
 export * from "./useCredential";
 export * from "./useDidDB";
 export * from "./useToggle";
+export * from "./useDecryptedCredential";
+export * from "./useTemplate";

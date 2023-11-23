@@ -11,6 +11,8 @@ import CardContainer from "./CardContainer";
 import { categoryMap, isCategory } from "./categories";
 import { ZkIDCardProps } from "./types";
 
+import cardBg from "./assets/card/img_card_3.png";
+
 function Item({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div>
@@ -38,7 +40,7 @@ const OtherCard: React.FC<ZkIDCardProps> = ({
   }, [template]);
 
   const bg = useMemo(
-    () => template?.background ?? "/static/card/img_card_3.png",
+    () => template?.background ?? cardBg,
     [template?.background]
   );
 
