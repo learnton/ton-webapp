@@ -70,4 +70,5 @@ function CredentialCard({ attester, ctypeHash, id, templateId }: Props) {
   );
 }
 
-export default React.memo(CredentialCard);
+const MemoComponent = React.memo(CredentialCard);
+export default MemoComponent;

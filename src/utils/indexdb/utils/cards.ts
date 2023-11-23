@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+ 
 
 import { HexString } from "@zcloak/crypto/types";
 
