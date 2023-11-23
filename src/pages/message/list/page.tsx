@@ -3,75 +3,20 @@
 
 import type { DidDB, MessageMeta } from "@/utils";
 import { addCardRelation, getTemplateById } from "@/utils";
-import moment from "moment";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Did } from "@zcloak/did";
 import { decryptMessage } from "@zcloak/message";
 import { vcVerify } from "@zcloak/verify";
 
 import { fetchAndSaveMessages, insertTempIfNot, addVC } from "../_utils";
 import { AppContext } from "@/context/AppProvider";
-import { AccountName, categoryMap, CTypeName, CARD_TYPE } from "@/components";
 import { useCredentials, useDidDB, useLiveQuery } from "@/hooks";
-
-function Cell({
-  checked,
-  message,
-  setChecked,
-}: {
-  message: MessageMeta;
-  checked: string[];
-  setChecked: React.Dispatch<React.SetStateAction<string[]>>;
-}) {
-  const isChecked = checked.includes(message.id);
-  const { cacheDB } = useContext(AppContext);
-  const template = useLiveQuery(
-    getTemplateById,
-    cacheDB,
-    message?.templateId ? [message?.templateId] : null
-  );
-
-  return (
-    <div className="flex items-center px-2 py-4 gap-2 rounded">
-      <input
-        type="checkbox"
-        className="checkbox"
-        checked={isChecked}
-        onChange={(e) => {
-          if (e.target.checked) {
-            setChecked((value) => [...value, message.id]);
-          } else {
-            setChecked((value) =>
-              value.filter((value) => value !== message.id)
-            );
-          }
-        }}
-      />
-      <div className="flex-1">
-        <div className="flex items-center justify-between">
-          <CTypeName cTypeHash={message.ctype} />
-          <span color="text3.primary">
-            {moment(message.createTime).format("YYYY-MM-DD HH:mm")}
-          </span>
-        </div>
-        {typeof template?.category === "number" && (
-          <span className="badge">
-            {categoryMap[template?.category as CARD_TYPE]}
-          </span>
-        )}
-        <span color="text3.primary" className="mt-2">
-          Attester: <AccountName showVid value={message.sender} />
-        </span>
-      </div>
-    </div>
-  );
-}
+import Cell from "./_cell";
 
 function PageMessages() {
-  const { cacheDB, keyring, resolver, currentDid } = useContext(AppContext);
-  const account = currentDid();
+  const { cacheDB, keyring, resolver, didAccounts } = useContext(AppContext);
+  const account = didAccounts.current;
   const [checked, setChecked] = useState<string[]>([]);
   const didDB = useDidDB();
   const [busy, setBusy] = useState(false);
@@ -115,9 +60,8 @@ function PageMessages() {
   }, [credentials, messages]);
 
   const confirm = async () => {
-    if (didDB && account?.instance instanceof Did) {
+    if (didDB && account) {
       setBusy(true);
-
       for (const message of unImportedMessages) {
         if (checked.includes(message.id)) {
           try {
@@ -126,7 +70,7 @@ function PageMessages() {
               account.instance,
               resolver
             );
-
+            console.log(decrypted);
             if (await vcVerify(decrypted.data)) {
               const credential = await addVC(
                 didDB,
@@ -139,7 +83,7 @@ function PageMessages() {
                 cacheDB,
                 message?.templateId
               );
-
+              console.log(didDB, credential, template);
               await addCardRelation(didDB, credential?.id, template);
             }
           } catch (error) {
@@ -161,22 +105,11 @@ function PageMessages() {
   }, [didDB, messages]);
 
   return (
-    <>
+    <div className="pt-12 pb-20">
+      <div className="fixed left-0 top-0 w-full p-4 bg-body">
+        <h1 className="leading-loose font-bold text-xl">Message Center</h1>
+      </div>
       <div>
-        <div>
-          <input
-            type="checkbox"
-            className="checkbox"
-            onChange={(e) => {
-              if (e.target.checked) {
-                setChecked(unImportedMessages.map((message) => message.id));
-              } else {
-                setChecked([]);
-              }
-            }}
-          />
-          Select All
-        </div>
         {unImportedMessages.map((message) => (
           <Cell
             checked={checked}
@@ -186,17 +119,31 @@ function PageMessages() {
           />
         ))}
       </div>
-      <div>
+      <div className="fixed left-0 bottom-0 w-full flex items-center p-4 bg-white gap-4">
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            className="checkbox checkbox-xs checkbox-primary"
+            onChange={(e) => {
+              if (e.target.checked) {
+                setChecked(unImportedMessages.map((message) => message.id));
+              } else {
+                setChecked([]);
+              }
+            }}
+          />
+          Select All
+        </label>
         <button
-          className="btn"
+          className="btn btn-primary flex-1"
           disabled={checked.length === 0}
-          onClick={confirm}
+          onClick={() => !busy && confirm()}
         >
           {busy && <span className="loading loading-spinner"></span>}
           Decrypt and recover
         </button>
       </div>
-    </>
+    </div>
   );
 }
 

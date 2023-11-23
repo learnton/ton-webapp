@@ -6,8 +6,8 @@ import IconRight from "@/assets/img/icon_go.svg?react";
 import { Link } from "react-router-dom";
 
 export default function Profile() {
-  const { currentDid } = useContext(AppContext);
-  const did = currentDid();
+  const { didAccounts } = useContext(AppContext);
+  const did = didAccounts.current;
   const { UserInfo } = useTwaSdk();
 
   return (

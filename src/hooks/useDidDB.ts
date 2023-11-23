@@ -7,8 +7,8 @@ import { DidDB } from "@/utils";
 
 import { AppContext } from "@/context/AppProvider";
 export function useDidDB(): DidDB | null | undefined {
-  const { allDidDB, currentDid } = useContext(AppContext);
-  const did = currentDid();
+  const { allDidDB, didAccounts } = useContext(AppContext);
+  const did = didAccounts.current;
 
   return useMemo(() => {
     return did ? allDidDB.get(did.instance.id) : null;

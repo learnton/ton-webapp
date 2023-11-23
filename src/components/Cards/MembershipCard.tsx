@@ -14,8 +14,8 @@ import { ZkIDCardProps } from "./types";
 
 function Item({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div color="inherit">
-      <span color="inherit">{label}</span>
+    <div>
+      <span>{label}</span>
       {value}
     </div>
   );
@@ -65,7 +65,7 @@ const MembershipCard: React.FC<ZkIDCardProps> = ({
         }}
       >
         <div className="flex space-between">
-          <span color="inherit">MEMBERSHIP</span>
+          <span>MEMBERSHIP</span>
           {handleQr && (
             <button className="btn" onClick={handleQr}>
               <IconQr />
@@ -73,10 +73,8 @@ const MembershipCard: React.FC<ZkIDCardProps> = ({
           )}
         </div>
         <div className="text-center">
-          <span color="inherit" className="text-xl">
-            {name}
-          </span>
-          <span color="inherit">{role}</span>
+          <span className="text-xl">{name}</span>
+          <span>{role}</span>
         </div>
         <div className="flex items-center mt-4 gap-1">
           {template?.logo && <Avatar src={template?.logo} />}

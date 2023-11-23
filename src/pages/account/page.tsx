@@ -15,8 +15,8 @@ import { useToast } from "@/components/Toast";
 import { useRef } from "react";
 
 export default function Account() {
-  const { currentDid } = useContext(AppContext);
-  const did = currentDid();
+  const { didAccounts } = useContext(AppContext);
+  const did = didAccounts.current;
   const { UserInfo, WebApp } = useTwaSdk();
   const [noti, setNoti] = useState(0);
   const toast = useToast();

@@ -8,10 +8,14 @@ function Address({
   showFull,
   value,
   withCopy,
+  showAfterLength = 8,
+  showBeforeLength,
 }: {
   value?: string | null;
   showFull?: boolean;
   withCopy?: boolean;
+  showAfterLength?: number;
+  showBeforeLength?: number;
 }) {
   const [state, copyToClipboard] = useCopyToClipboard();
   const [showTip, setShowTip] = useState(false);
@@ -31,7 +35,13 @@ function Address({
   return (
     <div className="inline-flex items-center">
       <div className="flex-1">
-        {showFull ? value : shortString(value, 15, 8)}
+        {showFull
+          ? value
+          : shortString(
+              value,
+              showBeforeLength ? showBeforeLength : showAfterLength + 7,
+              showAfterLength
+            )}
       </div>
       {withCopy &&
         (state.value && showTip ? (

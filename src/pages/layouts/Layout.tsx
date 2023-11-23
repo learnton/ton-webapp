@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 export default function Layout() {
   return (
-    <div className="p-4 bg-[#F9FAFB] min-h-[100vh]">
+    <div className="p-4 bg-body min-h-[100vh]">
       <Outlet />
     </div>
   );

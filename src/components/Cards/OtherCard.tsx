@@ -13,7 +13,7 @@ import { ZkIDCardProps } from "./types";
 
 function Item({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div color="inherit">
+    <div>
       <span className="text-xs">{label}</span>
       {value}
     </div>
@@ -69,9 +69,7 @@ const OtherCard: React.FC<ZkIDCardProps> = ({
           )}
         </div>
         <div className="tooltip" data-tip={template?.title}>
-          <span color="inherit" className="mb-4 text-xl">
-            {template?.title}
-          </span>
+          <span className="mb-4 text-xl">{template?.title}</span>
         </div>
         <div className="flex items-center justify-between">
           <Item

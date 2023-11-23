@@ -12,8 +12,8 @@ import { ZkIDCardProps } from "./types";
 
 function Item({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div color="inherit">
-      <span color="inherit">{label}</span>
+    <div>
+      <span>{label}</span>
       {value}
     </div>
   );
@@ -57,9 +57,7 @@ const OldCard: React.FC<ZkIDCardProps> = ({ handleQr, id, onClick, vc }) => {
           )}
         </div>
         <div className="tooltip" data-tip={ctype?.title}>
-          <span color="inherit" className="mb-4 text-xl">
-            {ctype?.title}
-          </span>
+          <span className="mb-4 text-xl">{ctype?.title}</span>
         </div>
 
         <div className="flex items-center justify-between">

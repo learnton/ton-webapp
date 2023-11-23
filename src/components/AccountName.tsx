@@ -36,7 +36,12 @@ function AccountName({ showFull, showVid = false, value, withMeta }: Props) {
       {vid || (
         <>
           {prefix}
-          <Address showFull={showFull} value={content} />
+          <Address
+            showFull={showFull}
+            value={content}
+            showAfterLength={4}
+            showBeforeLength={4}
+          />
         </>
       )}
     </>

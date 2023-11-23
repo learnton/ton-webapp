@@ -11,5 +11,5 @@ body {
 }
 
 body {
-  color: #363636;
+  @apply text-text1;
 }

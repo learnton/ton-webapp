@@ -5,6 +5,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   plugins: [require("daisyui")],
   theme: {
+    colors: {
+      ...themeColor,
+    },
     extend: {
       aspectRatio: {
         card: "12 / 7",

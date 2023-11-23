@@ -7,8 +7,8 @@ import { shortString } from "@/utils";
 import { Link } from "react-router-dom";
 
 export default function AccountKeys() {
-  const { currentDid } = useContext(AppContext);
-  const did = currentDid();
+  const { didAccounts } = useContext(AppContext);
+  const did = didAccounts.current;
 
   const toHex = (publicKey: Uint8Array | HexString | undefined | DidUrl) =>
     publicKey
