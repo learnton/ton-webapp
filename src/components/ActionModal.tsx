@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 type Props = {
   onClose?: () => void;
@@ -7,12 +7,14 @@ type Props = {
 };
 
 export default function ActionModal(props: Props) {
-  const domId = `my_modal_${Math.round(Math.random() * 1e5)}`;
+  const domId = useRef<string>(`my_modal_${Math.round(Math.random() * 1e5)}`);
 
-  const openModal = () => {
-    (document.getElementById(domId) as any)?.showModal();
-  };
   useEffect(() => {
+    const openModal = () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
+      (document.getElementById(domId.current) as any)?.showModal();
+    };
+
     if (props.open) {
       openModal();
     }
@@ -20,7 +22,7 @@ export default function ActionModal(props: Props) {
 
   return (
     <>
-      <dialog id={domId} className="modal">
+      <dialog id={domId.current} className="modal">
         <div className="modal-box w-full max-w-full">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}

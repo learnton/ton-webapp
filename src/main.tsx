@@ -4,7 +4,7 @@ import "./assets/global.css";
 import { ToastProvider } from "@/components";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { BrowserSession, BrowserStore } from "@zcloak/ui-store";
+import { BrowserStore } from "@zcloak/ui-store";
 import AppProvider from "./context/AppProvider";
 import rootRoute from "./pages/routes";
 import { initCrypto } from "@zcloak/crypto";
@@ -13,10 +13,10 @@ const router = createBrowserRouter(rootRoute, {
   basename: import.meta.env.BASE_URL,
 });
 
-const session = new BrowserSession();
+// const session = new BrowserSession();
 const store = new BrowserStore();
 
-initCrypto().then(() => {
+void initCrypto().then(() => {
   ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
       <TonConnectUIProvider
@@ -25,7 +25,7 @@ initCrypto().then(() => {
           twaReturnUrl: import.meta.env.VITE_APP_TWA_URL,
         }}
       >
-        <AppProvider session={session} store={store}>
+        <AppProvider session={store} store={store}>
           <ToastProvider>
             <RouterProvider router={router} />
           </ToastProvider>

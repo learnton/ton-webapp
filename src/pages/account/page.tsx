@@ -13,14 +13,17 @@ import { extraResult, DidDB } from "@/utils";
 import { useToast } from "@/components/Toast";
 import { useRef } from "react";
 import { fetchAndSaveMessages } from "@/pages/message/_utils";
+import { useNavigate } from "react-router-dom";
+import { useCredentials } from "@/hooks";
 
 export default function Account() {
   const { didAccounts } = useContext(AppContext);
   const did = didAccounts.current;
   const { UserInfo, WebApp } = useTwaSdk();
   const toast = useToast();
-
+  const navigate = useNavigate();
   const didDB = useDidDB();
+  const credentials = useCredentials();
 
   useEffect(() => {
     if (did && didDB) {
@@ -53,15 +56,15 @@ export default function Account() {
   const links = useRef([
     {
       name: "Profile",
-      path: "/account/profile",
+      path: "",
     },
     {
       name: "Messages",
-      path: "/message/list",
+      path: "",
     },
     {
       name: "Settings",
-      path: "/account/settings",
+      link: "",
     },
   ]);
 
@@ -117,7 +120,9 @@ export default function Account() {
         >
           <div className="flex-1 text-center">
             <p>zkID Cards</p>
-            <div className="text-2xl text-white">{342}</div>
+            <div className="text-2xl text-white">
+              {credentials?.length || 0}
+            </div>
           </div>
           <div className="w-0 h-10 border-l-[1px] border-[#6A6A6A]"></div>
           <div className="flex-1 text-center">
@@ -134,7 +139,13 @@ export default function Account() {
           <li
             key={index}
             className="flex items-center p-4 rounded-xl bg-white"
-            onClick={() => WebApp.openLink(link.path)}
+            onClick={() =>
+              link.link
+                ? WebApp.openLink(link.link)
+                : link.path
+                ? navigate(link.path)
+                : null
+            }
           >
             <div className="flex-1">{link.name}</div>
             <IconRight />
@@ -142,11 +153,11 @@ export default function Account() {
         ))}
       </ul>
 
-      <button className="btn" onClick={() => localStorage.clear()}>
+      <button className="btn m-1" onClick={() => localStorage.clear()}>
         clear storage
       </button>
       <button
-        className="btn"
+        className="btn m-1"
         onClick={() =>
           toast &&
           toast({
@@ -155,7 +166,7 @@ export default function Account() {
           })
         }
       >
-        useToast
+        test Toast
       </button>
     </>
   );

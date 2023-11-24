@@ -3,8 +3,6 @@
 
 import { useContext, useEffect, useMemo, useState } from "react";
 
-import { HexString } from "@zcloak/crypto/types";
-
 import { insertTempIfNot } from "@/pages/message/_utils";
 import { getTemplateById, getVcTemplate } from "@/utils";
 import { CacheTemplate } from "@/utils";
@@ -12,7 +10,7 @@ import { CacheTemplate } from "@/utils";
 import { AppContext } from "@/context/AppProvider";
 import { useDidDB } from "./useDidDB";
 
-export function useVcTemplate(id?: HexString | string) {
+export function useVcTemplate(id?: string) {
   const [template, setTemplate] = useState<CacheTemplate | undefined>(
     undefined
   );
@@ -21,7 +19,7 @@ export function useVcTemplate(id?: HexString | string) {
 
   useEffect(() => {
     if (id && didDB) {
-      getVcTemplate(cacheDB, didDB, id).then(setTemplate);
+      void getVcTemplate(cacheDB, didDB, id).then(setTemplate);
     }
   }, [didDB, cacheDB, id]);
 
@@ -36,10 +34,10 @@ export function useTemplate(id?: number) {
 
   useEffect(() => {
     if (id) {
-      getTemplateById(cacheDB, id).then((template) => {
-        template
+      void getTemplateById(cacheDB, id).then((template) => {
+        void (template
           ? setTemplate(template)
-          : insertTempIfNot(cacheDB, id).then(setTemplate);
+          : insertTempIfNot(cacheDB, id).then(setTemplate));
       });
     }
   }, [cacheDB, id]);
