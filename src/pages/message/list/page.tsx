@@ -78,6 +78,11 @@ function PageMessages() {
               account.instance,
               resolver
             );
+            toast &&
+              toast({
+                type: "success",
+                message: JSON.stringify(decrypted),
+              });
             console.log(decrypted);
             if (await vcVerify(decrypted.data)) {
               const credential = await addVC(
@@ -93,6 +98,12 @@ function PageMessages() {
               );
               console.log(didDB, credential, template);
               await addCardRelation(didDB, credential?.id, template);
+            } else {
+              toast &&
+                toast({
+                  type: "error",
+                  message: "decrypted.data:" + decrypted.data,
+                });
             }
           } catch (error) {
             toast &&
