@@ -8,10 +8,13 @@ export default {
     colors: {
       ...themeColor,
     },
+    fontFamily: {
+      rubik: ["Rubik", "sans-serif"],
+    },
     extend: {
       aspectRatio: {
         card: "12 / 7",
-        card2: "100 / 62.97",
+        card2: "100 / 62",
       },
     },
   },

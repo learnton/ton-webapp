@@ -9,6 +9,8 @@ import Avatar from "./Avatar";
 import CTypeName from "./CTypeName";
 import IdentityIcon from "./IdentityIcon";
 import ActionModal from "./ActionModal";
+import ClaimContent from "./ClaimContent";
+import DeleteDialog from "./DeleteDialog";
 
 export {
   Avatar,
@@ -23,6 +25,8 @@ export {
   CTypeName,
   IdentityIcon,
   ActionModal,
+  ClaimContent,
+  DeleteDialog,
 };
 
 export * from "./Cards";

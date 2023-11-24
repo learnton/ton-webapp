@@ -14,7 +14,7 @@ export default function DisplayMnemonic(props: { mnemonic: string }) {
     <>
       <div className="relative mt-4 border rounded overflow-hidden">
         <textarea
-          className={"block textarea w-full" + (!show ? " blur" : "")}
+          className={"block textarea w-full" + (!show ? " blur-sm" : "")}
           placeholder="present police twin quality river sail coach link give distance palm paddle"
           rows={4}
           value={props.mnemonic}

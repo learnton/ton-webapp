@@ -14,3 +14,4 @@ export * from "./useDidDB";
 export * from "./useToggle";
 export * from "./useDecryptedCredential";
 export * from "./useTemplate";
+export * from "./useWebsiteMeta";

@@ -16,7 +16,7 @@ const PageCredential = () => {
   }, [filterVcs, credentials, cate]);
 
   return (
-    <div>
+    <>
       <div className="flex items-center">
         <h1 className="leading-loose font-bold text-xl flex-1">
           My zkID Cards
@@ -43,7 +43,7 @@ const PageCredential = () => {
         })}
       </div>
       {/* {open && <CredentialImport onClose={toggleImport} open={open} />} */}
-    </div>
+    </>
   );
 };
 

@@ -6,7 +6,7 @@ import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { BrowserStore } from "@zcloak/ui-store";
 import AppProvider from "./context/AppProvider";
-import rootRoute from "./pages/routes";
+import rootRoute from "./pages";
 import { initCrypto } from "@zcloak/crypto";
 
 const router = createBrowserRouter(rootRoute, {

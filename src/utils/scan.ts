@@ -5,7 +5,7 @@ import { isJsonObject } from "@polkadot/util";
 
 import { isVP } from "@zcloak/vc/is";
 
-import { isDomain, isUrl } from "./helper";
+import { isDomain, isUrl } from "./";
 
 type addPartsParam = {
   index: number;

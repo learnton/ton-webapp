@@ -11,3 +11,5 @@ export * from "./keyring";
 export * from "./resolver";
 export * from "./channel";
 export * from "./eventHandler";
+export * from "./addHttpsPrefix";
+export * from "./national";
