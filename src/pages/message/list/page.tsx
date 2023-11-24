@@ -90,7 +90,7 @@ function PageMessages() {
             toast &&
               toast({
                 type: "error",
-                message: error?.message || "Decrypt error",
+                message: (error as Error).message || "Decrypt error",
               });
           }
         }
