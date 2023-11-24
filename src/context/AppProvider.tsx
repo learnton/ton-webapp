@@ -43,10 +43,10 @@ async function initInstance(
   credentialCard = new CredentialCard(store);
   await credentialCard.isReady;
 
-  keyring = new WalletKeyring(store, session);
+  keyring = new WalletKeyring(store, session, prefix);
   await keyring.isReady;
 
-  didAccounts = await new DidAccounts(prefix, keyring, store).isReady;
+  didAccounts = await new DidAccounts(prefix, keyring, store, session).isReady;
 }
 
 export const AppContext = createContext<AppState>({} as AppState);
@@ -64,7 +64,7 @@ function AppProvider({
   const { UserInfo } = useTwaSdk();
 
   useEffect(() => {
-    if (session && store && UserInfo.id) {
+    if (store && session && UserInfo.id) {
       void initInstance(store, session, `ton-${UserInfo.id}`).then(() => {
         didAccounts.accounts.forEach((account) => {
           allDidDB.set(account.instance.id, new DidDB(account.instance.id));
