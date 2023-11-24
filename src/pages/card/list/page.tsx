@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import IconSearch from "@/assets/img/icon_search.svg?react";
+// import IconSearch from "@/assets/img/icon_search.svg?react";
 import { CARD_TYPE } from "@/components";
 import { useCredentialByCate, useCredentials } from "@/hooks";
 import CredentialCard from "../_components/CredentialCard";
@@ -21,9 +21,9 @@ const PageCredential = () => {
         <h1 className="leading-loose font-bold text-xl flex-1">
           My zkID Cards
         </h1>
-        <button className="btn btn-circle bg-white ">
+        {/* <button className="btn btn-circle bg-white btn-sm">
           <IconSearch />
-        </button>
+        </button> */}
       </div>
 
       <div className="flex items-center mt-2">

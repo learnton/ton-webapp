@@ -9,4 +9,5 @@ export const themeColor = {
   white: "#fff",
   text1: "#363636",
   text2: "#B4B4B4",
+  grey: "#E3E3E3",
 };

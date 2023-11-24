@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 type Props = {
   onClose?: () => void;
   open: boolean;
+  title?: string;
   children: React.ReactNode;
 };
 
@@ -22,8 +23,8 @@ export default function ActionModal(props: Props) {
 
   return (
     <>
-      <dialog id={domId.current} className="modal">
-        <div className="modal-box w-full max-w-full">
+      <dialog id={domId.current} className="modal items-end">
+        <div className="modal-box w-full max-w-full rounded-bl-none rounded-br-none overflow-hidden">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
             <button
@@ -33,6 +34,9 @@ export default function ActionModal(props: Props) {
               ✕
             </button>
           </form>
+          {props.title && (
+            <h5 className="font-semibold text-lg -mt-2 mb-2">{props.title}</h5>
+          )}
           {props.children}
         </div>
       </dialog>

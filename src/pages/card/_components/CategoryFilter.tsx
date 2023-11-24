@@ -29,20 +29,21 @@ const CategoryFilter = ({ onCateChange }: Props) => {
 
   return (
     <>
-      <button className="btn bg-white btn-sm" onClick={toggle}>
+      <button className="btn btn-ghost" onClick={toggle}>
         <IconFilter />
       </button>
       {open && (
-        <ActionModal onClose={toggle} open={open}>
-          <h5 className="text-center font-semibold">Filter Cards</h5>
-          <div className="flex items-center mt-2 gap-2">Category</div>
-          <div className="flex gap-2 justify-start my-4">
+        <ActionModal onClose={toggle} open={open} title="Filters">
+          <div className="font-semibold mt-4">Category</div>
+          <div className="my-4">
             {Object.keys(categoryMap).map((k) => {
               const index = Number(k) as CARD_TYPE;
 
               return (
                 <span
-                  className="badge badge-primary mr-2"
+                  className={`btn btn-outline border-grey m-1${
+                    selectIndex === index ? " border-primary" : ""
+                  }`}
                   key={k}
                   onClick={() => setSelect(index)}
                 >
@@ -51,7 +52,7 @@ const CategoryFilter = ({ onCateChange }: Props) => {
               );
             })}
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 mt-4">
             <button className="btn flex-1" onClick={onReset}>
               Reset
             </button>
