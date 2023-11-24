@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 import { decryptMessage } from "@zcloak/message";
 import { vcVerify } from "@zcloak/verify";
-
+import { useToast } from "@/components";
 import { fetchAndSaveMessages, insertTempIfNot, addVC } from "../_utils";
 import { AppContext } from "@/context/AppProvider";
 import { useCredentials, useDidDB, useLiveQuery } from "@/hooks";
@@ -21,6 +21,7 @@ function PageMessages() {
   const didDB = useDidDB();
   const [busy, setBusy] = useState(false);
   const navigate = useNavigate();
+  const toast = useToast();
 
   const messages = useLiveQuery(
     function getMessages(db: DidDB): Promise<MessageMeta[]> {
@@ -86,7 +87,11 @@ function PageMessages() {
               await addCardRelation(didDB, credential?.id, template);
             }
           } catch (error) {
-            console.error(error);
+            toast &&
+              toast({
+                type: "error",
+                message: error?.message || "Decrypt error",
+              });
           }
         }
       }
