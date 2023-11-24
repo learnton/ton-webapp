@@ -3,11 +3,11 @@ import EnterPassword from "./_EnterPassword";
 import BackupSeed from "./_BackupSeed";
 import Complete from "./_Complete";
 import { utils } from "@zcloak/wallet-lib";
-import { useDidHelper, useTwaSdk } from "@/hooks";
+import { useDidHelper } from "@/hooks";
 import { useNavigate } from "react-router-dom";
 import { DidAccount } from "@zcloak/wallet-lib";
-import { bind } from "@/api/auth";
 import { useToast } from "@/components";
+import { useBind } from "@/pages/auth/_utils";
 
 export default function RegistByPassword() {
   const toast = useToast();
@@ -20,18 +20,8 @@ export default function RegistByPassword() {
   const [step, setStep] = useState(0);
   const [runing, setRuning] = useState(false);
   const [did, setDid] = useState<DidAccount | undefined>();
-  const { UserInfo } = useTwaSdk();
+  const bindDid = useBind();
 
-  const bindDid = (did: DidAccount) => {
-    if (UserInfo.id && did) {
-      return bind({
-        onChainAddress: String(UserInfo.id),
-        didUrl: did.instance.id as string,
-      });
-    } else {
-      return Promise.reject("did bind: params error");
-    }
-  };
   const MainButtonHandle = () => {
     switch (step) {
       case 0:

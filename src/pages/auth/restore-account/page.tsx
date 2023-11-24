@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useDidHelper } from "@/hooks";
 import { reloadToIndex } from "@/utils";
 import { Password, useToast } from "@/components";
+import { useBind } from "@/pages/auth/_utils";
+import { AppContext } from "@/context/AppProvider";
 
 export default function RestoreAccount() {
   const toast = useToast();
@@ -9,6 +11,8 @@ export default function RestoreAccount() {
   const [mnemonic, setMnemonic] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const bind = useBind();
+  const { didAccounts } = useContext(AppContext);
 
   const onSubmit = () => {
     if (!mnemonic.trim().length) {
@@ -25,7 +29,10 @@ export default function RestoreAccount() {
             mnemonic,
           }).then((did) => {
             if (did) {
-              reloadToIndex();
+              didAccounts.unlock(password);
+              bind(did).then(() => {
+                reloadToIndex();
+              });
             }
           });
         }
