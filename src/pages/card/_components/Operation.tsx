@@ -26,8 +26,8 @@ const Operation: React.FC<Props> = ({
   credentialId,
   templateId,
 }) => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [open, toggle] = useToggle();
+  const [, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [, toggle] = useToggle();
   const [delOpen, toggleDel] = useToggle();
   const { credentialCard } = useContext(AppContext);
   const didDB = useDidDB();
