@@ -60,14 +60,6 @@ function PageMessages() {
   }, [credentials, messages]);
 
   const confirm = async () => {
-    if (!unImportedMessages.length || !checked.length) {
-      return alert(
-        "checked: " +
-          JSON.stringify(checked) +
-          "unImportedMessages length:" +
-          unImportedMessages.length
-      );
-    }
     if (didDB && account) {
       setBusy(true);
       for (const message of unImportedMessages) {
@@ -78,11 +70,7 @@ function PageMessages() {
               account.instance,
               resolver
             );
-            toast &&
-              toast({
-                type: "success",
-                message: JSON.stringify(decrypted),
-              });
+
             console.log(decrypted);
             if (await vcVerify(decrypted.data)) {
               const credential = await addVC(
