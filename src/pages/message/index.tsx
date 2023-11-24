@@ -2,7 +2,7 @@ import Message from "./list/page";
 
 const routers = [
   {
-    path: "message/list",
+    path: "message",
     element: <Message />,
   },
 ];

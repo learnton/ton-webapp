@@ -89,7 +89,7 @@ export default function Account() {
           <div className="flex-1 text-right">
             {count > 0 && <span>{count} new message</span>}
           </div>
-          <Link to="/message/list" className="btn btn-ghost btn-xs relative">
+          <Link to="/message" className="btn btn-ghost btn-xs relative">
             {count > 0 && (
               <div className="absolute left-[50%] translate-x-[4px] top-0 w-2 h-2 overflow-hidden rounded-3xl bg-error"></div>
             )}
