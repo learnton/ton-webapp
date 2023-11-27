@@ -60,8 +60,8 @@ const MembershipCard: React.FC<ZkIDCardProps> = ({
             <button
               className="btn btn-ghost"
               onClick={(e) => {
-                return e.stopPropagation();
-                // handleQr()
+                e.stopPropagation();
+                handleQr(e);
               }}
             >
               <IconQr />

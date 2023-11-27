@@ -11,7 +11,7 @@ import {
   useVcTemplate,
 } from "@/hooks";
 import { AppContext } from "@/context/AppProvider";
-import BaseCard from "../../../components/Cards/BaseCard";
+import { BaseCard } from "@/components";
 
 interface Props {
   id?: string;

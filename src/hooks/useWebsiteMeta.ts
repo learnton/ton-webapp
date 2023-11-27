@@ -1,11 +1,10 @@
-// Copyright 2021-2023 zcloak authors & contributors
-// SPDX-License-Identifier: Apache-2.0
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 import { useEffect, useState } from "react";
 
-import { DID_SERVICE } from "@/api/axiosInstance";
-
 import { addHttpsPrefix } from "@/utils";
+import { getWebsiteMeta } from "@/api/did";
 
 interface UseWebsiteMeta {
   fetched: boolean;
@@ -26,10 +25,7 @@ export function useWebsiteMeta(value: string): UseWebsiteMeta {
     if (str) {
       const url = new URL(str);
 
-      fetch(
-        `${DID_SERVICE}/website_metadata?url=${encodeURIComponent(url.href)}`
-      )
-        .then((res) => res.json())
+      getWebsiteMeta({ url: encodeURIComponent(url.href) })
         .then((data) => {
           if (data.code === 200) {
             const title: string | undefined = data.data?.title;
@@ -43,7 +39,7 @@ export function useWebsiteMeta(value: string): UseWebsiteMeta {
               icon: favicon,
             });
           } else {
-            throw new Error(data.message);
+            throw new Error(data.msg);
           }
         })
         .catch(() => {

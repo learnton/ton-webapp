@@ -133,7 +133,11 @@ const CredentialsDetails = () => {
     <>
       <div className="flex items-center mb-4">
         <h1 className="leading-loose font-bold text-xl flex-1">Card Details</h1>
-        <Operation />
+        <Operation
+          credential={decrypted}
+          credentialId={id}
+          templateId={templateId}
+        />
       </div>
       <CredentialCard
         attester={attester}

@@ -32,36 +32,34 @@ const CategoryFilter = ({ onCateChange }: Props) => {
       <button className="btn btn-ghost" onClick={toggle}>
         <IconFilter />
       </button>
-      {open && (
-        <ActionModal onClose={toggle} open={open} title="Filters">
-          <div className="font-semibold mt-4">Category</div>
-          <div className="my-4">
-            {Object.keys(categoryMap).map((k) => {
-              const index = Number(k) as CARD_TYPE;
+      <ActionModal onClose={toggle} open={open} title="Filters">
+        <div className="font-semibold mt-4">Category</div>
+        <div className="my-4">
+          {Object.keys(categoryMap).map((k) => {
+            const index = Number(k) as CARD_TYPE;
 
-              return (
-                <span
-                  className={`btn btn-outline border-grey m-1${
-                    selectIndex === index ? " border-primary" : ""
-                  }`}
-                  key={k}
-                  onClick={() => setSelect(index)}
-                >
-                  {categoryMap[index]}
-                </span>
-              );
-            })}
-          </div>
-          <div className="flex items-center gap-4 mt-4">
-            <button className="btn flex-1" onClick={onReset}>
-              Reset
-            </button>
-            <button className="btn btn-primary flex-1" onClick={onConfirm}>
-              Confirm
-            </button>
-          </div>
-        </ActionModal>
-      )}
+            return (
+              <span
+                className={`btn btn-outline border-grey m-1${
+                  selectIndex === index ? " border-primary" : ""
+                }`}
+                key={k}
+                onClick={() => setSelect(index)}
+              >
+                {categoryMap[index]}
+              </span>
+            );
+          })}
+        </div>
+        <div className="flex items-center gap-4 mt-4">
+          <button className="btn flex-1" onClick={onReset}>
+            Reset
+          </button>
+          <button className="btn btn-primary flex-1" onClick={onConfirm}>
+            Confirm
+          </button>
+        </div>
+      </ActionModal>
     </>
   );
 };

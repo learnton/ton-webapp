@@ -26,3 +26,10 @@ export type Request = {
 export const getCTypes = (params?: Request) => {
   return instance.get(`/ctype`, { params, baseURL: DID_SERVICE });
 };
+
+export const getWebsiteMeta = (params: { url: string }) => {
+  return instance.get(`/website_metadata`, {
+    params,
+    baseURL: DID_SERVICE,
+  });
+};

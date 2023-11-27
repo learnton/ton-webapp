@@ -11,6 +11,8 @@ import IdentityIcon from "./IdentityIcon";
 import ActionModal from "./ActionModal";
 import ClaimContent from "./ClaimContent";
 import DeleteDialog from "./DeleteDialog";
+import QRCodeGenerator from "./QRCodeGenerator";
+import TimeNow from "./TimeNow";
 
 export {
   Avatar,
@@ -27,6 +29,8 @@ export {
   ActionModal,
   ClaimContent,
   DeleteDialog,
+  QRCodeGenerator,
+  TimeNow,
 };
 
 export * from "./Cards";

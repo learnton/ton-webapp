@@ -29,8 +29,8 @@ export default function RestoreAccount() {
             mnemonic,
           }).then((did) => {
             if (did) {
-              didAccounts.unlock(password);
-              bind(did).then(() => {
+              void didAccounts.unlock(password);
+              void bind(did).then(() => {
                 reloadToIndex();
               });
             }

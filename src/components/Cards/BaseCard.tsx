@@ -8,7 +8,7 @@ interface Props {
   isOpen?: boolean;
 }
 
-const BasicCard: React.FC<ZkIDCardProps & Props> = ({
+export const BaseCard: React.FC<ZkIDCardProps & Props> = ({
   handleQr,
   id,
   onClick,
@@ -30,5 +30,3 @@ const BasicCard: React.FC<ZkIDCardProps & Props> = ({
     />
   );
 };
-
-export default BasicCard;

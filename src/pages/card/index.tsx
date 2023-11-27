@@ -1,5 +1,7 @@
 import CardList from "./list/page";
 import CardDetail from "./detail/page";
+import ShareX from "./detail/shareX/page";
+import Presentation from "./detail/presentation/page";
 
 const routers = [
   {
@@ -8,7 +10,20 @@ const routers = [
   },
   {
     path: "card/:id",
-    element: <CardDetail />,
+    children: [
+      {
+        index: true,
+        element: <CardDetail />,
+      },
+      {
+        path: "share",
+        element: <ShareX />,
+      },
+      {
+        path: "presentation",
+        element: <Presentation />,
+      },
+    ],
   },
 ];
 
