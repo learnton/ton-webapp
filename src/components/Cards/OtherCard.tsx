@@ -52,14 +52,10 @@ const OtherCard: React.FC<ZkIDCardProps> = ({
   return (
     <CardContainer bg={bg}>
       <div
+        className="after:content-['OtherCard'] after:text-[0] h-full flex flex-col justify-between"
         onClick={onClick}
         style={{
           color: template?.color,
-          height: "100%",
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
         }}
       >
         <div className="flex items-center justify-between">

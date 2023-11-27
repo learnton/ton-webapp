@@ -7,9 +7,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { VerifiableCredential } from "@zcloak/vc/types";
 import BtnDelete from "../_assets/btn_delete.svg?react";
-import IconBackup from "../_assets/btn_backup.svg?react";
-import IconMore from "../_assets/btn_more.svg?react";
-import IconShare from "../_assets/btn_share.svg?react";
+import IconBackup from "../_assets/icon_backup.svg?react";
+import IconMore from "../_assets/icon_more.svg?react";
+import IconShare from "../_assets/icon_share.svg?react";
 import { WarpVcWithTemplate } from "@/types";
 import { AppContext } from "@/context/AppProvider";
 import { useDidDB, useToggle } from "@/hooks";
@@ -85,28 +85,25 @@ const Operation: React.FC<Props> = ({
 
   return (
     <>
-      <div className="menu">
-        <Link className={"btn" + !templateId ? " btn-disabled" : ""} to="share">
-          <IconShare />
-        </Link>
-        <details>
-          <summary>
-            <button className="btn" onClick={handleClick}>
-              <IconMore />
-            </button>
-          </summary>
-          <div className="px-2 w-[200px]">
-            <button className="btn" onClick={download}>
-              Backup Card
-              <IconBackup />
-            </button>
-            <button className="btn" onClick={toggleDel}>
-              Delete
-              <BtnDelete />
-            </button>
-          </div>
-        </details>
-      </div>
+      <Link className={"btn" + (!templateId ? " btn-disabled" : "")} to="share">
+        <IconShare />
+      </Link>
+      <details className="dropdown dropdown-end">
+        <summary className="btn" onClick={handleClick}>
+          <IconMore />
+        </summary>
+        <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-40 text-text1">
+          <li
+            className="flex flex-row items-center"
+            onClick={(e) => download(e)}
+          >
+            <div>Backup Card</div>
+          </li>
+          <li className="flex flex-row items-center" onClick={toggleDel}>
+            <div>Delete</div>
+          </li>
+        </ul>
+      </details>
 
       {delOpen && (
         <DeleteDialog

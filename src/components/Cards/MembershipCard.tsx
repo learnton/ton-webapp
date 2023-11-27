@@ -48,7 +48,7 @@ const MembershipCard: React.FC<ZkIDCardProps> = ({
   return (
     <CardContainer bg={bg}>
       <div
-        className="h-full flex flex-col justify-between"
+        className="h-full flex flex-col justify-between after:content-['MembershipCard'] after:text-[0]"
         onClick={onClick}
         style={{
           color: template?.color ?? "#FFF",

@@ -31,15 +31,8 @@ const OldCard: React.FC<ZkIDCardProps> = ({ handleQr, id, onClick, vc }) => {
   return (
     <CardContainer bg={cardBg?.bg}>
       <div
+        className="after:content-['OldCard'] after:text-[0] h-full flex flex-col justify-between text-white"
         onClick={onClick}
-        style={{
-          height: "100%",
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          color: "#FFFFFF",
-        }}
       >
         <div className="flex items-center justify-between">
           <span>Legacy</span>

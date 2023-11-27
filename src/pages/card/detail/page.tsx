@@ -3,7 +3,7 @@
 
 import { isHex } from "@polkadot/util";
 import moment from "moment";
-import { useContext, useMemo } from "react";
+import { useContext, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { isDidUrl } from "@zcloak/did";
@@ -24,7 +24,7 @@ import {
   ClaimContent,
 } from "@/components";
 
-// import Operation from "../_components/Operation";
+import Operation from "../_components/Operation";
 
 export function ItemWrapper(props: {
   children: React.ReactNode;
@@ -86,7 +86,7 @@ const CredentialsDetails = () => {
   const [template] = useVcTemplate(id);
   const ctype = useCtype(decrypted?.ctype);
 
-  console.log(decrypted, credential, keyring, template);
+  // console.log(decrypted, credential, keyring, template);
   const {
     applications,
     category,
@@ -126,11 +126,14 @@ const CredentialsDetails = () => {
     return credential?.attester?.[0];
   }, [credential?.attester]);
 
+  const tabs = useRef(["Data Fields", "Card Properties"]);
+  const [currentTab, setCurrentTab] = useState(0);
+
   return (
     <>
       <div className="flex items-center mb-4">
         <h1 className="leading-loose font-bold text-xl flex-1">Card Details</h1>
-        {/* <Operation /> */}
+        <Operation />
       </div>
       <CredentialCard
         attester={attester}
@@ -140,60 +143,84 @@ const CredentialsDetails = () => {
         rootHash={credential?.rootHash}
         showDetails={false}
       />
-      <div className="text-sm font-semibold my-4">Card Info</div>
-      {decrypted && (
-        <ItemWrapper>
-          <ClaimContent
-            contents={decrypted?.credentialSubject}
-            ctype={decrypted?.ctype}
-          />
-        </ItemWrapper>
-      )}
-      <div className="text-sm font-semibold my-4">Card Properties</div>
 
-      <div className="flex flex-col gap-4">
-        <div>
-          <Label label="TITLE" />
-          <ItemWrapper>{title}</ItemWrapper>
-        </div>
-
-        <div>
-          <Label label="DESCRIPTION" />
-          <ItemWrapper>{desc}</ItemWrapper>
-        </div>
-
-        <div>
-          <Label label="CARD INFO" />
-
-          <ItemWrapper>
-            <InfoItem label="TEMPLATE ID" value={templateId} />
-            <div className="h-[0px] border-t border-white"></div>
-            <InfoItem label="EXPIRE TIME" value={expirationTime} />
-            <div className="h-[0px] border-t border-white"></div>
-            <InfoItem label="ISSUER" value={attester} />
-            <div className="h-[0px] border-t border-white"></div>
-            <InfoItem
-              label="CATEGORY"
-              value={category ? categoryMap[category] : ""}
-            />
-          </ItemWrapper>
-        </div>
-
-        <div>
-          <Label label="DATA FIELD HASH" />
-          <ItemWrapper className="break-all">
-            <div>{ctypeHash}</div>
-          </ItemWrapper>
-        </div>
-        {applications && applications.length > 0 && (
-          <div>
-            <Label label="APPLICATIONS" />
-            {applications?.map((item, idx) => {
-              return <Application app={item} key={idx} />;
-            })}
-          </div>
-        )}
+      <div role="tablist" className="tabs mb-4">
+        {tabs.current.map((tab, index) => (
+          <a
+            key={index}
+            role="tab"
+            className={
+              "tab rounded-xl " +
+              (currentTab === index ? "bg-[#0F1511] text-white" : "text-text2")
+            }
+            onClick={() => {
+              setCurrentTab(index);
+            }}
+          >
+            {tab}
+          </a>
+        ))}
       </div>
+      {currentTab === 0 && (
+        <>
+          <Label label="Data Fields" />
+          {decrypted && (
+            <ItemWrapper>
+              <ClaimContent
+                contents={decrypted?.credentialSubject}
+                ctype={decrypted?.ctype}
+              />
+            </ItemWrapper>
+          )}
+        </>
+      )}
+      {currentTab === 1 && (
+        <>
+          <div className="flex flex-col gap-4">
+            <div>
+              <Label label="TITLE" />
+              <ItemWrapper>{title}</ItemWrapper>
+            </div>
+
+            <div>
+              <Label label="DESCRIPTION" />
+              <ItemWrapper>{desc}</ItemWrapper>
+            </div>
+
+            <div>
+              <Label label="CARD INFO" />
+
+              <ItemWrapper>
+                <InfoItem label="TEMPLATE ID" value={templateId} />
+                <div className="h-[0px] border-t border-white"></div>
+                <InfoItem label="EXPIRE TIME" value={expirationTime} />
+                <div className="h-[0px] border-t border-white"></div>
+                <InfoItem label="ISSUER" value={attester} />
+                <div className="h-[0px] border-t border-white"></div>
+                <InfoItem
+                  label="CATEGORY"
+                  value={category ? categoryMap[category] : ""}
+                />
+              </ItemWrapper>
+            </div>
+
+            <div>
+              <Label label="DATA FIELD HASH" />
+              <ItemWrapper className="break-all">
+                <div>{ctypeHash}</div>
+              </ItemWrapper>
+            </div>
+            {applications && applications.length > 0 && (
+              <div>
+                <Label label="APPLICATIONS" />
+                {applications?.map((item, idx) => {
+                  return <Application app={item} key={idx} />;
+                })}
+              </div>
+            )}
+          </div>
+        </>
+      )}
     </>
   );
 };
