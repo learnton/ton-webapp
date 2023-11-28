@@ -9,5 +9,6 @@ export const generateImage: (params: {
 }) => Promise<Blob> = (params) => {
   return instance.post(`/puppeteer/generate_image`, params, {
     baseURL: TWEET_SERVICE,
+    responseType: "blob",
   });
 };

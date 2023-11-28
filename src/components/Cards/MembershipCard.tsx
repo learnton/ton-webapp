@@ -69,7 +69,7 @@ const MembershipCard: React.FC<ZkIDCardProps> = ({
           )}
         </div>
         <div className="text-center">
-          <strong className="text-xl">{name}</strong>
+          <div className="text-xl font-semibold">{name}</div>
           <div>{role}</div>
         </div>
         <div className="flex items-center mt-4 gap-2">

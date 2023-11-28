@@ -2,23 +2,27 @@ import QRCode from "qrcode-generator";
 import { useEffect, useRef } from "react";
 
 interface Props {
-  url: string;
-  cellSize?: number | undefined | null;
+  data: string | string[];
+  cellSize?: number | null;
+  margin?: number;
 }
 
-const QRCodeGenerator = ({ cellSize, url }: Props) => {
+const QRCodeGenerator = ({ cellSize, data, margin }: Props) => {
   const qrCodeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const qrCode = QRCode(0, "L");
+    if (Array.isArray(data)) {
+      data.forEach((d) => typeof d === "string" && qrCode.addData(d));
+    } else if (typeof data === "string") {
+      qrCode.addData(data);
+    }
 
-    qrCode.addData(url);
     qrCode.make();
-    qrCode.createImgTag(30);
 
     if (qrCodeRef.current && cellSize)
-      qrCodeRef.current.innerHTML = qrCode.createImgTag(cellSize);
-  }, [url, cellSize]);
+      qrCodeRef.current.innerHTML = qrCode.createImgTag(cellSize, margin);
+  }, [data, cellSize, margin]);
 
   return <div ref={qrCodeRef}></div>;
 };
