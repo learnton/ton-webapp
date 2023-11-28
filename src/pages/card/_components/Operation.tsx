@@ -67,14 +67,14 @@ const Operation = ({ credential, credentialId, templateId }: Props) => {
   return (
     <>
       {templateId && (
-        <div className="p-2 text-xs text-center">
+        <Link className="text-xs text-center p-2" to="presentation">
           <IconShowProof className="m-auto" />
           <div>Show Proof</div>
-        </div>
+        </Link>
       )}
       <div
         role="button"
-        className="p-2 text-xs text-center"
+        className="text-xs text-center p-2"
         onClick={() => setMoreVisible(true)}
       >
         <IconMore className="m-auto" />
@@ -89,21 +89,21 @@ const Operation = ({ credential, credentialId, templateId }: Props) => {
       >
         <ul className="text-text1">
           <Link className={LiClass} to="share">
-            <div className="p-2 bg-[#fff7e6] text-[0px] rounded-3xl">
+            <div className="bg-[#fff7e6] rounded-3xl p-2 text-[0px]">
               <img
                 src={IconShare}
                 alt="Share"
-                className="w-4 h-4 object-contain"
+                className="object-contain h-4 w-4"
               />
             </div>
             Share Card
           </Link>
           <li className={LiClass} onClick={download}>
-            <div className="p-2 bg-[#effbf3] text-[0px] rounded-3xl">
+            <div className="bg-[#effbf3] rounded-3xl p-2 text-[0px]">
               <img
                 src={IconBackup}
                 alt="Share"
-                className="w-4 h-4 object-contain"
+                className="object-contain h-4 w-4"
               />
             </div>
             Backup Card
@@ -115,11 +115,11 @@ const Operation = ({ credential, credentialId, templateId }: Props) => {
               toggleDel();
             }}
           >
-            <div className="p-2 bg-[#fff3f3] text-[0px] rounded-3xl">
+            <div className="bg-[#fff3f3] rounded-3xl p-2 text-[0px]">
               <img
                 src={IconDelete}
                 alt="Share"
-                className="w-4 h-4 object-contain"
+                className="object-contain h-4 w-4"
               />
             </div>
             Delete
@@ -131,7 +131,7 @@ const Operation = ({ credential, credentialId, templateId }: Props) => {
         onClose={toggleDel}
         onConfirm={() => void deleteVc()}
         open={delOpen}
-        text="Are you sure to delete this Credential?"
+        text="to Are you sure delete this Credential?"
         title="Delete Credential"
       />
     </>

@@ -38,6 +38,7 @@ function stringToParts(value: string, size: number): string[] {
 }
 
 // TODO refactor by QRCodeGenerator
+
 const Code = ({
   cellSize,
   isParts,
@@ -88,7 +89,7 @@ const Code = ({
 
   return (
     <div
-      className="CredentialQrcode bg-body shadow rounded-lg w-[330px] h-[330px] mx-auto overflow-hidden"
+      className="bg-body rounded-lg mx-auto h-[330px] shadow w-[330px] CredentialQrcode overflow-hidden"
       ref={container}
     />
   );
