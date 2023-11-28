@@ -96,7 +96,7 @@ const Operation = ({ credential, credentialId, templateId }: Props) => {
                 className="w-4 h-4 object-contain"
               />
             </div>
-            <a>Share Card</a>
+            Share Card
           </Link>
           <li className={LiClass} onClick={download}>
             <div className="p-2 bg-[#effbf3] text-[0px] rounded-3xl">
@@ -106,9 +106,15 @@ const Operation = ({ credential, credentialId, templateId }: Props) => {
                 className="w-4 h-4 object-contain"
               />
             </div>
-            <a>Backup Card</a>
+            Backup Card
           </li>
-          <li className={LiClass} onClick={toggleDel}>
+          <li
+            className={LiClass}
+            onClick={() => {
+              setMoreVisible(false);
+              toggleDel();
+            }}
+          >
             <div className="p-2 bg-[#fff3f3] text-[0px] rounded-3xl">
               <img
                 src={IconDelete}
@@ -116,7 +122,7 @@ const Operation = ({ credential, credentialId, templateId }: Props) => {
                 className="w-4 h-4 object-contain"
               />
             </div>
-            <a>Delete</a>
+            Delete
           </li>
         </ul>
       </ActionModal>
