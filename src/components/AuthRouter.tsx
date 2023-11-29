@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, Outlet } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AuthWhitelist, HOMEPAGE_URL } from "@/constant";
 import { useAuth } from "@/hooks";
 import WebApp from "@twa-dev/sdk";
 import { login } from "@/api/auth";
 import { useToast } from "@/components";
+import Layout from "@/pages/layouts/Layout";
 
 WebApp.BackButton.onClick(() => {
   window.history.back();
@@ -74,14 +75,5 @@ export default function AuthRouter() {
     }
   }, [isAuth, pathname, navigate, toast]);
 
-  return (
-    <div className="p-4 bg-[#F9FAFB] min-h-[100vh]">
-      {loading && (
-        <div className="flex justify-center items-center w-full h-full fixed z-50 left-0 top-0">
-          <span className="loading loading-spinner loading-md"></span>
-        </div>
-      )}
-      <Outlet />
-    </div>
-  );
+  return <Layout loading={loading}></Layout>;
 }

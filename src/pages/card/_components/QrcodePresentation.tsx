@@ -110,6 +110,7 @@ const QrcodePresentation = function ({
   templateId?: number;
   onClose: () => void;
 }) {
+  console.log("open=", open);
   return (
     <ActionModal onClose={onClose} open={open}>
       <div className="p-4">

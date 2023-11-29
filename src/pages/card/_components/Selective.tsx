@@ -15,15 +15,16 @@ function Selective({
   onChange: (value: string[] | ((value: string[]) => string[])) => void;
   value: string[];
 }) {
+  console.log(value);
+
   return (
-    <div className="p-2 bg-body rounded">
+    <div className="p-4 bg-grey rounded-lg mt-6 flex flex-col gap-2">
       {Object.entries(subject).map(([key, v]) => (
         <div className="flex justify-between items-center" key={key}>
-          <div className="flex items-center gap-2">
-            {key}
+          <label className="flex items-center gap-2 text-[#555f79] font-rubik">
             <input
               type="checkbox"
-              className="checkbox"
+              className="checkbox checkbox-sm"
               checked={value.includes(key)}
               color="success"
               onChange={(e) => {
@@ -34,7 +35,8 @@ function Selective({
                 }
               }}
             />
-          </div>
+            {key}
+          </label>
           <div className="font-medium">{v?.toLocaleString()}</div>
         </div>
       ))}

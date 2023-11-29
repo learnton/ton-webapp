@@ -7,20 +7,17 @@ import { isJsonObject } from "@polkadot/util";
 import { useCallback, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { Did } from "@zcloak/did";
 import { VerifiablePresentationBuilder } from "@zcloak/vc";
 
 import CredentialCard from "../../_components/CredentialCard";
 import QrcodePresentation from "../../_components/QrcodePresentation";
 import { useCredential, useDecryptedCredential, useVcTemplate } from "@/hooks";
 import { AppContext } from "@/context/AppProvider";
-import { DidContext } from "@/context/Did";
 
-import Selective from "./Selective";
+import Selective from "../../_components/Selective";
 
 function Presentation() {
-  const { keyring } = useContext(AppContext);
-  const { didAccounts } = useContext(DidContext);
+  const { keyring, didAccounts } = useContext(AppContext);
   const account = didAccounts?.current;
   const { id } = useParams();
   const credential = useCredential(id);
@@ -30,43 +27,42 @@ function Presentation() {
   const [template] = useVcTemplate(id);
 
   const handleClick = useCallback(() => {
-    if (vc && account?.instance instanceof Did) {
+    if (vc && account?.instance) {
       const vpBuilder = new VerifiablePresentationBuilder(account.instance);
-
       vpBuilder.addVC(vc, "VP_SelectiveDisclosure", selective);
 
       const challenge = `${Date.now()}`;
-
       void vpBuilder.build(undefined, challenge).then(setVp);
+    } else {
+      console.warn("vc=", vc, "account=", account);
     }
   }, [account, selective, vc]);
 
   return (
-    <div className="bg-[#f0f0f5]">
-      <div>
-        <div className="p-2">
-          <div className="mb-2">Please Selective Disclosure.</div>
-          <CredentialCard
-            attester={credential?.attester?.[0]}
-            ctypeHash={credential?.ctypeHash}
-            encoded={credential?.encoded}
-            id={credential?.id}
-            rootHash={credential?.rootHash}
-          />
-          {vc && isJsonObject(vc.credentialSubject) && (
-            <Selective
-              onChange={setSelective}
-              subject={vc.credentialSubject}
-              value={selective}
-            />
-          )}
+    <div className="flex flex-col h-[100vh] py-4">
+      <div className="flex-1 overflow-auto">
+        <div className="mb-4 font-rubik text-[#555f79]">
+          Please Selective Disclosure.
         </div>
+        <CredentialCard
+          attester={credential?.attester?.[0]}
+          ctypeHash={credential?.ctypeHash}
+          encoded={credential?.encoded}
+          id={credential?.id}
+          rootHash={credential?.rootHash}
+        />
+        {vc && isJsonObject(vc.credentialSubject) && (
+          <Selective
+            onChange={setSelective}
+            subject={vc.credentialSubject}
+            value={selective}
+          />
+        )}
       </div>
-      <div>
-        <button className="btn btn-block" onClick={handleClick}>
-          Generate QR Code
-        </button>
-      </div>
+      <button className="btn btn-block btn-primary" onClick={handleClick}>
+        Generate QR Code
+      </button>
+
       <QrcodePresentation
         isParts
         onClose={() => setVp(undefined)}
