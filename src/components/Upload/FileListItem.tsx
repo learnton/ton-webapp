@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import React from "react";
+import IconDelete from "@/assets/img/btn_delete.svg?react";
 
 export interface FileListItemProps {
   name: string;
@@ -12,8 +13,8 @@ function FileListItem({ name, onDelete }: FileListItemProps) {
   return (
     <li className="flex items-center p-2">
       <div className="flex-1">{name}</div>
-      <button className="btn btn-ghost btn-error" onClick={onDelete}>
-        delete
+      <button className="btn btn-ghost text-error" onClick={onDelete}>
+        <IconDelete />
       </button>
     </li>
   );

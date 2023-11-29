@@ -13,7 +13,6 @@ import ClaimContent from "./ClaimContent";
 import DeleteDialog from "./DeleteDialog";
 import QRCodeGenerator from "./QRCodeGenerator";
 import TimeNow from "./TimeNow";
-import CredentialImport from "./CredentialImport";
 import OperationButtons from "./OperationButtons";
 
 export {
@@ -33,7 +32,6 @@ export {
   DeleteDialog,
   QRCodeGenerator,
   TimeNow,
-  CredentialImport,
   OperationButtons,
 };
 

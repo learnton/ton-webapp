@@ -39,20 +39,18 @@ const CredentialEdit: React.FC<{
 
   return (
     <div>
-      <div className="text-lg font-rubik font-medium text-center">
+      <div className="text-lg font-rubik font-medium text-center mb-4">
         Import Credential
       </div>
-      <div className="flex justify-center">
-        <CardWithBg
-          alias={alias}
-          attester={attester}
-          bg={bg}
-          bgConfig={cardBgConfig}
-          setBg={setBg}
-          templateId={templateId}
-        />
-      </div>
-      <div className="my-2 flex justify-center">
+      <CardWithBg
+        alias={alias}
+        attester={attester}
+        bg={bg}
+        bgConfig={cardBgConfig}
+        setBg={setBg}
+        templateId={templateId}
+      />
+      <div className="my-2 flex items-center gap-2 mt-4">
         <OperationButtons
           cancel={onReject}
           cancelText="Cancel"

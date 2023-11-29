@@ -43,10 +43,10 @@ const CardWithBg: React.FC<{
 
   return (
     <div
-      className="rounded-[20px] h-[123px] mt-[40px] pb-[28px] pl-[24px] pt-[28px] relative bg-cover w-[320px]"
+      className="rounded-[20px] h-[123px] pb-[28px] pl-[24px] pt-[28px] relative bg-cover "
       style={{
-        background: `url(${_bg})`,
-        color: template?.color,
+        backgroundImage: `url(${_bg})`,
+        color: template?.color || "#fff",
       }}
     >
       {!template && (

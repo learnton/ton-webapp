@@ -1,10 +1,11 @@
 import { useMemo, useState } from "react";
 // import IconSearch from "@/assets/img/icon_search.svg?react";
-import { CARD_TYPE, CredentialImport } from "@/components";
+import { CARD_TYPE } from "@/components";
 import { useCredentialByCate, useCredentials } from "@/hooks";
 import CredentialCard from "../_components/CredentialCard";
 import CategoryFilter from "../_components/CategoryFilter";
 import IconImport from "@/assets/img/icon_add.svg?react";
+import CredentialImport from "../_components/CredentialImport";
 
 const PageCredential = () => {
   const [openImport, toggleImport] = useState(false);
@@ -44,7 +45,12 @@ const PageCredential = () => {
           return <CredentialCard id={item.id} key={item.id} showProof />;
         })}
       </div>
-      <CredentialImport onClose={() => toggleImport(false)} open={openImport} />
+      {openImport && (
+        <CredentialImport
+          onClose={() => toggleImport(false)}
+          open={openImport}
+        />
+      )}
     </>
   );
 };
