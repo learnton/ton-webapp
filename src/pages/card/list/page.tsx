@@ -39,7 +39,7 @@ const PageCredential = () => {
 
       <div className="mt-4">
         {showVcs?.map((item) => {
-          return <CredentialCard id={item.id} key={item.id} />;
+          return <CredentialCard id={item.id} key={item.id} showProof />;
         })}
       </div>
       {/* {open && <CredentialImport onClose={toggleImport} open={open} />} */}

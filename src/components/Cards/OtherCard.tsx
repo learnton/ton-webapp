@@ -61,8 +61,14 @@ const OtherCard: React.FC<ZkIDCardProps> = ({
         <div className="flex items-center justify-between">
           <span>{isCategory(category) && categoryMap[category]}</span>
           {handleQr && (
-            <button className="btn" onClick={handleQr}>
-              <IconQr />
+            <button
+              className="btn btn-circle bg-[rgba(0,0,0,.2)] border-none"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleQr(e);
+              }}
+            >
+              <IconQr className="text-[#fff] scale-[110%]" />
             </button>
           )}
         </div>

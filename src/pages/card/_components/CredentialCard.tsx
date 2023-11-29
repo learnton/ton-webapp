@@ -22,10 +22,16 @@ interface Props {
   rootHash?: string;
   showDetails?: boolean;
   to?: string;
-  handleQr?: (id: string) => void;
+  showProof?: boolean;
 }
 
-function CredentialCard({ attester, ctypeHash, id, templateId }: Props) {
+function CredentialCard({
+  attester,
+  ctypeHash,
+  id,
+  templateId,
+  showProof,
+}: Props) {
   const { keyring } = useContext(AppContext);
 
   const navigate = useNavigate();
@@ -60,7 +66,7 @@ function CredentialCard({ attester, ctypeHash, id, templateId }: Props) {
   return (
     <div className="mb-3">
       <BaseCard
-        handleQr={handleQr}
+        handleQr={showProof ? handleQr : undefined}
         id={id}
         onClick={() => navigate(`/card/${id}`)}
         template={vcTemplate || template}

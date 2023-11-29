@@ -38,13 +38,13 @@ const OldCard: React.FC<ZkIDCardProps> = ({ handleQr, id, onClick, vc }) => {
           <span>Legacy</span>
           {handleQr && (
             <button
-              className="btn btn-ghost"
+              className="btn btn-circle bg-[rgba(0,0,0,.2)] border-none"
               onClick={(e) => {
                 e.stopPropagation();
-                // handleQr()
+                handleQr(e);
               }}
             >
-              <IconQr />
+              <IconQr className="text-[#fff] scale-[110%]" />
             </button>
           )}
         </div>

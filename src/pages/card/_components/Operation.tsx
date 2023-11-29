@@ -66,12 +66,10 @@ const Operation = ({ credential, credentialId, templateId }: Props) => {
 
   return (
     <>
-      {templateId && (
-        <Link className="text-xs text-center p-2" to="presentation">
-          <IconShowProof className="m-auto" />
-          <div>Show Proof</div>
-        </Link>
-      )}
+      <Link className="text-xs text-center p-2" to="presentation">
+        <IconShowProof className="m-auto" />
+        <div>Show Proof</div>
+      </Link>
       <div
         role="button"
         className="text-xs text-center p-2"
@@ -88,16 +86,18 @@ const Operation = ({ credential, credentialId, templateId }: Props) => {
         onClose={() => setMoreVisible(false)}
       >
         <ul className="text-text1">
-          <Link className={LiClass} to="share">
-            <div className="bg-[#fff7e6] rounded-3xl p-2 text-[0px]">
-              <img
-                src={IconShare}
-                alt="Share"
-                className="object-contain h-4 w-4"
-              />
-            </div>
-            Share Card
-          </Link>
+          {templateId ? (
+            <Link className={LiClass} to="share">
+              <div className="bg-[#fff7e6] rounded-3xl p-2 text-[0px]">
+                <img
+                  src={IconShare}
+                  alt="Share"
+                  className="object-contain h-4 w-4"
+                />
+              </div>
+              Share Card
+            </Link>
+          ) : null}
           <li className={LiClass} onClick={download}>
             <div className="bg-[#effbf3] rounded-3xl p-2 text-[0px]">
               <img

@@ -58,13 +58,13 @@ const MembershipCard: React.FC<ZkIDCardProps> = ({
           <span>MEMBERSHIP</span>
           {handleQr && (
             <button
-              className="btn btn-ghost"
+              className="btn btn-circle bg-[rgba(0,0,0,.2)] border-none"
               onClick={(e) => {
                 e.stopPropagation();
                 handleQr(e);
               }}
             >
-              <IconQr />
+              <IconQr className="text-[#fff] scale-[110%]" />
             </button>
           )}
         </div>
