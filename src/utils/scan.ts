@@ -12,10 +12,27 @@ type addPartsParam = {
   length: number;
   value: string;
 };
+export function makeParts(): (part: {
+  index: number;
+  length: number;
+  value: string;
+}) => string[] {
+  const parts: { index: number; length: number; value: string }[] = [];
+
+  return (part) => {
+    if (!parts.find(({ index }) => part.index === index)) {
+      parts.push(part);
+    }
+
+    return parts.sort((l, r) => l.index - r.index).map(({ value }) => value);
+  };
+}
+
+export type ResultType = [QrResultTypes, QrResult[QrResultTypes]];
 
 export const extraResult = function (
   data: string,
-  onDone: (result: [QrResultTypes, QrResult[QrResultTypes]]) => void,
+  onDone: (result: ResultType) => void,
   onProgress: (progress: number) => void,
   addParts?: (part: addPartsParam) => string[]
 ): void {

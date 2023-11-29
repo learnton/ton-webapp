@@ -15,6 +15,7 @@ import { useRef } from "react";
 import { fetchAndSaveMessages } from "@/pages/message/_utils";
 import { useNavigate } from "react-router-dom";
 import { useCredentials } from "@/hooks";
+import handleScanResult from "./_util/handleScan";
 
 export default function Account() {
   const { didAccounts } = useContext(AppContext);
@@ -41,15 +42,9 @@ export default function Account() {
     ) || 0;
 
   const handleScan: (text: string) => true | void = (text: string) => {
-    extraResult(
-      text,
-      (result) => {
-        alert(result);
-      },
-      (percent) => {
-        console.log(percent);
-      }
-    );
+    extraResult(text, handleScanResult, (percent) => {
+      console.log(percent);
+    });
     return true;
   };
 
