@@ -1,12 +1,12 @@
 import { updateSvg } from "jdenticon";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 interface Props {
   value?: string | null;
   [key: string]: unknown;
 }
 
-const IdentityIcon: React.FC<Props> = (props) => {
+const IdentityIcon = (props: Props) => {
   const canvasRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {

@@ -22,12 +22,7 @@ function Item({ label, value }: { label: string; value: React.ReactNode }) {
   );
 }
 
-const OtherCard: React.FC<ZkIDCardProps> = ({
-  handleQr,
-  onClick,
-  template,
-  vc,
-}) => {
+const OtherCard = ({ handleQr, onClick, template, vc }: ZkIDCardProps) => {
   const { category, expirationTime } = useMemo(() => {
     return template
       ? {
@@ -52,7 +47,7 @@ const OtherCard: React.FC<ZkIDCardProps> = ({
   return (
     <CardContainer bg={bg}>
       <div
-        className="after:content-['OtherCard'] after:text-[0] h-full flex flex-col justify-between"
+        className="'OtherCard'] after:text-[0] h-full flex flex-col justify-between"
         onClick={onClick}
         style={{
           color: template?.color,
@@ -62,7 +57,7 @@ const OtherCard: React.FC<ZkIDCardProps> = ({
           <span>{isCategory(category) && categoryMap[category]}</span>
           {handleQr && (
             <button
-              className="btn btn-circle bg-[rgba(0,0,0,.2)] border-none"
+              className="border-none bg-[rgba(0,0,0,.2)] btn btn-circle"
               onClick={(e) => {
                 e.stopPropagation();
                 handleQr(e);
@@ -73,7 +68,7 @@ const OtherCard: React.FC<ZkIDCardProps> = ({
           )}
         </div>
         <div className="tooltip" data-tip={template?.title}>
-          <span className="mb-4 text-xl">{template?.title}</span>
+          <span className="text-xl mb-4">{template?.title}</span>
         </div>
         <div className="flex items-center justify-between">
           <Item

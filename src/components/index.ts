@@ -14,6 +14,7 @@ import DeleteDialog from "./DeleteDialog";
 import QRCodeGenerator from "./QRCodeGenerator";
 import TimeNow from "./TimeNow";
 import OperationButtons from "./OperationButtons";
+import AccountIcon from "./AccountIcon";
 
 export {
   Avatar,
@@ -33,6 +34,7 @@ export {
   QRCodeGenerator,
   TimeNow,
   OperationButtons,
+  AccountIcon,
 };
 
 export * from "./Cards";

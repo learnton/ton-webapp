@@ -16,10 +16,13 @@ import { national } from "@/utils";
 import { useCtype } from "../hooks";
 import AccountName from "./AccountName";
 
-export const ClaimContent: React.FC<{
+export const ClaimContent = ({
+  contents,
+  ctype,
+}: {
   ctype: HexString;
   contents: CredentialSubject;
-}> = ({ contents, ctype }) => {
+}) => {
   const local = useCtype(ctype);
 
   const keyLength = useMemo(() => {
@@ -44,14 +47,17 @@ export const ClaimContent: React.FC<{
   );
 };
 
-const DividerItem: React.FC<{ keyLength: number; now: number }> = ({
+const DividerItem = ({
   keyLength,
   now,
+}: {
+  keyLength: number;
+  now: number;
 }) => {
   return (
     <>
       {keyLength > 0 && now !== keyLength - 1 ? (
-        <div className="h-[0px] border-t border-white"></div>
+        <div className="border-t border-white h-[0px]"></div>
       ) : (
         <></>
       )}
@@ -59,11 +65,15 @@ const DividerItem: React.FC<{ keyLength: number; now: number }> = ({
   );
 };
 
-const ContentItem: React.FC<{
+const ContentItem = ({
+  format,
+  label,
+  val,
+}: {
   label: string;
   val: NativeType | NativeTypeWithOutNull[];
   format?: string; // 'date' | 'time' | 'date-time' | 'url' | 'email' | 'hostname' | 'ipv4' | 'ipv6' | 'int32' | 'int64' | 'uint32' | 'uint64' | 'float' | 'double' | 'bytes' | 'hex' | 'did' | 'timestamp' | 'national-code'
-}> = ({ format, label, val }) => {
+}) => {
   const el = useMemo(() => {
     if (val && React.isValidElement(val)) {
       return val;
@@ -95,9 +105,9 @@ const ContentItem: React.FC<{
   }, [format, val]);
 
   return (
-    <div className="flex items-center justify-between p-2">
+    <div className="flex p-2 items-center justify-between">
       <div className="text-sm text-text2">{label}</div>
-      <div className="text-right font-semibold">{el}</div>
+      <div className="font-semibold text-right">{el}</div>
     </div>
   );
 };

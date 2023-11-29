@@ -6,10 +6,10 @@ interface Props extends PropsWithChildren {
   bg?: string;
 }
 
-const CardContainer: React.FC<Props> = ({ bg, children }) => {
+const CardContainer = ({ bg, children }: Props) => {
   return (
     <div
-      className="aspect-card2 rounded-3xl p-4"
+      className="rounded-3xl p-4 aspect-card2"
       style={{
         background: `url(${bg}) no-repeat`,
         backgroundSize: "cover",

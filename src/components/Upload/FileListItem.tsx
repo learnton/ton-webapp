@@ -9,15 +9,18 @@ export interface FileListItemProps {
   onDelete: () => void;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 function FileListItem({ name, onDelete }: FileListItemProps) {
   return (
-    <li className="flex items-center p-2">
+    <li className="flex p-2 items-center">
       <div className="flex-1">{name}</div>
-      <button className="btn btn-ghost text-error" onClick={onDelete}>
+      <button className="text-error btn btn-ghost" onClick={onDelete}>
         <IconDelete />
       </button>
     </li>
   );
 }
 
-export default React.memo(FileListItem);
+const exportComponent = React.memo(FileListItem);
+
+export default exportComponent;

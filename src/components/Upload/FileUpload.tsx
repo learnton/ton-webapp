@@ -19,6 +19,7 @@ export interface FileUploadProps
   onChange: (files: File[]) => void;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 function FileUpload({
   buttonProps,
   buttonText = "Click or drop files",
@@ -55,9 +56,9 @@ function FileUpload({
 
   return (
     <div>
-      {label && <div className="text-sm font-medium">{label}</div>}
+      {label && <div className="font-medium text-sm">{label}</div>}
       <div
-        className="rounded py-4 px-1 min-h-[160px] bg-[#F5F6FA] flex flex-col justify-center items-center"
+        className="rounded flex flex-col bg-[#F5F6FA] min-h-[160px] py-4 px-1 justify-center items-center"
         {...getRootProps()}
       >
         <div className="flex flex-col justify-center items-center">
@@ -75,11 +76,13 @@ function FileUpload({
           </div>
         </div>
         {files.length > 0 && (
-          <ul className="flex justify-center flex-wrap p-1">{files}</ul>
+          <ul className="flex flex-wrap p-1 justify-center">{files}</ul>
         )}
       </div>
     </div>
   );
 }
 
-export default React.memo(FileUpload);
+const exportComponent = React.memo(FileUpload);
+
+export default exportComponent;

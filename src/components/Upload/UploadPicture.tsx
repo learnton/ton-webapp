@@ -9,6 +9,7 @@ export interface FileUploadProps
   onClick: () => void;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 function FileUpload({
   disabled,
   maxSize,
@@ -44,4 +45,6 @@ function FileUpload({
   );
 }
 
-export default React.memo(FileUpload);
+const exportComponent = React.memo(FileUpload);
+
+export default exportComponent;

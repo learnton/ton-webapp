@@ -1,7 +1,14 @@
-function Avatar({ src }: { src: string }) {
+interface Props {
+  src?: string;
+  [property: string]: unknown;
+}
+
+function Avatar({ src, ...props }: Props) {
   return (
-    <div className="w-24 rounded-full">
-      <img src={src} />
+    <div className="avatar" {...props}>
+      <div className="rounded-full w-24">
+        <img src={src} />
+      </div>
     </div>
   );
 }

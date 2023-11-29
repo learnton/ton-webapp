@@ -9,6 +9,7 @@ import AppProvider from "./context/AppProvider";
 import rootRoute from "./pages";
 import { initCrypto } from "@zcloak/crypto";
 import { utils } from "@zcloak/wallet-lib";
+import ScanProvider from "./context/ScanProvider";
 
 const router = createBrowserRouter(rootRoute, {
   basename: import.meta.env.BASE_URL,
@@ -16,7 +17,7 @@ const router = createBrowserRouter(rootRoute, {
 
 // const session = new BrowserSession();
 const store = new BrowserStore();
-Promise.all([initCrypto(), utils.initCrypto()]).then(() => {
+void Promise.all([initCrypto(), utils.initCrypto()]).then(() => {
   ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
       <TonConnectUIProvider
@@ -26,9 +27,11 @@ Promise.all([initCrypto(), utils.initCrypto()]).then(() => {
         }}
       >
         <AppProvider session={store} store={store}>
-          <ToastProvider>
-            <RouterProvider router={router} />
-          </ToastProvider>
+          <ScanProvider>
+            <ToastProvider>
+              <RouterProvider router={router} />
+            </ToastProvider>
+          </ScanProvider>
         </AppProvider>
       </TonConnectUIProvider>
     </React.StrictMode>

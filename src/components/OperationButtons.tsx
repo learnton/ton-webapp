@@ -1,25 +1,27 @@
-const OperationButtons: React.FC<{
-  cancelText: string;
-  confirmText: string;
-  loading: boolean;
+type Props = {
   cancel: () => void;
+  cancelText: string;
   confirm: () => void;
+  confirmText: string;
   disableConfirm?: boolean;
-}> = ({
+  loading?: boolean;
+};
+
+const OperationButtons = ({
   cancel,
   cancelText,
   confirm,
   confirmText,
   disableConfirm,
   loading,
-}) => {
+}: Props) => {
   return (
     <>
-      <button className="btn flex-1" disabled={loading} onClick={cancel}>
+      <button className="flex-1 btn" disabled={loading} onClick={cancel}>
         {cancelText}
       </button>
       <button
-        className="btn flex-1 btn-primary"
+        className="flex-1 btn btn-primary"
         disabled={loading || disableConfirm}
         onClick={confirm}
       >

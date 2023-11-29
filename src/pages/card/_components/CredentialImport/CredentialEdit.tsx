@@ -10,7 +10,7 @@ import { isDidUrlArray } from "@/utils";
 
 import CardWithBg from "./CardWithBg";
 
-const CredentialEdit: React.FC<{
+type Props = {
   credential: VerifiableCredential<boolean>;
   alias?: string;
   templateId?: number;
@@ -20,7 +20,9 @@ const CredentialEdit: React.FC<{
   onReject: () => void;
   onConfirm: () => void;
   loading: boolean;
-}> = ({
+};
+
+const CredentialEdit = ({
   alias,
   bg,
   credential,
@@ -29,7 +31,7 @@ const CredentialEdit: React.FC<{
   onReject,
   setBg,
   templateId,
-}) => {
+}: Props) => {
   // TODO v1 to v2 issuer
   const attester = useMemo(() => {
     return isDidUrlArray(credential.issuer)
@@ -39,7 +41,7 @@ const CredentialEdit: React.FC<{
 
   return (
     <div>
-      <div className="text-lg font-rubik font-medium text-center mb-4">
+      <div className="font-rubik font-medium text-lg text-center mb-4">
         Import Credential
       </div>
       <CardWithBg
@@ -50,7 +52,7 @@ const CredentialEdit: React.FC<{
         setBg={setBg}
         templateId={templateId}
       />
-      <div className="my-2 flex items-center gap-2 mt-4">
+      <div className="flex my-2 mt-4 gap-2 items-center">
         <OperationButtons
           cancel={onReject}
           cancelText="Cancel"

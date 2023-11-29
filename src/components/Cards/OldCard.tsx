@@ -12,7 +12,7 @@ import { ZkIDCardProps } from "./types";
 
 import DataItem from "./DataItem";
 
-const OldCard: React.FC<ZkIDCardProps> = ({ handleQr, id, onClick, vc }) => {
+const OldCard = ({ handleQr, id, onClick, vc }: ZkIDCardProps) => {
   const expirationTime = useMemo(() => {
     return vc?.expirationDate
       ? moment(vc.expirationDate).format("YYYY-MM-DD")
@@ -31,14 +31,14 @@ const OldCard: React.FC<ZkIDCardProps> = ({ handleQr, id, onClick, vc }) => {
   return (
     <CardContainer bg={cardBg?.bg}>
       <div
-        className="after:content-['OldCard'] after:text-[0] h-full flex flex-col justify-between text-white"
+        className="'OldCard'] after:text-[0] h-full flex flex-col justify-between text-white"
         onClick={onClick}
       >
         <div className="flex items-center justify-between">
           <span>Legacy</span>
           {handleQr && (
             <button
-              className="btn btn-circle bg-[rgba(0,0,0,.2)] border-none"
+              className="border-none bg-[rgba(0,0,0,.2)] btn btn-circle"
               onClick={(e) => {
                 e.stopPropagation();
                 handleQr(e);
@@ -48,7 +48,7 @@ const OldCard: React.FC<ZkIDCardProps> = ({ handleQr, id, onClick, vc }) => {
             </button>
           )}
         </div>
-        <div className="mb-4 text-xl">{ctype?.title}</div>
+        <div className="text-xl mb-4">{ctype?.title}</div>
 
         <div className="flex justify-between">
           <DataItem
@@ -62,4 +62,6 @@ const OldCard: React.FC<ZkIDCardProps> = ({ handleQr, id, onClick, vc }) => {
   );
 };
 
-export default React.memo(OldCard);
+const exportComponent = React.memo(OldCard);
+
+export default exportComponent;

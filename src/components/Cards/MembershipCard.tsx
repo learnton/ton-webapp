@@ -3,7 +3,7 @@
 
 import { Avatar } from "@/components";
 import { isHex } from "@polkadot/util";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import IconQr from "@/assets/img/icon_qr.svg?react";
 import { isDidUrlArray } from "@/utils";
@@ -15,12 +15,7 @@ import { ZkIDCardProps } from "./types";
 import cardBg from "./assets/card/img_card_1.png";
 import DataItem from "./DataItem";
 
-const MembershipCard: React.FC<ZkIDCardProps> = ({
-  handleQr,
-  onClick,
-  template,
-  vc,
-}) => {
+const MembershipCard = ({ handleQr, onClick, template, vc }: ZkIDCardProps) => {
   const { name, role } = useMemo(() => {
     if (isHex(vc?.credentialSubject) || !vc?.credentialSubject) {
       return {
@@ -48,7 +43,7 @@ const MembershipCard: React.FC<ZkIDCardProps> = ({
   return (
     <CardContainer bg={bg}>
       <div
-        className="h-full flex flex-col justify-between after:content-['MembershipCard'] after:text-[0]"
+        className="flex flex-col h-full justify-between 'MembershipCard'] after:text-[0]"
         onClick={onClick}
         style={{
           color: template?.color ?? "#FFF",
@@ -58,7 +53,7 @@ const MembershipCard: React.FC<ZkIDCardProps> = ({
           <span>MEMBERSHIP</span>
           {handleQr && (
             <button
-              className="btn btn-circle bg-[rgba(0,0,0,.2)] border-none"
+              className="border-none bg-[rgba(0,0,0,.2)] btn btn-circle"
               onClick={(e) => {
                 e.stopPropagation();
                 handleQr(e);
@@ -69,10 +64,10 @@ const MembershipCard: React.FC<ZkIDCardProps> = ({
           )}
         </div>
         <div className="text-center">
-          <div className="text-xl font-semibold">{name}</div>
+          <div className="font-semibold text-xl">{name}</div>
           <div>{role}</div>
         </div>
-        <div className="flex items-center mt-4 gap-2">
+        <div className="flex mt-4 gap-2 items-center">
           {template?.logo && <Avatar src={template?.logo} />}
           <DataItem
             label="ISSUER"

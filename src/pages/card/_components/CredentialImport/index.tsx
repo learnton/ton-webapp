@@ -26,6 +26,7 @@ import {
 import CredentialEdit from "./CredentialEdit";
 import ImportVcFile from "./ImportVcFile";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export async function addVC(
   didDB: DidDB,
   vc: VerifiableCredential<boolean> | null | undefined,
@@ -83,12 +84,15 @@ export async function addVC(
   return credential;
 }
 
-const ImportVc: React.FC<{
+const ImportVc = ({
+  onClose,
+  open,
+}: {
   onReject?: () => void;
   onConfirm?: () => void;
   open: boolean;
   onClose: () => void;
-}> = ({ onClose, open }) => {
+}) => {
   const toast = useToast();
 
   const { credentialCard, keyring, didAccounts } = useContext(AppContext);
@@ -126,7 +130,7 @@ const ImportVc: React.FC<{
       toast &&
         toast({
           type: "error",
-          message: err.message,
+          message: (err as Error).message,
         });
     });
 
@@ -138,12 +142,13 @@ const ImportVc: React.FC<{
     credential,
     alias,
     didDB,
-    template,
     toggleLoading,
     credentialCard,
     bg,
     keyring.password,
+    template,
     onClose,
+    toast,
   ]);
 
   const onReject = useCallback(() => {
@@ -171,7 +176,7 @@ const ImportVc: React.FC<{
   }
 
   useEffect(() => {
-    (async (): Promise<any> => {
+    void (async (): Promise<unknown> => {
       if (!file || !account) return;
       const data = await handleJsonFile(file);
       const notifyError = (message: string) => {
@@ -213,7 +218,7 @@ const ImportVc: React.FC<{
       setCredential(vc);
       setAlias(shortHash(vc.digest));
     })();
-  }, [file, account, shortHash]);
+  }, [file, account, shortHash, toast]);
 
   return (
     <ActionModal onClose={onClose} open={open}>
@@ -226,7 +231,7 @@ const ImportVc: React.FC<{
             bg={bg}
             credential={credential}
             loading={loading}
-            onConfirm={onConfirm}
+            onConfirm={() => void onConfirm()}
             onReject={onReject}
             setAlias={setAlias}
             setBg={setBg}

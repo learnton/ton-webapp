@@ -2,13 +2,14 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { FileUpload } from "@/components";
-
-const ImportVcFile: React.FC<{
+type Props = {
   setFile: (file: File) => void;
-}> = ({ setFile }) => {
+};
+
+const ImportVcFile = ({ setFile }: Props) => {
   return (
     <>
-      <div className="text-lg font-medium font-rubik mb-[32px] text-center">
+      <div className="font-medium font-rubik text-lg text-center mb-[32px]">
         Import Credential
       </div>
       <FileUpload

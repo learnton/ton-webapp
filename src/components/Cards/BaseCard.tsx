@@ -8,13 +8,13 @@ interface Props {
   isOpen?: boolean;
 }
 
-export const BaseCard: React.FC<ZkIDCardProps & Props> = ({
+export const BaseCard = ({
   handleQr,
   id,
   onClick,
   template,
   vc,
-}) => {
+}: ZkIDCardProps & Props) => {
   const Card =
     typeof template?.category === "number"
       ? findCard(template?.category)

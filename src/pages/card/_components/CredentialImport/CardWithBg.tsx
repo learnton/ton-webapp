@@ -8,14 +8,21 @@ import LogoZcloakVc from "@/assets/logo_zcloak_vc.svg?react";
 import { AccountName, CardBgConfig, cardImage } from "@/components";
 import { useTemplate } from "@/hooks";
 
-const CardWithBg: React.FC<{
+const CardWithBg = ({
+  alias,
+  attester,
+  bg,
+  bgConfig,
+  setBg,
+  templateId,
+}: {
   bgConfig: CardBgConfig[];
   attester: string;
   templateId?: number;
   bg: string;
   setBg: (bg: string) => void;
   alias?: string;
-}> = ({ alias, attester, bg, bgConfig, setBg, templateId }) => {
+}) => {
   const [cardBgs, setCardBg] = useState(bgConfig);
   const [template] = useTemplate(templateId);
 
@@ -43,19 +50,19 @@ const CardWithBg: React.FC<{
 
   return (
     <div
-      className="rounded-[20px] h-[123px] pb-[28px] pl-[24px] pt-[28px] relative bg-cover "
+      className="bg-cover rounded-[20px] h-[123px] pt-[28px] pb-[28px] pl-[24px] relative "
       style={{
         backgroundImage: `url(${_bg})`,
         color: template?.color || "#fff",
       }}
     >
       {!template && (
-        <div className="h-[36px] absolute right-0 -top-[18px] bg-white flex flex-row-reverse items-center rounded-[21px] shadow">
+        <div className="bg-white flex flex-row-reverse rounded-[21px] h-[36px] shadow -top-[18px] right-0 absolute items-center">
           {cardBgs.map((item, index) => {
             if (item.bgId === "1") {
               return (
-                <button className="btn bg-[#000]" key={index} onClick={showBg}>
-                  <IconEdit className="text-white w-[14px] h-[14px]" />
+                <button className="bg-[#000] btn" key={index} onClick={showBg}>
+                  <IconEdit className="h-[14px] text-white w-[14px]" />
                 </button>
               );
             }
@@ -71,7 +78,7 @@ const CardWithBg: React.FC<{
         </div>
       )}
 
-      <div className="flex items-center gap-2">
+      <div className="flex gap-2 items-center">
         <LogoZcloakVc />
         <div>
           <div>{alias}</div>

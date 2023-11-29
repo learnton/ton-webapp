@@ -15,10 +15,11 @@ import { useRef } from "react";
 import { fetchAndSaveMessages } from "@/pages/message/_utils";
 import { useNavigate } from "react-router-dom";
 import { useCredentials } from "@/hooks";
-import handleScanResult from "./_util/handleScan";
+import { ScanContext } from "@/context/ScanProvider";
 
 export default function Account() {
   const { didAccounts } = useContext(AppContext);
+  const ScanState = useContext(ScanContext);
   const did = didAccounts.current;
   const { UserInfo, WebApp } = useTwaSdk();
   const toast = useToast();
@@ -42,9 +43,13 @@ export default function Account() {
     ) || 0;
 
   const handleScan: (text: string) => true | void = (text: string) => {
-    extraResult(text, handleScanResult, (percent) => {
-      console.log(percent);
-    });
+    extraResult(
+      text,
+      (result) => (ScanState.result = result),
+      (percent) => {
+        console.log(percent);
+      }
+    );
     return true;
   };
 
@@ -66,14 +71,14 @@ export default function Account() {
   return (
     <>
       <div
-        className="bg-[#C7D8FA] aspect-card rounded-3xl p-4 flex flex-col justify-center relative mb-20"
+        className="flex flex-col bg-[#C7D8FA] rounded-3xl mb-20 p-4 aspect-card justify-center relative"
         style={{
           backgroundImage: `url(${CardBgURL})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        <div className="absolute left-0 top-0 w-full box-border p-4 flex flex-row items-center">
+        <div className="flex flex-row w-full p-4 top-0 left-0 absolute box-border items-center">
           <Link to="/account/profile" className="btn btn-ghost btn-xs">
             <IconAccount />
           </Link>
@@ -89,16 +94,16 @@ export default function Account() {
           </div>
           <Link to="/message" className="btn btn-ghost btn-xs relative">
             {count > 0 && (
-              <div className="absolute left-[50%] translate-x-[4px] top-0 w-2 h-2 overflow-hidden rounded-3xl bg-error"></div>
+              <div className="bg-error rounded-3xl h-2 top-0 left-[50%] w-2 translate-x-[4px] absolute overflow-hidden"></div>
             )}
             <IconNoti />
           </Link>
         </div>
-        <div className="flex flex-row items-center gap-2">
+        <div className="flex flex-row gap-2 items-center">
           {did && (
             <IdentityIcon
               value={did.instance.id}
-              className="w-12 h-12 m-auto mask mask-circle bg-[#eee]"
+              className="bg-[#eee] m-auto h-12 w-12 mask mask-circle"
             />
           )}
           <div className="flex-1">
@@ -111,29 +116,29 @@ export default function Account() {
         {/* bottom card */}
         <Link
           to="/cards"
-          className="bg-[#3D3E45] rounded-xl p-4 -bottom-12 flex items-center text-[#C7D8FA] absolute left-4 right-4"
+          className="rounded-xl flex bg-[#3D3E45] p-4 right-4 -bottom-12 left-4 text-[#C7D8FA] items-center absolute"
         >
           <div className="flex-1 text-center">
             <p>zkID Cards</p>
-            <div className="text-2xl text-white">
+            <div className="text-white text-2xl">
               {credentials?.length || 0}
             </div>
           </div>
-          <div className="w-0 h-10 border-l-[1px] border-[#6A6A6A]"></div>
+          <div className="border-l-[1px] border-[#6A6A6A] h-10 w-0"></div>
           <div className="flex-1 text-center">
             <p>view cards</p>
           </div>
         </Link>
       </div>
 
-      <h1 className="font-medium text-[#111827] text-xl mb-4">
+      <h1 className="font-medium text-xl mb-4 text-[#111827]">
         What can you do?
       </h1>
-      <ul className="flex flex-col gap-2 mb-4">
+      <ul className="flex flex-col mb-4 gap-2">
         {links.current.map((link, index) => (
           <li
             key={index}
-            className="flex items-center p-4 rounded-xl bg-white"
+            className="bg-white rounded-xl flex p-4 items-center"
             onClick={() =>
               link.link
                 ? WebApp.openLink(link.link)
@@ -148,11 +153,11 @@ export default function Account() {
         ))}
       </ul>
 
-      <button className="btn m-1" onClick={() => localStorage.clear()}>
+      <button className="m-1 btn" onClick={() => localStorage.clear()}>
         clear storage
       </button>
       <button
-        className="btn m-1"
+        className="m-1 btn"
         onClick={() =>
           toast &&
           toast({
