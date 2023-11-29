@@ -13,6 +13,8 @@ import ClaimContent from "./ClaimContent";
 import DeleteDialog from "./DeleteDialog";
 import QRCodeGenerator from "./QRCodeGenerator";
 import TimeNow from "./TimeNow";
+import CredentialImport from "./CredentialImport";
+import OperationButtons from "./OperationButtons";
 
 export {
   Avatar,
@@ -31,6 +33,9 @@ export {
   DeleteDialog,
   QRCodeGenerator,
   TimeNow,
+  CredentialImport,
+  OperationButtons,
 };
 
 export * from "./Cards";
+export * from "./Upload";

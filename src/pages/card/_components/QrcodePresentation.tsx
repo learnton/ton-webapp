@@ -37,8 +37,6 @@ function stringToParts(value: string, size: number): string[] {
   return results;
 }
 
-// TODO refactor by QRCodeGenerator
-
 const Code = ({
   cellSize,
   isParts,
@@ -89,7 +87,7 @@ const Code = ({
 
   return (
     <div
-      className="bg-body rounded-lg mx-auto h-[330px] shadow w-[330px] CredentialQrcode overflow-hidden"
+      className="bg-body rounded-lg shadow-lg aspect-square overflow-hidden"
       ref={container}
     />
   );
@@ -110,24 +108,24 @@ const QrcodePresentation = function ({
   templateId?: number;
   onClose: () => void;
 }) {
-  console.log("open=", open);
   return (
     <ActionModal onClose={onClose} open={open}>
       <div className="p-4">
-        <div>
-          {open && presentation && (
-            <Code
-              cellSize={cellSize}
-              isParts={isParts}
-              presentation={presentation}
-              templateId={templateId}
-            />
-          )}
-        </div>
+        {open && presentation && (
+          <Code
+            cellSize={cellSize}
+            isParts={isParts}
+            presentation={presentation}
+            templateId={templateId}
+          />
+        )}
 
-        <div className="font-medium text-center">
+        <div className="font-medium text-center mt-4 text-text2">
           <TimeNow />
         </div>
+        <button className="btn btn-block btn-outline btn-primary mt-4">
+          Send Proof
+        </button>
       </div>
     </ActionModal>
   );

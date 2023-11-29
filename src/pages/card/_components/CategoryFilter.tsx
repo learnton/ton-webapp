@@ -29,7 +29,7 @@ const CategoryFilter = ({ onCateChange }: Props) => {
 
   return (
     <>
-      <button className="btn btn-ghost" onClick={toggle}>
+      <button className="btn bg-white" onClick={toggle}>
         <IconFilter />
       </button>
       <ActionModal onClose={toggle} open={open} title="Filters">

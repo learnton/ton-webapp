@@ -1,12 +1,13 @@
 import { useMemo, useState } from "react";
 // import IconSearch from "@/assets/img/icon_search.svg?react";
-import { CARD_TYPE } from "@/components";
+import { CARD_TYPE, CredentialImport } from "@/components";
 import { useCredentialByCate, useCredentials } from "@/hooks";
 import CredentialCard from "../_components/CredentialCard";
 import CategoryFilter from "../_components/CategoryFilter";
+import IconImport from "@/assets/img/icon_add.svg?react";
 
 const PageCredential = () => {
-  // const [open, toggleImport] = useToggle();
+  const [openImport, toggleImport] = useState(false);
   const [cate, setCate] = useState<CARD_TYPE>();
   const credentials = useCredentials();
   const filterVcs = useCredentialByCate(cate);
@@ -26,15 +27,16 @@ const PageCredential = () => {
         </button> */}
       </div>
 
-      <div className="flex items-center mt-2">
+      <div className="flex items-center mt-4 gap-2">
         <div className="font-medium flex-1">{showVcs?.length || 0} Results</div>
-        <div>
-          {/* <button onClick={toggleImport} className="btn-secondary">
-              <IconImportVc />
-              Import
-            </button> */}
-          <CategoryFilter onCateChange={setCate} />
-        </div>
+        <button
+          onClick={() => toggleImport(true)}
+          className="bg-white font-sm font-rubik btn"
+        >
+          <IconImport />
+          Import Card
+        </button>
+        <CategoryFilter onCateChange={setCate} />
       </div>
 
       <div className="mt-4">
@@ -42,7 +44,7 @@ const PageCredential = () => {
           return <CredentialCard id={item.id} key={item.id} showProof />;
         })}
       </div>
-      {/* {open && <CredentialImport onClose={toggleImport} open={open} />} */}
+      <CredentialImport onClose={() => toggleImport(false)} open={openImport} />
     </>
   );
 };

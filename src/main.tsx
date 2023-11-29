@@ -8,6 +8,7 @@ import { BrowserStore } from "@zcloak/ui-store";
 import AppProvider from "./context/AppProvider";
 import rootRoute from "./pages";
 import { initCrypto } from "@zcloak/crypto";
+import { utils } from "@zcloak/wallet-lib";
 
 const router = createBrowserRouter(rootRoute, {
   basename: import.meta.env.BASE_URL,
@@ -15,8 +16,7 @@ const router = createBrowserRouter(rootRoute, {
 
 // const session = new BrowserSession();
 const store = new BrowserStore();
-
-void initCrypto().then(() => {
+Promise.all([initCrypto(), utils.initCrypto()]).then(() => {
   ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
       <TonConnectUIProvider

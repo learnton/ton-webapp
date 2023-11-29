@@ -15,8 +15,6 @@ function Selective({
   onChange: (value: string[] | ((value: string[]) => string[])) => void;
   value: string[];
 }) {
-  console.log(value);
-
   return (
     <div className="p-4 bg-grey rounded-lg mt-6 flex flex-col gap-2">
       {Object.entries(subject).map(([key, v]) => (
