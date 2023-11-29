@@ -3,7 +3,7 @@
 
 import MembershipCard from "./MembershipCard";
 import OtherCard from "./OtherCard";
-import { CARD_TYPE, CardMap, ZkIDCardProps } from "./types";
+import { CARD_TYPE, CardMap } from "./types";
 
 const componentMap: CardMap = {
   [CARD_TYPE.Membership]: MembershipCard,
@@ -17,5 +17,5 @@ const componentMap: CardMap = {
 };
 
 export function findCard(category: CARD_TYPE) {
-  return componentMap[category] as ZkIDCardProps;
+  return componentMap[category];
 }
