@@ -9,17 +9,17 @@ import IconRight from "@/assets/img/icon_go.svg?react";
 import { useTwaSdk, useDidDB, useLiveQuery } from "@/hooks";
 import CardBgURL from "./_assets/img_bg_card@2x.webp";
 import { Link } from "react-router-dom";
-import { extraResult, DidDB } from "@/utils";
+import { DidDB } from "@/utils";
 import { useToast } from "@/components/Toast";
 import { useRef } from "react";
 import { fetchAndSaveMessages } from "@/pages/message/_utils";
 import { useNavigate } from "react-router-dom";
 import { useCredentials } from "@/hooks";
-import { ScanContext } from "@/context/ScanProvider";
+// import { ScanContext } from "@/context/ScanProvider";
 
 export default function Account() {
   const { didAccounts } = useContext(AppContext);
-  const ScanState = useContext(ScanContext);
+  // const ScanState = useContext(ScanContext);
   const did = didAccounts.current;
   const { UserInfo, WebApp } = useTwaSdk();
   const toast = useToast();
@@ -42,21 +42,21 @@ export default function Account() {
       []
     ) || 0;
 
-  const handleScan: (text: string) => true | void = (text: string) => {
-    extraResult(
-      text,
-      (result) => {
-        if (result.length === 2) {
-          ScanState.type = result[0];
-          ScanState.result = result[1];
-        }
-      },
-      (percent) => {
-        console.log(percent);
-      }
-    );
-    return true;
-  };
+  // const handleScan: (text: string) => true | void = (text: string) => {
+  //   extraResult(
+  //     text,
+  //     (result) => {
+  //       if (result.length === 2) {
+  //         ScanState.type = result[0];
+  //         ScanState.result = result[1];
+  //       }
+  //     },
+  //     (percent) => {
+  //       console.log(percent);
+  //     }
+  //   );
+  //   return true;
+  // };
 
   const links = useRef([
     {
