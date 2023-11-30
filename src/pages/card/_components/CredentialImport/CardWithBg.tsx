@@ -1,7 +1,7 @@
 // Copyright 2021-2023 zcloak authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import IconEdit from "@/assets/icon_edit.svg?react";
 import LogoZcloakVc from "@/assets/logo_zcloak_vc.svg?react";
