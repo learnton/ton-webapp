@@ -29,6 +29,7 @@
     "jdenticon": "^3.2.0",
     "lottie-react": "^2.4.0",
     "moment": "^2.29.4",
+    "qr-scanner": "^1.4.2",
     "qrcode-generator": "^1.4.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -2,6 +2,7 @@ import CardList from "./list/page";
 import CardDetail from "./detail/page";
 import ShareX from "./detail/shareX/page";
 import Presentation from "./detail/presentation/page";
+import Scan from "./scan/page";
 
 const routers = [
   {
@@ -24,6 +25,10 @@ const routers = [
         element: <Presentation />,
       },
     ],
+  },
+  {
+    path: "scan",
+    element: <Scan />,
   },
 ];
 

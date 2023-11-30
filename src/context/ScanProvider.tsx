@@ -5,22 +5,24 @@ import React, {
   useState,
   useMemo,
 } from "react";
-import { ResultType, isDidUrlArray } from "@/utils";
+import { isDidUrlArray } from "@/utils";
 import { isVpWithTemplate } from "@/pages/card/_components/QrcodePresentation";
 import { VerifiablePresentation } from "@zcloak/vc/types";
 import { isHex, isNumber } from "@polkadot/util";
 import moment from "moment";
 import { ClaimContent, ActionModal } from "@/components";
 import CredentialCard from "@/pages/card/_components/CredentialCard";
+import { QrResultTypes, QrResult } from "@/pages/card/scan/_utils/types";
 
 export interface ScanState {
-  result?: ResultType;
+  type: QrResultTypes;
+  result: QrResult[QrResultTypes];
 }
 
-export const ScanContext = createContext<ScanState>({});
+export const ScanContext = createContext<ScanState>({} as ScanState);
 
 function ScanProvider({ children }: { children: React.ReactNode }) {
-  const { result } = useContext(ScanContext);
+  const { type, result } = useContext(ScanContext);
   const [vp, setVp] = useState<VerifiablePresentation>();
   const [templateId, setTemplateId] = useState<number>();
   const [challengeResult, setChallengeResult] = useState<React.ReactNode>();
@@ -33,7 +35,10 @@ function ScanProvider({ children }: { children: React.ReactNode }) {
   }, [vp?.verifiableCredential]);
 
   useEffect(() => {
-    const handleScanResult = ([type, result]: ResultType) => {
+    const handleScanResult = (
+      type: QrResultTypes,
+      result: QrResult[QrResultTypes]
+    ) => {
       if (type === "vp") {
         let _result;
 
@@ -90,11 +95,11 @@ function ScanProvider({ children }: { children: React.ReactNode }) {
       }
     };
 
-    result && handleScanResult(result);
-  }, [result]);
+    type && result && handleScanResult(type, result);
+  }, [type, result]);
 
   return (
-    <ScanContext.Provider value={{}}>
+    <ScanContext.Provider value={{} as ScanState}>
       {children}
       <ActionModal onClose={() => setVp(undefined)} open={!!vp}>
         {challengeResult}

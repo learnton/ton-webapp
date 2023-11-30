@@ -39,7 +39,7 @@ function FileUpload({
     <div>
       <input {...getInputProps()} />
       <button className="btn" disabled={disabled} onClick={open}>
-        <InsertPhotoIcon />
+        <InsertPhotoIcon className="w-4 h-4" />
       </button>
     </div>
   );

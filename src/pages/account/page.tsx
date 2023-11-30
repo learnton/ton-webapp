@@ -45,7 +45,12 @@ export default function Account() {
   const handleScan: (text: string) => true | void = (text: string) => {
     extraResult(
       text,
-      (result) => (ScanState.result = result),
+      (result) => {
+        if (result.length === 2) {
+          ScanState.type = result[0];
+          ScanState.result = result[1];
+        }
+      },
       (percent) => {
         console.log(percent);
       }
@@ -83,7 +88,10 @@ export default function Account() {
             <IconAccount />
           </Link>
           <button
-            onClick={() => WebApp.showScanQrPopup({}, handleScan)}
+            onClick={() => {
+              navigate("/scan");
+              // WebApp.showScanQrPopup({}, handleScan)
+            }}
             className="btn btn-ghost btn-xs"
           >
             <IconScan />
