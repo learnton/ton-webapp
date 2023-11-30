@@ -1,7 +1,7 @@
 // Copyright 2021-2023 zcloak authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import React, { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import IconEdit from "@/assets/icon_edit.svg?react";
 import LogoZcloakVc from "@/assets/logo_zcloak_vc.svg?react";
@@ -23,22 +23,8 @@ const CardWithBg = ({
   setBg: (bg: string) => void;
   alias?: string;
 }) => {
-  const [cardBgs, setCardBg] = useState(bgConfig);
   const [template] = useTemplate(templateId);
-
-  const showBg = useCallback(() => {
-    setCardBg((c) =>
-      c.map((item) => {
-        if (item.bgId !== "1") {
-          item.show = !item.show;
-
-          return item;
-        }
-
-        return item;
-      })
-    );
-  }, []);
+  const [showCardBgs, setShowCardBgs] = useState(false);
 
   const _bg = useMemo(() => {
     return template
@@ -57,23 +43,30 @@ const CardWithBg = ({
       }}
     >
       {!template && (
-        <div className="bg-white flex flex-row-reverse rounded-[21px] h-[36px] shadow -top-[18px] right-0 absolute items-center">
-          {cardBgs.map((item, index) => {
+        <div className="bg-white flex flex-row-reverse rounded-3xl shadow -top-[20px] right-0 absolute items-center gap-2 p-2">
+          {bgConfig.map((item, index) => {
             if (item.bgId === "1") {
               return (
-                <button className="bg-[#000] btn" key={index} onClick={showBg}>
-                  <IconEdit className="h-[14px] text-white w-[14px]" />
-                </button>
+                <div
+                  className="bg-[#000] rounded-full w-8 h-8 flex items-center justify-center"
+                  key={index}
+                  onClick={() => setShowCardBgs(!showCardBgs)}
+                >
+                  <IconEdit className=" text-white" />
+                </div>
               );
             }
 
-            return (
-              <div key={index}>
-                <button className="btn" onClick={() => setBg(item.bg)}>
-                  {item.component as React.ReactElement}
-                </button>
+            return showCardBgs ? (
+              <div key={index} className="avatar">
+                <div
+                  className="rounded-full w-8 h-8"
+                  onClick={() => setBg(item.bg)}
+                >
+                  <img src={item.bg} alt="" />
+                </div>
               </div>
-            );
+            ) : null;
           })}
         </div>
       )}

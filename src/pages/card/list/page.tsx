@@ -47,7 +47,10 @@ const PageCredential = () => {
       </div>
       {openImport && (
         <CredentialImport
-          onClose={() => toggleImport(false)}
+          onClose={() => {
+            toggleImport(false);
+            window.location.reload();
+          }}
           open={openImport}
         />
       )}

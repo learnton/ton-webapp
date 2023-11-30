@@ -31,7 +31,7 @@ const OldCard = ({ handleQr, id, onClick, vc }: ZkIDCardProps) => {
   return (
     <CardContainer bg={cardBg?.bg}>
       <div
-        className="'OldCard'] after:text-[0] h-full flex flex-col justify-between text-white"
+        className="after:content-['OldCard'] after:text-[0] h-full flex flex-col justify-between text-white"
         onClick={onClick}
       >
         <div className="flex items-center justify-between">

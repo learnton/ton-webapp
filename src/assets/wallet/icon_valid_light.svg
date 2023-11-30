@@ -1,1 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><style>.a,.d{fill:#0145ff;}.b{fill:rgba(1,69,255,0);}.c{clip-path:url(#a);}.d{stroke:rgba(112,112,112,0);opacity:0;}.e{stroke:none;}.f{fill:none;}</style><clipPath id="a"><rect class="a" width="24" height="24"/></clipPath></defs><rect class="b" width="24" height="24"/><g class="d"><rect class="e" width="24" height="24"/><rect class="f" x="0.5" y="0.5" width="23" height="23"/></g><g transform="translate(1 1)"><g class="d"><rect class="e" width="22" height="22"/><rect class="f" x="0.5" y="0.5" width="21" height="21"/></g><g transform="translate(1.297 1.676)"><path class="a" d="M5.444,18.56H0V10.909H5.444v2.137h4.847v0a3.766,3.766,0,0,0,0-7.525V0a9.277,9.277,0,0,1,.009,18.55v0Zm2.127-7.566V7.917L5.113,5.457H0V0H5.444V5.125L7.879,7.566h3.115v3.427Z" transform="translate(0 0)"/></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+        <style>.c{clip-path:url(#a);}</style>
+        <clipPath id="a">
+            <rect fill="#0145ff" width="24" height="24"/>
+        </clipPath>
+    </defs>
+
+    <g transform="translate(1 1)">
+
+        <g transform="translate(1.297 1.676)">
+            <path fill="#0145ff" d="M5.444,18.56H0V10.909H5.444v2.137h4.847v0a3.766,3.766,0,0,0,0-7.525V0a9.277,9.277,0,0,1,.009,18.55v0Zm2.127-7.566V7.917L5.113,5.457H0V0H5.444V5.125L7.879,7.566h3.115v3.427Z" transform="translate(0 0)"/>
+        </g>
+    </g>
+</svg>

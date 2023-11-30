@@ -1,5 +1,3 @@
- 
-
 import { PropsWithChildren } from "react";
 
 interface Props extends PropsWithChildren {
@@ -9,11 +7,9 @@ interface Props extends PropsWithChildren {
 const CardContainer = ({ bg, children }: Props) => {
   return (
     <div
-      className="rounded-3xl p-4 aspect-card2"
+      className="rounded-3xl p-4 aspect-card2 bg-no-repeat bg-cover"
       style={{
-        background: `url(${bg}) no-repeat`,
-        backgroundSize: "cover",
-        backgroundPosition: "center center",
+        backgroundImage: `url(${bg})`,
       }}
     >
       {children}

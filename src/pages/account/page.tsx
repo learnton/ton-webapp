@@ -99,7 +99,7 @@ export default function Account() {
             <IconNoti />
           </Link>
         </div>
-        <div className="flex flex-row gap-2 items-center">
+        <div className="flex flex-row gap-2 items-center pl-4">
           {did && (
             <IdentityIcon
               value={did.instance.id}

@@ -1,11 +1,11 @@
 // Copyright 2021-2023 zcloak authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import IconCard from "@/assets//wallet/icon_card.svg?react";
-import IconCard1 from "@/assets//wallet/icon_card1.svg";
-import IconCard2 from "@/assets//wallet/icon_card2.svg";
-import IconCard3 from "@/assets//wallet/icon_card3.svg";
-import IconCard4 from "@/assets//wallet/icon_card4.svg";
+import IconCard from "@/assets/wallet/icon_card.svg?react";
+import IconCard1 from "@/assets/wallet/icon_card1.svg?react";
+import IconCard2 from "@/assets/wallet/icon_card2.svg?react";
+import IconCard3 from "@/assets/wallet/icon_card3.svg?react";
+import IconCard4 from "@/assets/wallet/icon_card4.svg?react";
 
 import cardBg1 from "./assets/pic_card1.webp";
 import cardBg2 from "./assets/pic_card2.webp";
@@ -15,7 +15,7 @@ import cardBg4 from "./assets/pic_card4.webp";
 export interface CardBgConfig {
   bgId: string;
   bg: string;
-  component: unknown;
+  component: any;
   show: boolean;
   default: boolean;
 }

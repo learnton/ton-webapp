@@ -43,7 +43,7 @@ const MembershipCard = ({ handleQr, onClick, template, vc }: ZkIDCardProps) => {
   return (
     <CardContainer bg={bg}>
       <div
-        className="flex flex-col h-full justify-between 'MembershipCard'] after:text-[0]"
+        className="flex flex-col h-full justify-between after:content-['MembershipCard'] after:text-[0]"
         onClick={onClick}
         style={{
           color: template?.color ?? "#FFF",
