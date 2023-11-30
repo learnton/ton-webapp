@@ -1,6 +1,5 @@
 import { isHex } from "@polkadot/util";
 import React, { useCallback, useContext, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { isDidUrl } from "@zcloak/did";
 
@@ -34,7 +33,6 @@ function CredentialCard({
 }: Props) {
   const { keyring } = useContext(AppContext);
 
-  const navigate = useNavigate();
   const [template] = useTemplate(templateId);
   const [vcTemplate] = useVcTemplate(id);
   const credential = useCredential(id);
@@ -44,9 +42,12 @@ function CredentialCard({
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.stopPropagation();
 
-      id && navigate(`/card/${id}/presentation`);
+      id &&
+        (window.location.href = `${
+          import.meta.env.BASE_URL
+        }/card/${id}/presentation`);
     },
-    [navigate, id]
+    [id]
   );
 
   const vpVc = useMemo(() => {
@@ -68,7 +69,9 @@ function CredentialCard({
       <BaseCard
         handleQr={showProof ? handleQr : undefined}
         id={id}
-        onClick={() => navigate(`/card/${id}`)}
+        onClick={() =>
+          (window.location.href = `${import.meta.env.BASE_URL}/card/${id}`)
+        }
         template={vcTemplate || template}
         vc={vpVc}
       />

@@ -14,15 +14,18 @@ import { ClaimContent, ActionModal } from "@/components";
 import CredentialCard from "@/pages/card/_components/CredentialCard";
 import { QrResultTypes, QrResult } from "@/pages/card/scan/_utils/types";
 
-export interface ScanState {
-  type: QrResultTypes;
-  result: QrResult[QrResultTypes];
-}
+type ScanResult = [QrResultTypes, QrResult[QrResultTypes]];
+export type ScanState = {
+  value: ScanResult;
+  set: (value: ScanResult) => void;
+};
 
-export const ScanContext = createContext<ScanState>({} as ScanState);
+export const ScanContext = createContext<ScanState>({} as unknown as ScanState);
 
 function ScanProvider({ children }: { children: React.ReactNode }) {
-  const { type, result } = useContext(ScanContext);
+  const [scanResult, setScanResult] = useState<ScanResult>(
+    [] as unknown as ScanResult
+  );
   const [vp, setVp] = useState<VerifiablePresentation>();
   const [templateId, setTemplateId] = useState<number>();
   const [challengeResult, setChallengeResult] = useState<React.ReactNode>();
@@ -35,10 +38,8 @@ function ScanProvider({ children }: { children: React.ReactNode }) {
   }, [vp?.verifiableCredential]);
 
   useEffect(() => {
-    const handleScanResult = (
-      type: QrResultTypes,
-      result: QrResult[QrResultTypes]
-    ) => {
+    const handleScanResult = (scanResult: ScanResult) => {
+      const [type, result] = scanResult;
       if (type === "vp") {
         let _result;
 
@@ -51,18 +52,18 @@ function ScanProvider({ children }: { children: React.ReactNode }) {
 
         if (!_result.proof.challenge) {
           setChallengeResult(
-            <div color="warning.main">No challenge found</div>
+            <div className="text-xs text-warning">No challenge found</div>
           );
         } else if (isHex(_result.proof.challenge)) {
           setChallengeResult(
-            <div color="warning.main">
+            <div className="text-xs text-warning">
               Verifiable Presentation challenge is: ${_result.proof.challenge}
             </div>
           );
         } else if (isNumber(Number(_result.proof.challenge))) {
           if (Date.now() <= Number(_result.proof.challenge) + 60 * 1000) {
             setChallengeResult(
-              <div color="success.main">
+              <div className="text-xs text-success">
                 Verifiable Presentation time is:{" "}
                 {moment(Number(_result.proof.challenge)).format(
                   "YYYY-MM-DD HH:mm:ss"
@@ -71,7 +72,7 @@ function ScanProvider({ children }: { children: React.ReactNode }) {
             );
           } else {
             setChallengeResult(
-              <div color="error.main">
+              <div className="text-xs text-error">
                 Verifiable Presentation is expired:{" "}
                 {moment(Number(_result.proof.challenge)).format(
                   "YYYY-MM-DD HH:mm:ss"
@@ -81,7 +82,7 @@ function ScanProvider({ children }: { children: React.ReactNode }) {
           }
         } else {
           setChallengeResult(
-            <div color="text.primary">
+            <div className="text-xs text-primary">
               Verifiable Presentation challenge is: ${_result.proof.challenge}
             </div>
           );
@@ -95,11 +96,16 @@ function ScanProvider({ children }: { children: React.ReactNode }) {
       }
     };
 
-    type && result && handleScanResult(type, result);
-  }, [type, result]);
+    scanResult && handleScanResult(scanResult);
+  }, [scanResult]);
 
   return (
-    <ScanContext.Provider value={{} as ScanState}>
+    <ScanContext.Provider
+      value={{
+        value: scanResult,
+        set: setScanResult,
+      }}
+    >
       {children}
       <ActionModal onClose={() => setVp(undefined)} open={!!vp}>
         {challengeResult}

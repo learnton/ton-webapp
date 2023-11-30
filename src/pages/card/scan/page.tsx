@@ -95,7 +95,7 @@ function extraResult(
 async function startScan(
   scanner: React.MutableRefObject<Scanner | null>,
   ele: HTMLVideoElement,
-  onResult: React.MutableRefObject<QrHandleResult>,
+  onResult: QrHandleResult,
   onProgress: (progress: number) => void
 ) {
   if (!(await Scanner.hasCamera())) return;
@@ -110,7 +110,7 @@ async function startScan(
       extraResult(
         data,
         (result) => {
-          onResult.current(...result);
+          onResult(...result);
         },
         onProgress,
         addParts
@@ -141,14 +141,13 @@ function LinearProgressWithLabel(props: { value: number }) {
 
 function Scan() {
   const ScanState = useContext(ScanContext);
-  const onResult: QrHandleResult = (type, result) => {
-    ScanState.type = type;
-    ScanState.result = result;
+  const onResultRef: QrHandleResult = (type, result) => {
+    console.log("onResultRef", type, result);
+    ScanState.set([type, result]);
   };
   const navigate = useNavigate();
   const container = useRef<HTMLVideoElement | null>(null);
   const scanner = useRef<Scanner | null>(null);
-  const onResultRef = useRef<QrHandleResult>(onResult);
   const [mode, setMode] = useState<Scanner.FacingMode>("environment");
   const [isScan, toggleScan] = useToggle(true);
   const [imgData, setImgData] = useState<string>();
@@ -190,7 +189,7 @@ function Scan() {
               extraResult(
                 result.data,
                 (result) => {
-                  onResultRef.current(...result);
+                  onResultRef(...result);
                 },
                 setProgress
               );
@@ -203,10 +202,6 @@ function Scan() {
     },
     [toggleScan]
   );
-
-  useEffect(() => {
-    onResultRef.current = onResult;
-  }, [onResult]);
 
   return (
     <>
