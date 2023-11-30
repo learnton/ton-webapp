@@ -147,7 +147,7 @@ const ShareX = () => {
   }, [template, vc, toggle, toggleLoading, Role, Name]);
 
   return (
-    <div className="h-[100vh] bg-[#000]">
+    <div className="h-[100vh] bg-[#000] -mx-4">
       <div className="pt-8" ref={cardRef}>
         <div
           className="w-[340px] h-[450px] m-auto p-[32px] bg-contain bg-no-repeat"

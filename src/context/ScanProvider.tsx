@@ -84,9 +84,9 @@ function ScanProvider({ children }: { children: React.ReactNode }) {
 
         setVp(_result);
       } else if (type === "keys") {
-        window.location.href = `/account/import?state=${JSON.stringify(
-          result
-        )}`;
+        window.location.href = `${
+          import.meta.env.BASE_URL
+        }/account/import?state=${JSON.stringify(result)}`;
       }
     };
 

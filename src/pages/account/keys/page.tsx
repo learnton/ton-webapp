@@ -80,7 +80,7 @@ export default function AccountKeys() {
   });
 
   return (
-    <>
+    <div className="py-4">
       <h1 className="leading-loose font-bold text-xl">My Keys</h1>
       <div className="text-[#9CA3AF] flex flex-col gap-4">
         <p>
@@ -106,6 +106,6 @@ export default function AccountKeys() {
       >
         View my seed phrase
       </Link>
-    </>
+    </div>
   );
 }

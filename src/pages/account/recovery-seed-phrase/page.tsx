@@ -35,7 +35,7 @@ export default function RecoverySeedPhrase() {
   }, [password, accounts, toast]);
 
   return (
-    <>
+    <div className="py-4">
       <h1 className="font-bold text-xl mb-4">Back up your seed phrase</h1>
       <div className="text-[#9CA3AF] flex flex-col gap-4">
         <p>
@@ -82,6 +82,6 @@ export default function RecoverySeedPhrase() {
           </>
         )}
       </div>
-    </>
+    </div>
   );
 }

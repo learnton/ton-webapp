@@ -11,7 +11,7 @@ export default function Profile() {
   const { UserInfo } = useTwaSdk();
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-10 py-4">
       <div className="flex flex-col items-center gap-2">
         <div className="py-4">
           {did && (

@@ -18,7 +18,7 @@ const PageCredential = () => {
   }, [filterVcs, credentials, cate]);
 
   return (
-    <>
+    <div className="py-4">
       <div className="flex items-center">
         <h1 className="leading-loose font-bold text-xl flex-1">
           My zkID Cards
@@ -51,7 +51,7 @@ const PageCredential = () => {
           open={openImport}
         />
       )}
-    </>
+    </div>
   );
 };
 

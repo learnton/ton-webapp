@@ -69,9 +69,9 @@ export default function Account() {
   ]);
 
   return (
-    <>
+    <div className="py-4">
       <div
-        className="flex flex-col bg-[#C7D8FA] rounded-3xl mb-20 p-4 aspect-card justify-center relative"
+        className="flex flex-col bg-[#C7D8FA] rounded-3xl mb-20 aspect-card justify-center relative"
         style={{
           backgroundImage: `url(${CardBgURL})`,
           backgroundSize: "cover",
@@ -168,6 +168,6 @@ export default function Account() {
       >
         test Toast
       </button>
-    </>
+    </div>
   );
 }
