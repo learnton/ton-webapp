@@ -15,6 +15,7 @@ import cardBg4 from "./assets/pic_card4.webp";
 export interface CardBgConfig {
   bgId: string;
   bg: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: any;
   show: boolean;
   default: boolean;

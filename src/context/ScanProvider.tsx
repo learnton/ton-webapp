@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  useMemo,
-} from "react";
+import React, { createContext, useEffect, useState, useMemo } from "react";
 import { isDidUrlArray } from "@/utils";
 import { isVpWithTemplate } from "@/pages/card/_components/QrcodePresentation";
 import { VerifiablePresentation } from "@zcloak/vc/types";

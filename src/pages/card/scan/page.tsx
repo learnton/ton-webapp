@@ -1,5 +1,6 @@
-// Copyright 2021-2023 zcloak authors & contributors
-// SPDX-License-Identifier: Apache-2.0
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 import type { DidKeys$Json } from "@zcloak/did/keys/types";
 import type { QrHandleResult, QrResult, QrResultTypes } from "./_utils/types";
@@ -104,7 +105,7 @@ async function startScan(
 
   scanner.current = new Scanner(
     ele,
-    (result) => {
+    (result: { data: string }) => {
       const data: string = result.data;
 
       extraResult(
@@ -122,29 +123,34 @@ async function startScan(
       highlightCodeOutline: true,
     }
   );
-  scanner.current.start();
+  void scanner.current.start();
 }
 
 function destroy(scanner: React.MutableRefObject<Scanner | null>) {
   scanner.current?.destroy();
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 function LinearProgressWithLabel(props: { value: number }) {
   return (
     <progress
-      className="progress progress-success w-full"
+      className="w-full progress progress-success"
       value={props.value}
       max="100"
     ></progress>
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 function Scan() {
   const ScanState = useContext(ScanContext);
-  const onResultRef: QrHandleResult = (type, result) => {
-    console.log("onResultRef", type, result);
-    ScanState.set([type, result]);
-  };
+  const onResultRef: QrHandleResult = useCallback(
+    (type, result) => {
+      console.log("onResultRef", type, result);
+      ScanState.set([type, result]);
+    },
+    [ScanState]
+  );
   const navigate = useNavigate();
   const container = useRef<HTMLVideoElement | null>(null);
   const scanner = useRef<Scanner | null>(null);
@@ -155,7 +161,7 @@ function Scan() {
 
   useEffect(() => {
     if (isScan) {
-      startScan(
+      void startScan(
         scanner,
         container.current as HTMLVideoElement,
         onResultRef,
@@ -166,7 +172,7 @@ function Scan() {
     return () => {
       destroy(scanner);
     };
-  }, [isScan]);
+  }, [isScan, onResultRef]);
 
   const onSelect = useCallback(
     (files: File[]) => {
@@ -182,10 +188,10 @@ function Scan() {
           setImgData(imgData);
 
           if (imgData) {
-            Scanner.scanImage(imgData, {
+            void Scanner.scanImage(imgData, {
               alsoTryWithoutScanRegion: true,
               returnDetailedScanResult: true,
-            }).then((result) => {
+            }).then((result: { data: string }) => {
               extraResult(
                 result.data,
                 (result) => {
@@ -200,7 +206,7 @@ function Scan() {
         reader.readAsDataURL(file);
       }
     },
-    [toggleScan]
+    [onResultRef, toggleScan]
   );
 
   return (
@@ -211,7 +217,7 @@ function Scan() {
             <video
               autoPlay
               ref={container}
-              className="w-full aspect-square mb-4"
+              className="mb-4 w-full aspect-square"
             />
             <LinearProgressWithLabel value={progress * 100} />
           </>
@@ -220,20 +226,20 @@ function Scan() {
         )}
       </div>
       <div>
-        <div className="flex items-center gap-2">
+        <div className="flex gap-2 items-center">
           <button
             className="btn"
             onClick={() => {
               const value = mode === "environment" ? "user" : "environment";
 
               setMode(value);
-              scanner.current?.setCamera(value);
+              void scanner.current?.setCamera(value);
             }}
           >
             toggle
           </button>
           <button
-            className="btn btn-primary flex-1"
+            className="flex-1 btn btn-primary"
             onClick={() => navigate("/")}
           >
             Close
@@ -252,4 +258,5 @@ function Scan() {
   );
 }
 
-export default React.memo(Scan);
+const exportComponent = React.memo(Scan);
+export default exportComponent;
