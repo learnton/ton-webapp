@@ -210,14 +210,14 @@ function Scan() {
   );
 
   return (
-    <>
-      <div className="relative overflow-hidden">
+    <div className="flex flex-col h-[100vh] py-4">
+      <div className="flex flex-col flex-1 mb-4 relative overflow-hidden">
         {isScan ? (
           <>
             <video
               autoPlay
               ref={container}
-              className="mb-4 w-full aspect-square"
+              className="object-cover flex-1 mb-4 w-full"
             />
             <LinearProgressWithLabel value={progress * 100} />
           </>
@@ -254,7 +254,7 @@ function Scan() {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
