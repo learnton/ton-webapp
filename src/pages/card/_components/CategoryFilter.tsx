@@ -1,22 +1,25 @@
-// Copyright 2021-2023 zcloak authors & contributors
-// SPDX-License-Identifier: Apache-2.0
+/* eslint-disable react-refresh/only-export-components */
 
 import { useState, memo } from "react";
 import { ActionModal } from "@/components";
 import IconFilter from "@/assets/img/icon_filter.svg?react";
-import { CARD_TYPE, categoryMap } from "@/components";
+import { CARD_TYPE, categoryMap, Address } from "@/components";
 import { useToggle } from "@/hooks";
+import { DidUrl } from "@zcloak/did-resolver/types";
+
+export const DEFAULT_TYPE = -1;
+export const DEFAULT_ISSUER = "0x";
 
 const CategoryFilter = ({
   onChange,
   issuers,
 }: {
-  onChange: (cate: CARD_TYPE | number, issuer: string) => void;
-  issuers?: string[];
+  onChange: (cate: CARD_TYPE | -1, issuer: DidUrl | "0x") => void;
+  issuers?: DidUrl[];
 }) => {
   const [open, toggle] = useToggle();
-  const [selectIndex, setSelect] = useState<CARD_TYPE | number>(-1);
-  const [selectIssuer, setIssuer] = useState<string>("0x");
+  const [selectIndex, setSelect] = useState<CARD_TYPE | -1>(DEFAULT_TYPE);
+  const [selectIssuer, setIssuer] = useState<DidUrl | "0x">(DEFAULT_ISSUER);
 
   const onConfirm = () => {
     onChange(selectIndex, selectIssuer);
@@ -25,19 +28,16 @@ const CategoryFilter = ({
   };
 
   const onReset = () => {
-    setSelect(-1);
-    setIssuer("0x");
+    setSelect(DEFAULT_TYPE);
+    setIssuer(DEFAULT_ISSUER);
 
-    console.log(11, selectIndex, selectIssuer);
-    setTimeout(() => {
-      console.log(22, selectIndex, selectIssuer);
-      onConfirm();
-    }, 1000);
+    onChange(DEFAULT_TYPE, DEFAULT_ISSUER);
+    toggle();
   };
 
   return (
     <>
-      <button className="btn bg-white" onClick={toggle}>
+      <button className="bg-white btn" onClick={toggle}>
         <IconFilter />
       </button>
       <ActionModal onClose={toggle} open={open} title="Filters">
@@ -52,7 +52,9 @@ const CategoryFilter = ({
                   selectIndex === index ? " border-primary" : ""
                 }`}
                 key={k}
-                onClick={() => setSelect(selectIndex === index ? -1 : index)}
+                onClick={() =>
+                  setSelect(selectIndex === index ? DEFAULT_TYPE : index)
+                }
               >
                 {categoryMap[index]}
               </span>
@@ -71,21 +73,26 @@ const CategoryFilter = ({
                     }`}
                     key={issuer}
                     onClick={() =>
-                      setIssuer(selectIssuer === issuer ? "0x" : issuer)
+                      setIssuer(
+                        selectIssuer === issuer ? DEFAULT_ISSUER : issuer
+                      )
                     }
                   >
-                    {issuer}
+                    <Address value={issuer} />
                   </span>
                 );
               })}
             </div>
           </>
         ) : null}
-        <div className="flex items-center gap-4 mt-4">
-          <button className="btn flex-1" onClick={onReset}>
+        <div className="flex mt-4 gap-4 items-center">
+          <button className="flexDEFAULT_TYPE btn" onClick={onReset}>
             Reset
           </button>
-          <button className="btn btn-primary flex-1" onClick={onConfirm}>
+          <button
+            className="flexDEFAULT_TYPE btn btn-primary"
+            onClick={onConfirm}
+          >
             Confirm
           </button>
         </div>

@@ -13,14 +13,7 @@ import { ZkIDCardProps } from "./types";
 
 import cardBg from "./assets/card/img_card_3.png";
 
-function Item({ label, value }: { label: string; value: React.ReactNode }) {
-  return (
-    <div>
-      <span className="text-xs">{label}</span>
-      {value}
-    </div>
-  );
-}
+import DataItem from "./DataItem";
 
 const OtherCard = ({ handleQr, onClick, template, vc }: ZkIDCardProps) => {
   const { category, expirationTime } = useMemo(() => {
@@ -47,7 +40,7 @@ const OtherCard = ({ handleQr, onClick, template, vc }: ZkIDCardProps) => {
   return (
     <CardContainer bg={bg}>
       <div
-        className="after:content-['OtherCard'] after:text-[0] h-full flex flex-col justify-between"
+        className="'OtherCard'] after:text-[0] h-full flex flex-col justify-between"
         onClick={onClick}
         style={{
           color: template?.color,
@@ -71,11 +64,11 @@ const OtherCard = ({ handleQr, onClick, template, vc }: ZkIDCardProps) => {
           <span className="text-xl mb-4">{template?.title}</span>
         </div>
         <div className="flex items-center justify-between">
-          <Item
+          <DataItem
             label="ISSUER"
             value={<AccountName showVid value={attester} />}
           />
-          <Item label="EXPIRE DATE" value={expirationTime} />
+          <DataItem label="EXPIRE DATE" value={expirationTime} />
         </div>
       </div>
     </CardContainer>

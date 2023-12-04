@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { DidUrl } from "@zcloak/did-resolver/types";
 
@@ -9,6 +9,7 @@ import { type ZkCredential } from "@/utils";
 export function useAllCards(
   category?: number,
   issuer?: DidUrl,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   titleOrId?: string
 ) {
   const results = useCredentials();
@@ -61,24 +62,27 @@ export function useAllCards(
 
   useEffect(() => {
     search();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [issuer, category, results, filterByCategory]);
 
-  // useEffect(() => {
-  //   if (titleOrId) {
-  //     const queryReg = new RegExp(titleOrId, "i");
+  useEffect(() => {
+    if (titleOrId) {
+      console.log("titleOrId=", titleOrId);
+      // const queryReg = new RegExp(titleOrId, "i");
 
-  //     setData((data) => {
-  //       return data.filter((item) =>
-  //         item.template
-  //           ? queryReg.test(item.template?.id.toString()) ||
-  //             queryReg.test(item.template.title)
-  //           : false
-  //       );
-  //     });
-  //   } else {
-  //     search();
-  //   }
-  // }, [titleOrId, search]);
+      // setData((data) => {
+      //   return data.filter((item) =>
+      //     item.template
+      //       ? queryReg.test(item.template?.id.toString()) ||
+      //         queryReg.test(item.template.title)
+      //       : false
+      //   );
+      // });
+    } else {
+      search();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [titleOrId]);
 
   return useMemo(() => {
     return {

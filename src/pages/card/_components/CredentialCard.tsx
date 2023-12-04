@@ -45,7 +45,7 @@ function CredentialCard({
       id &&
         (window.location.href = `${
           import.meta.env.BASE_URL
-        }/card/${id}/presentation`);
+        }card/${id}/presentation`);
     },
     [id]
   );
