@@ -1,15 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-
 import { DidUrl } from "@zcloak/did-resolver/types";
-
 import { useCredentials, useCredentialByCate } from "@/hooks";
-
 import { type ZkCredential } from "@/utils";
 
 export function useAllCards(
   category?: number,
   issuer?: DidUrl,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   titleOrId?: string
 ) {
   const results = useCredentials();
