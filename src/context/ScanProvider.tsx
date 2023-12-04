@@ -86,7 +86,7 @@ function ScanProvider({ children }: { children: React.ReactNode }) {
       } else if (type === "keys") {
         window.location.href = `${
           import.meta.env.BASE_URL
-        }/account/import?state=${JSON.stringify(result)}`;
+        }/account/import?state=${JSON.stringify(result)}`.replace("//", "/");
       }
     };
 

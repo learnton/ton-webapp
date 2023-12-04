@@ -45,7 +45,7 @@ function CredentialCard({
       id &&
         (window.location.href = `${
           import.meta.env.BASE_URL
-        }card/${id}/presentation`);
+        }/card/${id}/presentation`.replace("//", "/"));
     },
     [id]
   );
@@ -70,7 +70,9 @@ function CredentialCard({
         handleQr={showProof ? handleQr : undefined}
         id={id}
         onClick={() =>
-          (window.location.href = `${import.meta.env.BASE_URL}/card/${id}`)
+          (window.location.href = `${
+            import.meta.env.BASE_URL
+          }/card/${id}`.replace("//", "/"))
         }
         template={vcTemplate || template}
         vc={vpVc}
