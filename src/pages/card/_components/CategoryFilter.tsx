@@ -86,13 +86,10 @@ const CategoryFilter = ({
           </>
         ) : null}
         <div className="flex mt-4 gap-4 items-center">
-          <button className="flexDEFAULT_TYPE btn" onClick={onReset}>
+          <button className="flex-1 btn" onClick={onReset}>
             Reset
           </button>
-          <button
-            className="flexDEFAULT_TYPE btn btn-primary"
-            onClick={onConfirm}
-          >
+          <button className="flex-1 btn btn-primary" onClick={onConfirm}>
             Confirm
           </button>
         </div>
