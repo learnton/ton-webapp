@@ -5,9 +5,8 @@ import { isHex } from "@polkadot/util";
 import { saveAs } from "file-saver";
 import moment from "moment";
 import { useCallback, useContext, useMemo, useRef } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-import IconClose from "../../_assets/icon_close.svg?react";
 import IconSave from "../../_assets/icon_save.svg?react";
 import LogoGraphics from "../../_assets/logo_graphics.svg?react";
 import LogoWord from "../../_assets/logo_word.svg?react";
@@ -46,16 +45,16 @@ function XDialog({ open, toggle }: { open: boolean; toggle: () => void }) {
   return (
     <ActionModal onClose={toggle} open={open}>
       <div className="text-semibold text-center">Share Tweet</div>
-      <div className="text-center my-4">
-        <div className="w-[50px] h-[50px] bg-[#000] flex items-center justify-center m-auto rounded">
+      <div className="my-4 text-center">
+        <div className="rounded flex m-auto bg-[#000] h-[50px] w-[50px] items-center justify-center">
           <LogoX className="text-white w-6" />
         </div>
       </div>
-      <div className="flex gap-2 mb-4">
-        <button className="btn flex-1" onClick={toggle}>
+      <div className="flex mb-4 gap-2">
+        <button className="flex-1 btn" onClick={toggle}>
           Cancel
         </button>
-        <button className="btn flex-1 btn-primary" onClick={retweet}>
+        <button className="flex-1 btn btn-primary" onClick={retweet}>
           Share Tweet
         </button>
       </div>
@@ -147,25 +146,25 @@ const ShareX = () => {
   }, [template, vc, toggle, toggleLoading, Role, Name]);
 
   return (
-    <div className="h-[100vh] bg-[#000] -mx-4">
+    <div className="bg-[#000] h-[100vh] -mx-4">
       <div className="pt-8" ref={cardRef}>
         <div
-          className="w-[340px] h-[450px] m-auto p-[32px] bg-contain bg-no-repeat"
+          className="bg-contain bg-no-repeat m-auto h-[450px] p-[32px] w-[340px]"
           style={{
             backgroundImage: `url(${CardBg})`,
           }}
         >
           <div className="mb-4">
-            <LogoWord className="w-[100px] text-[#5e6b7e] mx-auto" />
+            <LogoWord className="mx-auto text-[#5e6b7e] w-[100px]" />
           </div>
-          <div className="p-3 rounded-[26px] border border-[rgba(0, 0, 0, 0.2] bg-[rgba(0, 0, 0, 0.1)]">
+          <div className="border bg-[rgba(0, border-[rgba(0, rounded-[26px] p-3 0, 0.2] 0.1 ">
             <BaseCard id={id} template={template} vc={vc} />
           </div>
-          <div className="flex items-center justify-between mt-12">
+          <div className="flex mt-12 items-center justify-between">
             <LogoGraphics style={{ fontSize: 36 }} />
-            <div className="text-white scale-[80%] -mx-8">
+            <div className="-mx-8 text-white scale-[80%]">
               <div className="font-bold">Hey~</div>
-              <div className="text-xs font-medium ">
+              <div className="font-medium text-xs ">
                 Scan to unlock your zkID Card!
               </div>
             </div>
@@ -178,7 +177,7 @@ const ShareX = () => {
         </div>
       </div>
 
-      <div className="flex items-center flex-col justify-center">
+      <div className="flex flex-col items-center justify-center">
         <button
           className={
             "btn btn-circle border-none" +
@@ -193,10 +192,10 @@ const ShareX = () => {
             <IconSave />
           )}
         </button>
-        <div className="text-[#A5A5A5] mb-6 mt-2">Save to Album</div>
-        <Link className="btn btn-ghost" to={`/card/${id}`}>
+        <div className="mt-2 mb-6 text-[#A5A5A5]">Save to Album</div>
+        {/* <Link className="btn btn-ghost" to={`/card/${id}`}>
           <IconClose style={{ fontSize: 32 }} />
-        </Link>
+        </Link> */}
         {open && <XDialog open={open} toggle={toggle} />}
       </div>
     </div>
