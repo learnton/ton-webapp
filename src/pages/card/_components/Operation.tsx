@@ -131,7 +131,7 @@ const Operation = ({ credential, credentialId, templateId }: Props) => {
         onClose={toggleDel}
         onConfirm={() => void deleteVc()}
         open={delOpen}
-        text="to Are you sure delete this Credential?"
+        text="Are you sure you want to delete this card?"
         title="Delete Credential"
       />
     </>

@@ -60,16 +60,20 @@ export default function Account() {
 
   const links = useRef([
     {
-      name: "Profile",
-      path: "",
-    },
-    {
-      name: "Messages",
-      path: "",
-    },
-    {
-      name: "Settings",
+      name: "Understanding zkID Card",
       link: "",
+    },
+    {
+      name: "The tech behind: DID & VC",
+      link: "",
+    },
+    {
+      name: "zkID in Central Bank Projects",
+      link: "https://zcloaknetwork.medium.com/zcloaks-digital-identity-system-adopted-in-fintech-project-in-collaboration-with-two-central-banks-2e1dfb683f29",
+    },
+    {
+      name: "Legit ID Launch: New Identity Verification Era",
+      link: "https://zcloaknetwork.medium.com/on-chain-kyc-in-the-new-era-launch-of-legit-id-by-zcloak-network-3d74990a286b",
     },
   ]);
 
@@ -147,13 +151,7 @@ export default function Account() {
           <li
             key={index}
             className="bg-white rounded-xl flex p-4 items-center"
-            onClick={() =>
-              link.link
-                ? WebApp.openLink(link.link)
-                : link.path
-                ? navigate(link.path)
-                : null
-            }
+            onClick={() => link.link && WebApp.openLink(link.link)}
           >
             <div className="flex-1">{link.name}</div>
             <IconRight />

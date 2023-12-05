@@ -8,7 +8,14 @@ import { Link } from "react-router-dom";
 export default function Profile() {
   const { didAccounts } = useContext(AppContext);
   const did = didAccounts.current;
-  const { UserInfo } = useTwaSdk();
+  const { UserInfo, WebApp } = useTwaSdk();
+
+  const handleReset = () => {
+    WebApp.showConfirm("Are you sure you want to reset your DID?", () => {
+      localStorage.clear();
+      window.location.reload();
+    });
+  };
 
   return (
     <div className="flex flex-col gap-10 py-4">
@@ -59,6 +66,9 @@ export default function Profile() {
           </div>
           <IconRight />
         </Link>
+        <button className="btn btn-error text-white" onClick={handleReset}>
+          Reset Account
+        </button>
       </div>
     </div>
   );
