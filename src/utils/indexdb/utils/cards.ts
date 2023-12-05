@@ -1,5 +1,3 @@
- 
-
 import { HexString } from "@zcloak/crypto/types";
 
 import { CARD_TYPE } from "@/components";
@@ -21,6 +19,7 @@ export async function addCardRelation(
         templateId: template.id,
         template_id: template._id,
         category: template.category,
+        title: template.title,
       });
     }
   }

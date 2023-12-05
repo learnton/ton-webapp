@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { DidUrl } from "@zcloak/did-resolver/types";
-import { useCredentials, useCredentialByCate } from "@/hooks";
-import { type ZkCredential } from "@/utils";
+import { useCredentials, useCredentialByCate, useDidDB } from "@/hooks";
+import { type ZkCredential, type CardTemplateRelation } from "@/utils";
 
 export function useAllCards(
   category?: number,
@@ -11,20 +11,30 @@ export function useAllCards(
   const results = useCredentials();
   const [data, setData] = useState<ZkCredential[]>([]);
   const [issuers, setIssuers] = useState<DidUrl[]>([]);
-  const [categories, setCateGories] = useState<number[]>([]);
+  const [templateRelation, setTemplateRalation] = useState<
+    Record<string, CardTemplateRelation>
+  >({});
+  const [] = useState<number[]>([]);
   const filterByCategory = useCredentialByCate(category);
+  const didDB = useDidDB();
 
   useEffect(() => {
     if (Array.isArray(results)) {
-      const cate = new Set<number>();
-
-      // for (const card of results) {
-      //   if (card.template?.category !== undefined) {
-      //     cate.add(card.template?.category);
-      //   }
-      // }
-
-      setCateGories([...cate]);
+      let map: Record<string, CardTemplateRelation> = {};
+      if (Array.isArray(results)) {
+        for (const card of results) {
+          didDB?.cardTemplateRelation
+            .where({ id: card.id })
+            .first()
+            .then((template) => {
+              console.log("template=", template);
+              if (template && !map[card.id]) {
+                map[card.id] = template;
+                setTemplateRalation({ ...map });
+              }
+            });
+        }
+      }
       const uniqueIssuers = new Set<DidUrl>();
 
       results.forEach((card) => {
@@ -64,16 +74,16 @@ export function useAllCards(
   useEffect(() => {
     if (titleOrId) {
       console.log("titleOrId=", titleOrId);
-      // const queryReg = new RegExp(titleOrId, "i");
+      const queryReg = new RegExp(titleOrId, "i");
 
-      // setData((data) => {
-      //   return data.filter((item) =>
-      //     item.template
-      //       ? queryReg.test(item.template?.id.toString()) ||
-      //         queryReg.test(item.template.title)
-      //       : false
-      //   );
-      // });
+      setData((data) => {
+        return data.filter((item) =>
+          templateRelation[item.id]
+            ? queryReg.test(templateRelation[item.id]?.id.toString()) ||
+              queryReg.test(templateRelation[item.id].title)
+            : false
+        );
+      });
     } else {
       search();
     }
@@ -84,8 +94,10 @@ export function useAllCards(
     return {
       cards: data,
       issuers,
-      categories,
+      categories: Object.keys(templateRelation)
+        .map((vcid) => templateRelation[vcid].category)
+        .filter((c) => !!c),
       cardsCount: (results || []).length,
     };
-  }, [data, issuers, categories, results]);
+  }, [data, issuers, results]);
 }

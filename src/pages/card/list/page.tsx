@@ -47,8 +47,6 @@ const PageCredential = () => {
     debouncedTitleOrId
   );
 
-  console.log("categories=", categories);
-
   return (
     <div className="py-4">
       <div className="flex items-center">
@@ -88,6 +86,7 @@ const PageCredential = () => {
             Import Card
           </button>
           <CategoryFilter
+            categories={categories}
             issuers={issuers}
             onChange={(type, issuer) => {
               setCategory(type);

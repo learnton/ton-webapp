@@ -84,8 +84,9 @@ function PageMessages() {
                 cacheDB,
                 message?.templateId
               );
-              console.log(didDB, credential, template);
+
               await addCardRelation(didDB, credential?.id, template);
+              console.log("addCardRelation", credential?.id, template);
             } else {
               toast &&
                 toast({

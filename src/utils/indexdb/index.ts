@@ -10,5 +10,5 @@ export * from "./message-meta";
 export * from "./zk-credential";
 export * from "./cache-template";
 export * from "./db";
-
+export * from "./card-template";
 export * from "./utils";

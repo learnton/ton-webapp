@@ -73,7 +73,7 @@ export class DidDB extends Dexie {
           "&id, reply, createTime, version, msgType, sender, receiver, ctype, encryptedMsg, isRead",
         cardMessages:
           "&id, reply, createTime, version, msgType, sender, receiver, ctype, encryptedMsg, isRead, templateId",
-        cardTemplateRelation: "&id, templateId, category, template_id",
+        cardTemplateRelation: "&id, templateId, category, template_id, title",
         transactionMeta:
           "&id, hash, to, data, value, nonce, gasLimit, gasPrice, chainId",
       })

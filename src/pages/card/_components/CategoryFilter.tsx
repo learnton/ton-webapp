@@ -13,9 +13,11 @@ export const DEFAULT_ISSUER = "0x";
 const CategoryFilter = ({
   onChange,
   issuers,
+  categories,
 }: {
   onChange: (cate: CARD_TYPE | -1, issuer: DidUrl | "0x") => void;
   issuers?: DidUrl[];
+  categories?: CARD_TYPE[];
 }) => {
   const [open, toggle] = useToggle();
   const [selectIndex, setSelect] = useState<CARD_TYPE | -1>(DEFAULT_TYPE);
@@ -41,26 +43,31 @@ const CategoryFilter = ({
         <IconFilter />
       </button>
       <ActionModal onClose={toggle} open={open} title="Filters">
-        <div className="font-semibold mt-4">Category</div>
-        <div className="my-4">
-          {Object.keys(categoryMap).map((k) => {
-            const index = Number(k) as CARD_TYPE;
+        {Array.isArray(categories) && categories.length > 0 ? (
+          <>
+            <div className="font-semibold mt-4">Category</div>
+            <div className="my-4">
+              {categories.map((k) => {
+                const index = Number(k) as CARD_TYPE;
 
-            return (
-              <span
-                className={`btn btn-outline border-grey m-1${
-                  selectIndex === index ? " border-primary" : ""
-                }`}
-                key={k}
-                onClick={() =>
-                  setSelect(selectIndex === index ? DEFAULT_TYPE : index)
-                }
-              >
-                {categoryMap[index]}
-              </span>
-            );
-          })}
-        </div>
+                return (
+                  <span
+                    className={`btn btn-outline border-grey m-1${
+                      selectIndex === index ? " border-primary" : ""
+                    }`}
+                    key={k}
+                    onClick={() =>
+                      setSelect(selectIndex === index ? DEFAULT_TYPE : index)
+                    }
+                  >
+                    {categoryMap[index]}
+                  </span>
+                );
+              })}
+            </div>
+          </>
+        ) : null}
+
         {Array.isArray(issuers) ? (
           <>
             <div className="font-semibold mt-4">Issuer</div>
