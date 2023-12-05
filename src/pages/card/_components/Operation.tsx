@@ -11,7 +11,7 @@ import IconShowProof from "../_assets/icon_show.svg?react";
 import { WarpVcWithTemplate } from "@/types";
 import { AppContext } from "@/context/AppProvider";
 import { useDidDB, useToggle } from "@/hooks";
-import { CARD_TYPE, DeleteDialog, ActionModal } from "@/components";
+import { CARD_TYPE, ConfirmDialog, ActionModal } from "@/components";
 
 import IconShare from "../_assets/icon_share@2x.png";
 import IconBackup from "../_assets/icon_backup@2x.png";
@@ -127,7 +127,7 @@ const Operation = ({ credential, credentialId, templateId }: Props) => {
         </ul>
       </ActionModal>
 
-      <DeleteDialog
+      <ConfirmDialog
         onClose={toggleDel}
         onConfirm={() => void deleteVc()}
         open={delOpen}

@@ -1,20 +1,21 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "@/context/AppProvider";
-import { useTwaSdk } from "@/hooks";
-import { Address, QRCode, IdentityIcon } from "@/components";
+import { useTwaSdk, useDidDB } from "@/hooks";
+import { Address, QRCode, IdentityIcon, ConfirmDialog } from "@/components";
 import IconRight from "@/assets/img/icon_go.svg?react";
 import { Link } from "react-router-dom";
 
 export default function Profile() {
   const { didAccounts } = useContext(AppContext);
   const did = didAccounts.current;
-  const { UserInfo, WebApp } = useTwaSdk();
+  const { UserInfo } = useTwaSdk();
+  const didDB = useDidDB();
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const handleReset = () => {
-    WebApp.showConfirm("Are you sure you want to reset your DID?", () => {
-      localStorage.clear();
-      window.location.reload();
-    });
+    localStorage.clear();
+    didDB?.delete();
+    window.location.reload();
   };
 
   return (
@@ -66,10 +67,22 @@ export default function Profile() {
           </div>
           <IconRight />
         </Link>
-        <button className="btn btn-error text-white" onClick={handleReset}>
+        <button
+          className="btn btn-error text-white"
+          onClick={() => setShowConfirm(true)}
+        >
           Reset Account
         </button>
       </div>
+
+      <ConfirmDialog
+        title="Reset Account"
+        text="Are you sure you want to reset your DID?"
+        type="error"
+        open={showConfirm}
+        onClose={() => setShowConfirm(false)}
+        onConfirm={handleReset}
+      />
     </div>
   );
 }

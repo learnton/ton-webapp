@@ -4,11 +4,12 @@ type Props = {
   open: boolean;
   onClose: () => void;
   onConfirm: () => void;
-  title: string;
+  title?: string;
   text: string;
+  type?: "error" | "warning" | "success" | "primary";
 };
 
-export default function ActionModal(props: Props) {
+export default function ConfirmDialog(props: Props) {
   const domId = useRef<string>(`my_modal_${Math.round(Math.random() * 1e5)}`);
 
   useEffect(() => {
@@ -19,6 +20,9 @@ export default function ActionModal(props: Props) {
 
     if (props.open) {
       openModal();
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
+      (document.getElementById(domId.current) as any)?.close();
     }
   }, [props]);
 
@@ -41,7 +45,10 @@ export default function ActionModal(props: Props) {
               </button>
             </form>
             <button
-              className="btn btn-primary"
+              className={
+                "btn text-white" +
+                (props.type ? ` btn-${props.type}` : " btn-primary")
+              }
               onClick={() => props.onConfirm && props.onConfirm()}
             >
               Confirm

@@ -10,7 +10,7 @@ import CTypeName from "./CTypeName";
 import IdentityIcon from "./IdentityIcon";
 import ActionModal from "./ActionModal";
 import ClaimContent from "./ClaimContent";
-import DeleteDialog from "./DeleteDialog";
+import ConfirmDialog from "./ConfirmDialog";
 import QRCodeGenerator from "./QRCodeGenerator";
 import TimeNow from "./TimeNow";
 import OperationButtons from "./OperationButtons";
@@ -30,7 +30,7 @@ export {
   IdentityIcon,
   ActionModal,
   ClaimContent,
-  DeleteDialog,
+  ConfirmDialog,
   QRCodeGenerator,
   TimeNow,
   OperationButtons,
