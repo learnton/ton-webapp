@@ -11,6 +11,7 @@ import {
 } from "@/hooks";
 import { AppContext } from "@/context/AppProvider";
 import { BaseCard } from "@/components";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   id?: string;
@@ -38,15 +39,12 @@ function CredentialCard({
   const [vcTemplate] = useVcTemplate(id);
   const credential = useCredential(id);
   const vc = useDecryptedCredential(credential, keyring.password);
-
+  const navigate = useNavigate();
   const handleQr = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.stopPropagation();
 
-      id &&
-        (window.location.href = `${
-          import.meta.env.BASE_URL
-        }/card/${id}/presentation`.replace("//", "/"));
+      id && navigate(`/card/${id}/presentation`);
     },
     [id]
   );
@@ -70,12 +68,7 @@ function CredentialCard({
       <BaseCard
         handleQr={showProof ? handleQr : undefined}
         id={id}
-        onClick={() =>
-          linkToDetail &&
-          (window.location.href = `${
-            import.meta.env.BASE_URL
-          }/card/${id}`.replace("//", "/"))
-        }
+        onClick={() => linkToDetail && navigate(`/card/${id}`)}
         template={vcTemplate || template}
         vc={vpVc}
       />
