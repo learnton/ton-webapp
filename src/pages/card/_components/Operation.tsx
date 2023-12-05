@@ -1,6 +1,3 @@
-// Copyright 2021-2023 zcloak authors & contributors
-// SPDX-License-Identifier: Apache-2.0
-
 import saveAs from "file-saver";
 import { useCallback, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,7 +10,7 @@ import { AppContext } from "@/context/AppProvider";
 import { useDidDB, useToggle } from "@/hooks";
 import { CARD_TYPE, ConfirmDialog, ActionModal } from "@/components";
 
-import IconShare from "../_assets/icon_share@2x.png";
+// import IconShare from "../_assets/icon_share@2x.png";
 import IconBackup from "../_assets/icon_backup@2x.png";
 import IconDelete from "../_assets/icon_trash@2x.png";
 
@@ -86,7 +83,7 @@ const Operation = ({ credential, credentialId, templateId }: Props) => {
         onClose={() => setMoreVisible(false)}
       >
         <ul className="text-text1">
-          {templateId ? (
+          {/* {templateId ? (
             <Link className={LiClass} to="share">
               <div className="bg-[#fff7e6] rounded-3xl p-2 text-[0px]">
                 <img
@@ -97,7 +94,7 @@ const Operation = ({ credential, credentialId, templateId }: Props) => {
               </div>
               Share Card
             </Link>
-          ) : null}
+          ) : null} */}
           <li className={LiClass} onClick={download}>
             <div className="bg-[#effbf3] rounded-3xl p-2 text-[0px]">
               <img
