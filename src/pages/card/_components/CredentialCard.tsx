@@ -19,7 +19,7 @@ interface Props {
   ctypeHash?: string;
   attester?: string;
   rootHash?: string;
-  showDetails?: boolean;
+  linkToDetail?: boolean;
   to?: string;
   showProof?: boolean;
 }
@@ -30,6 +30,7 @@ function CredentialCard({
   id,
   templateId,
   showProof,
+  linkToDetail,
 }: Props) {
   const { keyring } = useContext(AppContext);
 
@@ -70,6 +71,7 @@ function CredentialCard({
         handleQr={showProof ? handleQr : undefined}
         id={id}
         onClick={() =>
+          linkToDetail &&
           (window.location.href = `${
             import.meta.env.BASE_URL
           }/card/${id}`.replace("//", "/"))

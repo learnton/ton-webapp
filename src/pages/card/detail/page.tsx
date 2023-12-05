@@ -145,7 +145,6 @@ const CredentialsDetails = () => {
         encoded={credential?.encoded}
         id={credential?.id}
         rootHash={credential?.rootHash}
-        showDetails={false}
       />
 
       <div role="tablist" className="tabs mb-4">

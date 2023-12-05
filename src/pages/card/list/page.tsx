@@ -99,7 +99,9 @@ const PageCredential = () => {
 
       <div className="mt-4">
         {cards?.map((item) => {
-          return <CredentialCard id={item.id} key={item.id} showProof />;
+          return (
+            <CredentialCard id={item.id} key={item.id} showProof linkToDetail />
+          );
         })}
       </div>
       {openImport && (

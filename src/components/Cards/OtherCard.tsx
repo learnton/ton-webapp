@@ -40,7 +40,7 @@ const OtherCard = ({ handleQr, onClick, template, vc }: ZkIDCardProps) => {
   return (
     <CardContainer bg={bg}>
       <div
-        className="'OtherCard'] after:text-[0] h-full flex flex-col justify-between"
+        className="after:content-['OtherCard'] after:text-[0] h-full flex flex-col justify-between"
         onClick={onClick}
         style={{
           color: template?.color,
