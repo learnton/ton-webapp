@@ -43,7 +43,7 @@ function ScanProvider({ children }: { children: React.ReactNode }) {
         } else {
           _result = result as VerifiablePresentation;
         }
-
+        console.log("scan _result=", _result);
         if (!_result.proof.challenge) {
           setChallengeResult(
             <div className="text-xs text-warning">No challenge found</div>
@@ -105,7 +105,7 @@ function ScanProvider({ children }: { children: React.ReactNode }) {
         {challengeResult}
         {vp?.verifiableCredential.map((vc, index) => {
           return (
-            <div className="flex mt-4 gap-2" key={index}>
+            <div className="mt-4" key={index}>
               {/* TODO v1 to v2 issuer */}
               <CredentialCard
                 attester={attester}

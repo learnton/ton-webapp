@@ -8,7 +8,7 @@ export default function Login() {
     <div className="flex flex-col justify-center p-4 h-[100vh] gap-8">
       <div className="text-[#9CA3AF]">
         <h1 className="font-bold text-[#111827] text-xl mb-4">
-          Welcome to Product Name
+          Welcome to zkID Card
         </h1>
         We&apos;ve prepared your digital identity. Check out its features, use
         our trusted digital cards, and enjoy smooth validations and enhanced
