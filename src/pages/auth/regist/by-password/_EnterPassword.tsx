@@ -13,14 +13,6 @@ export default function EnterPassword(props: {
         <p>
           Please kindly follow the requirements below to create your password:
         </p>
-        <p>Password Requirements: </p>
-        <ul>
-          <li>◉ At least one letter (A-Z or a-z)</li>
-          <li>◉ At least one number (0-9)</li>
-          <li>◉ At least one symbol (!@#$%^&*)</li>
-          <li>◉ Minimum 8 characters</li>
-        </ul>
-        <p>Example: A1b2@c3d</p>
       </div>
       <form
         className="py-4"
@@ -45,6 +37,16 @@ export default function EnterPassword(props: {
           />
         </div>
       </form>
+      <div className="text-[#9CA3AF]">
+        <p>Password Requirements: </p>
+        <ul>
+          <li>◉ At least one letter (A-Z or a-z)</li>
+          <li>◉ At least one number (0-9)</li>
+          <li>◉ At least one symbol (!@#$%^&*)</li>
+          <li>◉ Minimum 8 characters</li>
+        </ul>
+        <p>Example: A1b2@c3d</p>
+      </div>
     </>
   );
 }
