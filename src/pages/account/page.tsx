@@ -10,7 +10,6 @@ import { useTwaSdk, useDidDB, useLiveQuery } from "@/hooks";
 import CardBgURL from "./_assets/img_bg_card@2x.webp";
 import { Link } from "react-router-dom";
 import { DidDB } from "@/utils";
-import { useToast } from "@/components/Toast";
 import { useRef } from "react";
 import { fetchAndSaveMessages } from "@/pages/message/_utils";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +21,6 @@ export default function Account() {
   // const ScanState = useContext(ScanContext);
   const did = didAccounts.current;
   const { UserInfo, WebApp } = useTwaSdk();
-  const toast = useToast();
   const navigate = useNavigate();
   const didDB = useDidDB();
   const credentials = useCredentials();
@@ -158,22 +156,6 @@ export default function Account() {
           </li>
         ))}
       </ul>
-
-      <button className="m-1 btn" onClick={() => localStorage.clear()}>
-        clear storage
-      </button>
-      <button
-        className="m-1 btn"
-        onClick={() =>
-          toast &&
-          toast({
-            type: "success",
-            message: "success",
-          })
-        }
-      >
-        test Toast
-      </button>
     </div>
   );
 }
