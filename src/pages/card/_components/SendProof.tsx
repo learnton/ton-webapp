@@ -46,7 +46,7 @@ const SendProof = ({ template, vc, open, onClose }: Props) => {
   const handleSendVP = () => {
     const builder = new VerifiablePresentationBuilder(sender as Did);
 
-    builder
+    void builder
       .addVC(vc, "VP_SelectiveDisclosure", attributes)
       .build()
       .then(setPresentation);
@@ -122,27 +122,26 @@ const SendProof = ({ template, vc, open, onClose }: Props) => {
                 );
               })}
             </div>
+            <div className="flex gap-2 items-center mt-8">
+              <button className="btn flex-1" onClick={() => onClose?.()}>
+                Cancel
+              </button>
+              <button
+                className="btn btn-primary flex-1"
+                disabled={!holder || !template?.id}
+                onClick={() => {
+                  if (template?.id && holder) {
+                    handleSendVP();
+                  } else {
+                    console.warn(template?.id && holder);
+                  }
+                }}
+              >
+                Send Card
+              </button>
+            </div>
           </>
         )}
-
-        <div className="flex gap-2 items-center mt-8">
-          <button className="btn flex-1" onClick={() => onClose?.()}>
-            Cancel
-          </button>
-          <button
-            className="btn btn-primary flex-1"
-            disabled={!holder || !template?.id}
-            onClick={() => {
-              if (template?.id && holder) {
-                handleSendVP();
-              } else {
-                console.warn(template?.id && holder);
-              }
-            }}
-          >
-            Send Card
-          </button>
-        </div>
       </ActionModal>
     </>
   );

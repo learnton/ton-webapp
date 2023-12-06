@@ -10,5 +10,5 @@ export const postMessage = (params: {
   msg?: Message<MessageType> | null;
   templateId?: number | null;
 }) => {
-  return instance.post(`/api/message`, { params, baseURL: CARD_SERVICE });
+  return instance.post(`/api/message`, params, { baseURL: CARD_SERVICE });
 };

@@ -14,16 +14,15 @@ export function useAllCards(
   const [templateRelation, setTemplateRalation] = useState<
     Record<string, CardTemplateRelation>
   >({});
-  const [] = useState<number[]>([]);
   const filterByCategory = useCredentialByCate(category);
   const didDB = useDidDB();
 
   useEffect(() => {
     if (Array.isArray(results)) {
-      let map: Record<string, CardTemplateRelation> = {};
+      const map: Record<string, CardTemplateRelation> = {};
       if (Array.isArray(results)) {
         for (const card of results) {
-          didDB?.cardTemplateRelation
+          void didDB?.cardTemplateRelation
             .where({ id: card.id })
             .first()
             .then((template) => {
@@ -47,6 +46,7 @@ export function useAllCards(
 
       setIssuers([...uniqueIssuers]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [results]);
 
   const search = () => {
@@ -99,5 +99,6 @@ export function useAllCards(
         .filter((c) => !!c),
       cardsCount: (results || []).length,
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, issuers, results]);
 }

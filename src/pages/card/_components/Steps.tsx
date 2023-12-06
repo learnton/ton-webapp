@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 export interface StepProps {
@@ -11,13 +13,17 @@ export interface Report {
   (error: Error | null, loading?: boolean, message?: string): void;
 }
 
-const Steps: React.FC<{
+// eslint-disable-next-line react-refresh/only-export-components
+const Steps = ({
+  onDone,
+  steps,
+  start,
+}: {
   start?: boolean;
-  submitText?: string;
   onDone?: () => void;
   beforeStart?: () => Promise<void>;
   steps: StepProps[];
-}> = ({ onDone, steps, submitText, start }) => {
+}) => {
   const [activeStep, setActiveStep] = useState(0);
   const [error, setError] = useState<Error | null>();
   const [status, setStatus] = useState<{
@@ -25,7 +31,6 @@ const Steps: React.FC<{
     loading?: boolean;
   } | null>();
   const [execing, setExecing] = useState(start);
-  const [loading, setLoading] = useState(false);
   const stepsRef = useRef<StepProps[]>(steps);
 
   useEffect(() => {
@@ -78,23 +83,6 @@ const Steps: React.FC<{
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeStep, execing]);
 
-  const handleExec = useCallback(() => {
-    setError(null);
-    setStatus({ loading: true });
-    setLoading(true);
-    stepsRef.current[activeStep]
-      .exec(report)
-      .then(() => {
-        nextStep();
-      })
-      .catch(report)
-      .finally(() => {
-        setLoading(false);
-        setStatus({ loading: false });
-        setExecing(true);
-      });
-  }, [activeStep, nextStep, report]);
-
   return (
     <>
       <ul className="steps steps-vertical">
@@ -123,23 +111,16 @@ const Steps: React.FC<{
           );
         })}
       </ul>
-      {activeStep === steps.length ? (
-        <>
-          <button className="btn btn-block btn-primary" onClick={onDone}>
-            Finish
-          </button>
-        </>
-      ) : (
-        <button
-          className="btn btn-primary"
-          disabled={!execing || loading}
-          onClick={handleExec}
-        >
-          {submitText ?? "Submit"}
-        </button>
-      )}
+      <button
+        className="btn btn-block btn-primary"
+        disabled={activeStep !== steps.length}
+        onClick={onDone}
+      >
+        Finish
+      </button>
     </>
   );
 };
 
-export default React.memo(Steps);
+const exportComponent = React.memo(Steps);
+export default exportComponent;

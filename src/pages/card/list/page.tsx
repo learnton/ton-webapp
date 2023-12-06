@@ -38,6 +38,8 @@ const PageCredential = () => {
       setTimeout(() => {
         searchInputRef.current?.focus();
       }, 0);
+    } else {
+      setTitleOrId("");
     }
   };
 

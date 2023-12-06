@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { HexString } from "@zcloak/crypto/types";
 import type { DidUrl } from "@zcloak/did-resolver/types";
 import {

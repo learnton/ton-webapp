@@ -10,6 +10,7 @@ interface Props {
   onChange?: (value?: string, did?: Did) => void;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 function InputDid({
   defaultValue,
   disabled = false,
@@ -39,6 +40,7 @@ function InputDid({
           setError("");
         })
         .catch((err) => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           setError(err);
           onChange?.(value);
         })
@@ -46,6 +48,7 @@ function InputDid({
     } else if (value) {
       setError("Invalid Did");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   return (

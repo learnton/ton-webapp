@@ -38,7 +38,7 @@ function CredentialCard({
   const [template] = useTemplate(templateId);
   const [vcTemplate] = useVcTemplate(id);
   const credential = useCredential(id);
-  const vc = useDecryptedCredential(credential, keyring.password);
+  const vc = useDecryptedCredential(credential, keyring.password || undefined);
   const navigate = useNavigate();
   const handleQr = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -46,6 +46,7 @@ function CredentialCard({
 
       id && navigate(`/card/${id}/presentation`);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [id]
   );
 

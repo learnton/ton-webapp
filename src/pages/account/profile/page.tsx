@@ -14,7 +14,7 @@ export default function Profile() {
 
   const handleReset = () => {
     localStorage.clear();
-    didDB?.delete();
+    void didDB?.delete();
     window.location.reload();
   };
 
