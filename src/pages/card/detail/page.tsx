@@ -82,7 +82,10 @@ const CredentialsDetails = () => {
   const { keyring } = useContext(AppContext);
   const { id } = useParams();
   const credential = useCredential(id);
-  const decrypted = useDecryptedCredential(credential, keyring.password);
+  const decrypted = useDecryptedCredential(
+    credential,
+    keyring.password || undefined
+  );
   const [template] = useVcTemplate(id);
   const ctype = useCtype(decrypted?.ctype);
 

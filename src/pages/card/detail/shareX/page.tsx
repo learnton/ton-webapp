@@ -67,7 +67,7 @@ const ShareX = () => {
   const { keyring } = useContext(AppContext);
   const [template] = useVcTemplate(id);
   const credential = useCredential(id);
-  const vc = useDecryptedCredential(credential, keyring.password);
+  const vc = useDecryptedCredential(credential, keyring.password || undefined);
   const cardRef = useRef<HTMLDivElement>(null);
   const [open, toggle] = useToggle();
   const [loading, toggleLoading] = useToggle();
