@@ -1,12 +1,13 @@
 /* eslint-disable react-refresh/only-export-components */
 import { isJsonObject, isNumber } from "@polkadot/util";
 import qrcode from "qrcode-generator";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { isVP } from "@zcloak/vc/is";
-import { VerifiablePresentation } from "@zcloak/vc/types";
+import { VerifiablePresentation, VerifiableCredential } from "@zcloak/vc/types";
 
-import { TimeNow, ActionModal } from "@/components";
+import { TimeNow, ActionModal, BaseTempProps } from "@/components";
+import SendProof from "../_components/SendProof";
 
 export interface VpWithTemplate {
   vp: VerifiablePresentation;
@@ -100,6 +101,8 @@ const QrcodePresentation = function ({
   open,
   presentation,
   templateId,
+  vc,
+  template,
 }: {
   cellSize?: number;
   open: boolean;
@@ -107,27 +110,49 @@ const QrcodePresentation = function ({
   presentation?: VerifiablePresentation;
   templateId?: number;
   onClose: () => void;
+  vc?: VerifiableCredential<boolean>;
+  template?: BaseTempProps;
 }) {
-  return (
-    <ActionModal onClose={onClose} open={open}>
-      <div className="p-4">
-        {open && presentation && (
-          <Code
-            cellSize={cellSize}
-            isParts={isParts}
-            presentation={presentation}
-            templateId={templateId}
-          />
-        )}
+  const [openModal, setOpenModal] = useState(false);
 
-        <div className="font-medium text-center mt-4 text-text2">
-          <TimeNow />
+  return (
+    <>
+      <ActionModal onClose={onClose} open={open}>
+        <div className="p-4">
+          {open && presentation && (
+            <Code
+              cellSize={cellSize}
+              isParts={isParts}
+              presentation={presentation}
+              templateId={templateId}
+            />
+          )}
+
+          <div className="font-medium text-center mt-4 text-text2">
+            <TimeNow />
+          </div>
+          <button
+            className="btn btn-block btn-outline btn-primary mt-4"
+            disabled={!(vc && template)}
+            onClick={() => {
+              setOpenModal(true);
+              onClose();
+            }}
+          >
+            Send Proof
+          </button>
         </div>
-        <button className="btn btn-block btn-outline btn-primary mt-4">
-          Send Proof
-        </button>
-      </div>
-    </ActionModal>
+      </ActionModal>
+
+      {openModal && vc && template && (
+        <SendProof
+          template={template}
+          vc={vc}
+          open={openModal}
+          onClose={() => setOpenModal(false)}
+        />
+      )}
+    </>
   );
 };
 

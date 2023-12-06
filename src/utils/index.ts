@@ -13,3 +13,4 @@ export * from "./channel";
 export * from "./eventHandler";
 export * from "./addHttpsPrefix";
 export * from "./national";
+export * from "./did";

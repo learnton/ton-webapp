@@ -8,10 +8,11 @@ import { isVC } from "@zcloak/vc/is";
 
 export function useDecryptedCredential(
   credential?: ZkCredential,
-  password?: string | null
-): VerifiableCredential<boolean> | null {
-  const [decrypted, setDecrypted] =
-    useState<VerifiableCredential<boolean> | null>(null);
+  password?: string
+): VerifiableCredential<boolean> | undefined {
+  const [decrypted, setDecrypted] = useState<
+    VerifiableCredential<boolean> | undefined
+  >();
 
   useEffect(() => {
     if (credential && password) {

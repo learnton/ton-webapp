@@ -15,6 +15,7 @@ import QRCodeGenerator from "./QRCodeGenerator";
 import TimeNow from "./TimeNow";
 import OperationButtons from "./OperationButtons";
 import AccountIcon from "./AccountIcon";
+import InputDid from "./InputDid";
 
 export {
   Avatar,
@@ -35,6 +36,7 @@ export {
   TimeNow,
   OperationButtons,
   AccountIcon,
+  InputDid,
 };
 
 export * from "./Cards";

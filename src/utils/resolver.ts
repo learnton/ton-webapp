@@ -17,6 +17,12 @@ import {
 
 import { getDidDocument, createDid } from "@/api/did";
 
+import { ArweaveDidResolver } from "@zcloak/did-resolver";
+
+import { DID_SERVICE } from "@/api/axiosInstance";
+
+export const resolver = new ArweaveDidResolver({ server: DID_SERVICE });
+
 abstract class BaseResolver extends DidResolver {
   public server: string;
   protected cacheDB: CacheDB;

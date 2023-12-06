@@ -6,6 +6,7 @@ type Props = {
   title?: string;
   children: React.ReactNode;
   closeByModal?: boolean;
+  modal?: boolean;
 };
 
 export default function ActionModal(props: Props) {
@@ -29,7 +30,7 @@ export default function ActionModal(props: Props) {
     <>
       <dialog id={domId.current} className="modal items-end">
         <div className="modal-box w-full max-w-full rounded-bl-none rounded-br-none overflow-hidden">
-          {!props.closeByModal && (
+          {!props.closeByModal && !props.modal && (
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
               <button
@@ -46,7 +47,7 @@ export default function ActionModal(props: Props) {
           {props.children}
         </div>
 
-        {props.closeByModal && (
+        {props.closeByModal && !props.modal && (
           <form
             method="dialog"
             className="modal-backdrop"

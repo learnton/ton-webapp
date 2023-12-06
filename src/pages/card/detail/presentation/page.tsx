@@ -21,7 +21,7 @@ function Presentation() {
   const account = didAccounts?.current;
   const { id } = useParams();
   const credential = useCredential(id);
-  const vc = useDecryptedCredential(credential, keyring.password);
+  const vc = useDecryptedCredential(credential, keyring.password || undefined);
   const [selective, setSelective] = useState<string[]>([]);
   const [vp, setVp] = useState<VerifiablePresentation>();
   const [template] = useVcTemplate(id);
@@ -69,6 +69,8 @@ function Presentation() {
         open={!!vp}
         presentation={vp}
         templateId={template?.id}
+        template={template}
+        vc={vc}
       />
     </div>
   );
